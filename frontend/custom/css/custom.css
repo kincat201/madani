@@ -1,0 +1,28 @@
+.kt-header__brand-logo img, .kt-login__logo img{
+    max-width: 200px;
+}
+.kt-header-mobile__logo img{
+    max-width: 100px;
+}
+
+.kt-header__topbar-icon-custom{
+    width: auto !important;
+    padding: 0px 10px;
+}
+
+.kt-header__topbar-icon-custom i{
+    color: #32468d;
+}
+
+.has-error .help-block-error{
+    color:#ff9898 !important;
+}
+
+@media (max-width: 1024px){
+    .kt-header__topbar .kt-header__topbar-item .kt-header__topbar-wrapper .kt-header__topbar-icon i{
+        font-size: 0.9rem;
+    }
+    .kt-header__topbar .kt-header__topbar-item .kt-header__topbar-wrapper .kt-header__topbar-icon{
+        max-width: unset;
+    }
+}
