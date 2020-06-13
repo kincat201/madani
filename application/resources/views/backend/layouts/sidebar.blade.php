@@ -47,21 +47,21 @@
 					<li class="nav-item {{@$sidebar === 'product'? 'active' : ''}}">
 						<a
 								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-users"></i> <span class="title">Daftar Produk</span> <span
+									class="fa fa-product-hunt"></i> <span class="title">Daftar Produk</span> <span
 									class="arrow {{@$sidebar === 'product'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
 					<li class="nav-item {{@$sidebar === 'category'? 'active' : ''}}">
 						<a
 								href="{{route('admin.categories')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-users"></i> <span class="title">Kategori Produk</span> <span
+									class="fa fa-tags"></i> <span class="title">Kategori Produk</span> <span
 									class="arrow {{@$sidebar === 'category'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
 					<li class="nav-item {{@$sidebar === 'unit'? 'active' : ''}}">
 						<a
-								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-users"></i> <span class="title">Satuan Produk</span> <span
+								href="{{route('admin.units')}}" class="nav-link nav-toggle"> <i
+									class="fa fa-tag"></i> <span class="title">Satuan Produk</span> <span
 									class="arrow {{@$sidebar === 'unit'? '' : 'hidden'}}"></span>
 						</a>
 					</li>

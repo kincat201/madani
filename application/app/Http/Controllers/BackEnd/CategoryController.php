@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\BackEnd;
 
 use App\Category;
-use App\Util\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Member;
 use DataTables;
 use Validator;
 use Response;
@@ -42,7 +40,7 @@ class CategoryController extends BackEndController
     {
         $validate_rule = array();
 
-        foreach (Member::FORM_VALIDATION as $key => $value){
+        foreach (Category::FORM_VALIDATION as $key => $value){
             $validate_rule[$key] = $value;
         }
 
@@ -91,9 +89,9 @@ class CategoryController extends BackEndController
                     });
                 }
 
-                if ($request->has('description') && !empty($request->phone) ) {
+                if ($request->has('description') && !empty($request->description) ) {
                     $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                        return Str::contains($row['phone'], $request->get('phone')) ? true : false;
+                        return Str::contains($row['description'], $request->get('description')) ? true : false;
                     });
                 }
             })

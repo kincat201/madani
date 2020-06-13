@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\BackEnd;
 
-use App\Util\Constant;
+use App\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Member;
 use DataTables;
 use Validator;
 use Response;
 use Input;
 use Excel;
 
-class MemberController extends BackEndController
+class UnitController extends BackEndController
 {
     /**
      * Create a new controller instance.
@@ -32,21 +31,17 @@ class MemberController extends BackEndController
      */
     public function index()
     {
-        $data['sidebar'] = 'member';
-        $data['model'] = Member::class;
-        return view('backend.member.index',$data);
+        $data['sidebar'] = 'unit';
+        $data['model'] = Unit::class;
+        return view('backend.unit.index',$data);
     }
 
     public function save(Request $request)
     {
         $validate_rule = array();
 
-        foreach (Member::FORM_VALIDATION as $key => $value){
+        foreach (Unit::FORM_VALIDATION as $key => $value){
             $validate_rule[$key] = $value;
-        }
-
-        if($request->id == 0){
-            $validate_rule['email'] = 'required|unique:members,email|email';
         }
 
         $validation = Validator::make($request->all(),$validate_rule);
@@ -59,10 +54,10 @@ class MemberController extends BackEndController
             return response()->json($data);
         }
 
-        $data = Member::find($request->id);
+        $data = Unit::find($request->id);
 
         if(empty($data->id)){
-            $data = new Member();
+            $data = new Unit();
         }
 
         $data->fill((array)$request->all());
@@ -76,48 +71,27 @@ class MemberController extends BackEndController
     }
 
     public function getData($id){
-        return Response::json(Member::find($id));
+        return Response::json(Unit::find($id));
     }
 
     public function indexData(Request $request){
-        $datas = Member::orderBy('updated_at','desc')->get();
+        $datas = Unit::orderBy('name','asc')->get();
 
         return DataTables::of($datas)
-            ->addColumn('types',function($data) {
-                return Constant::MEMBER_TYPES_LIST[$data->types];
-            })
             ->addColumn('aksi',function($data) {
                 return '<a onclick="editData('.$data->id.')" class="btn btn-info btn-xs">Edit</a>'.' '.
                     '<a onclick="deleteData('.$data->id.')"class="btn btn-danger btn-xs">Delete</a>';
             })
             ->filter(function ($instance) use ($request) {
-                if ($request->has('email') && !empty($request->email)) {
-                    $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                        return Str::contains(strtoupper($row['email']), strtoupper($request->get('email'))) ? true : false;
-                    });
-                }
-
                 if ($request->has('name') && !empty($request->name)) {
                     $instance->collection = $instance->collection->filter(function ($row) use ($request) {
                         return Str::contains(strtoupper($row['name']), strtoupper($request->get('name'))) ? true : false;
                     });
                 }
 
-                if ($request->has('phone') && !empty($request->phone) ) {
+                if ($request->has('description') && !empty($request->description) ) {
                     $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                        return Str::contains($row['phone'], $request->get('phone')) ? true : false;
-                    });
-                }
-
-                if ($request->has('address') && !empty($request->address) ) {
-                    $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                        return Str::contains($row['address'], $request->get('address')) ? true : false;
-                    });
-                }
-
-                if ($request->has('types') && !empty($request->types) ) {
-                    $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                        return $row['types'] == $request->get('types') ? true : false;
+                        return Str::contains($row['description'], $request->get('description')) ? true : false;
                     });
                 }
             })
@@ -125,31 +99,27 @@ class MemberController extends BackEndController
     }
 
     public function delete($id){
-        $delete = Member::find($id);
+        $delete = Unit::find($id);
         $delete->deleted = 1;
         $delete->save();
     }
 
     public function export()
     {
-        return Excel::create( 'export_member_'.time() , function($excel) {
+        return Excel::create( 'export_unit_'.time() , function($excel) {
 
             // Set the title
-            $excel->setTitle('Export Data Member');
+            $excel->setTitle('Export Data Unit');
 
             // Call them separately
-            $excel->setDescription('Data member');
+            $excel->setDescription('Data unit');
 
-            $datas = Member::all();
+            $datas = Unit::all();
 
-            $excel->sheet('member', function($sheet) use ($datas) {
-
-                foreach ($datas as $key => $data){
-                    $datas[$key]->types = Constant::MEMBER_TYPES_LIST[$data->types];
-                }
+            $excel->sheet('unit', function($sheet) use ($datas) {
 
                 // Sheet manipulation
-                $sheet->loadView('backend.part.export',['datas'=>$datas,'model'=>Member::class]);
+                $sheet->loadView('backend.part.export',['datas'=>$datas,'model'=>Unit::class]);
 
                 $sheet->setStyle(array(
                     'font' => array(
@@ -162,13 +132,5 @@ class MemberController extends BackEndController
         })
         // ;
         ->download('xls');
-    }
-
-    public function search($query){
-        return Response::json(
-            Member::where('email','like','%'.$query.'%')
-                ->orWhere('name','like','%'.$query.'%')
-                ->get()
-        );
     }
 }

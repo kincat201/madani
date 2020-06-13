@@ -42,7 +42,9 @@ class Unit extends Model
     ];
 
     const exportData = [
-
+        'id'=>'Unit_id',
+        'name'=>'Nama',
+        'description'=>'Deskripsi',
     ];
 
     public function newQuery($excludeDeleted = true) {
