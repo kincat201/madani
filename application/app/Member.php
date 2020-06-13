@@ -43,15 +43,23 @@ class Member extends Model
 
     const FORM_SELECT_LIST = [
         'status' => 'getCommonStatus',
+        'types' => 'getMemberTypes',
     ];
 
     const FORM_VALIDATION = [
         'name' => 'required',
+        'email' => 'required',
         'types' => 'required',
     ];
 
     const exportData = [
-
+        'name'=>'Nama',
+        'email'=>'Email',
+        'phone'=>'Phone',
+        'address'=>'Alamat',
+        'types'=>'Tipe',
+        'created_at'=>'Created',
+        'updated_at'=>'Updated',
     ];
 
     public function newQuery($excludeDeleted = true) {

@@ -47,6 +47,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin:ADMIN']], func
     Route::get('/userExport', 'BackEnd\UserController@export')->name('admin.user.export');
     Route::get('/userSearch/{search}', 'BackEnd\UserController@search')->name('admin.user.search');
 
+    //Members
+    Route::get('/members', 'BackEnd\MemberController@index')->name('admin.members');
+    Route::get('/memberData', 'BackEnd\MemberController@indexData')->name('admin.member.data');
+    Route::get('/memberGet/{id}', 'BackEnd\MemberController@getData')->name('admin.member.get');
+    Route::post('/memberSave', 'BackEnd\MemberController@save')->name('admin.member.save');
+    Route::post('/memberDelete/{id}', 'BackEnd\MemberController@delete')->name('admin.member.delete');
+    Route::get('/memberExport', 'BackEnd\MemberController@export')->name('admin.member.export');
+    Route::get('/memberSearch/{search}', 'BackEnd\MemberController@search')->name('admin.member.search');
 
     //notification
     Route::get('/notifications', 'BackEnd\NotificationController@index')->name('admin.notifications');

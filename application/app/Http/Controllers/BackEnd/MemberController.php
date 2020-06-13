@@ -33,6 +33,7 @@ class MemberController extends BackEndController
     public function index()
     {
         $data['sidebar'] = 'member';
+        $data['model'] = Member::class;
         return view('backend.member.index',$data);
     }
 
@@ -40,6 +41,11 @@ class MemberController extends BackEndController
     {
         $validate_rule = array();
         $validate_rule['name'] = 'required';
+
+        foreach (Member::FORM_VALIDATION as $key => $value){
+            $validate_rule[$key] = $value;
+        }
+
         if($request->id == 0){
             $validate_rule['email'] = 'required|unique:members,email|email';
         }
@@ -70,12 +76,6 @@ class MemberController extends BackEndController
 
     }
 
-    public function detail($id){
-        $data['sidebar'] = 'user';
-        $data['model'] = Member::find($id);
-        return view('backend.member.detail',$data);
-    }
-
     public function getData($id){
         return Response::json(Member::find($id));
     }
@@ -84,9 +84,11 @@ class MemberController extends BackEndController
         $datas = Member::orderBy('updated_at','desc')->get();
 
         return DataTables::of($datas)
+            ->addColumn('types',function($data) {
+                return Constant::MEMBER_TYPES_LIST[$data->types];
+            })
             ->addColumn('aksi',function($data) {
-                return '<a href="'.route("admin.member.detail",["id"=>$data->id]).'" class="btn btn-success btn-xs">Detail</a>'.' '.
-                    '<a onclick="editData('.$data->id.')" class="btn btn-info btn-xs">Edit</a>'.' '.
+                return '<a onclick="editData('.$data->id.')" class="btn btn-info btn-xs">Edit</a>'.' '.
                     '<a onclick="deleteData('.$data->id.')"class="btn btn-danger btn-xs">Delete</a>';
             })
             ->filter(function ($instance) use ($request) {
@@ -140,9 +142,12 @@ class MemberController extends BackEndController
             $excel->setDescription('Data member');
 
             $datas = Member::all();
-            $dataMember = [];
 
             $excel->sheet('user', function($sheet) use ($datas) {
+
+                foreach ($datas as $key => $data){
+                    $datas[$key]->types = Constant::MEMBER_TYPES_LIST[$data->types];
+                }
 
                 // Sheet manipulation
                 $sheet->loadView('backend.member.export',['datas'=>$datas,'model'=>Member::class]);

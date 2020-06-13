@@ -1,6 +1,6 @@
 @extends('backend.layouts.template')
 
-@section('pageTitle','Detail Member')
+@section('pageTitle','Detail Akun')
 
 @push('customCss')
 
@@ -15,8 +15,8 @@
             <div class="page-bar">
                 <ul class="page-breadcrumb">
                     <li><a href="{{route('admin.dashboard')}}">Beranda</a> <i class="fa fa-circle"></i></li>
-                    <li><a href="{{route('admin.users')}}">Member</a> <i class="fa fa-circle"></i></li>
-                    <li><span>Detail Member</span></li>
+                    <li><a href="{{route('admin.users')}}">Akun</a> <i class="fa fa-circle"></i></li>
+                    <li><span>Detail Akun</span></li>
                 </ul>
             </div>
             <!-- END PAGE HEADER-->

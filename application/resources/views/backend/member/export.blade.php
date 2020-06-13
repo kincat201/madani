@@ -9,16 +9,16 @@
     <tr style="font-weight:bold">
         <td>No</td>
         @foreach($model::exportData as $field => $value)
-            <td>{{$value}}</td>
+        <td>{{$value}}</td>
         @endforeach
     </tr>
     @foreach($datas as $key => $data)
-        <tr>
-            <td>{{$key+1}}</td>
-            @foreach($model::exportData as $field => $value)
-                <td>{{$data->$field}}</td>
-            @endforeach
-        </tr>
+    <tr>
+        <td>{{$key+1}}</td>
+        @foreach($model::exportData as $field => $value)
+        <td>{{$data->$field}}</td>
+        @endforeach
+    </tr>
     @endforeach
 </table>
 

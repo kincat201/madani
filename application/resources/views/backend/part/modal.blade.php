@@ -19,6 +19,8 @@
                 <div class="col-sm-10">
                   @if($field == 'text')
                     <input type="{{$field}}" name="{{$keyField}}" class="form-control" placeholder="{{$model::FORM_LABEL[$keyField]}}">
+                  @elseif($field=='email')
+                    <input type="email" name="{{$keyField}}" class="form-control" placeholder="{{$model::FORM_LABEL[$keyField]}}">
                   @elseif($field=='date')
                     <input type="text" name="{{$keyField}}" class="form-control datepickerinput" placeholder="{{$model::FORM_LABEL[$keyField]}}">
                   @elseif($field == 'file')
@@ -32,7 +34,7 @@
                   @elseif($field == 'texteditor')
                     <textarea class="form-control summernote" id="{{$keyField}}" name="{{$keyField}}">{{@$data->$keyField}}</textarea>
                   @elseif($field == 'textarea')
-                    <textarea class="form-control" name="{{$keyField}}">{{@$data->$keyField}}</textarea>
+                    <textarea class="form-control" placeholder="{{@$data->$keyField}}" name="{{$keyField}}">{{@$data->$keyField}}</textarea>
                   @endif
                   <div id="{{ $keyField }}_error" class="help-block help-block-error"> </div>
                 </div>

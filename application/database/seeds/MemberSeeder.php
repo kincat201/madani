@@ -17,7 +17,7 @@ class MemberSeeder extends Seeder
         $datas = array();
 
         $types = [];
-        foreach (\App\Util\Constant::MEMBER_TYPES_LIST as $type){
+        foreach (\App\Util\Constant::MEMBER_TYPES_LIST as $type => $value){
             $types[] = $type;
         }
 
@@ -27,6 +27,9 @@ class MemberSeeder extends Seeder
             $data['phone'] = $faker->e164PhoneNumber;
             $data['address'] = $faker->address;
             $data['types'] = $types[mt_rand(0,count($types)-1)];
+            $date = \Carbon\Carbon::now()->subDay(mt_rand(0,50));
+            $data['created_at'] = $date;
+            $data['updated_at'] = $date;
             array_push($datas, $data);
         }
 

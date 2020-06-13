@@ -24,14 +24,14 @@
 					<li class="nav-item {{@$sidebar === 'user'? 'active' : ''}}">
 						<a
 							href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-								class="fa fa-admin.users"></i> <span class="title">Akun</span> <span
+								class="fa fa-users"></i> <span class="title">Akun</span> <span
 								class="arrow {{@$sidebar === 'user'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
 					<li class="nav-item {{@$sidebar === 'member'? 'active' : ''}}">
 						<a
-								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-admin.users"></i> <span class="title">Pelanggan</span> <span
+								href="{{route('admin.members')}}" class="nav-link nav-toggle"> <i
+									class="fa fa-users"></i> <span class="title">Pelanggan</span> <span
 									class="arrow {{@$sidebar === 'member'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
@@ -47,21 +47,21 @@
 					<li class="nav-item {{@$sidebar === 'product'? 'active' : ''}}">
 						<a
 								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-admin.users"></i> <span class="title">Daftar Produk</span> <span
+									class="fa fa-users"></i> <span class="title">Daftar Produk</span> <span
 									class="arrow {{@$sidebar === 'product'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
 					<li class="nav-item {{@$sidebar === 'category'? 'active' : ''}}">
 						<a
 								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-admin.users"></i> <span class="title">Kategori Produk</span> <span
+									class="fa fa-users"></i> <span class="title">Kategori Produk</span> <span
 									class="arrow {{@$sidebar === 'category'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
 					<li class="nav-item {{@$sidebar === 'unit'? 'active' : ''}}">
 						<a
 								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-admin.users"></i> <span class="title">Satuan Produk</span> <span
+									class="fa fa-users"></i> <span class="title">Satuan Produk</span> <span
 									class="arrow {{@$sidebar === 'unit'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
@@ -77,14 +77,14 @@
 					<li class="nav-item {{@$sidebar === 'order_new'? 'active' : ''}}">
 						<a
 								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-admin.users"></i> <span class="title">Pesanan Baru</span> <span
+									class="fa fa-users"></i> <span class="title">Pesanan Baru</span> <span
 									class="arrow {{@$sidebar === 'order_new'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
 					<li class="nav-item {{@$sidebar === 'order'? 'active' : ''}}">
 						<a
 								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-admin.users"></i> <span class="title">Daftar Pesanan</span> <span
+									class="fa fa-users"></i> <span class="title">Daftar Pesanan</span> <span
 									class="arrow {{@$sidebar === 'member'? '' : 'hidden'}}"></span>
 						</a>
 					</li>

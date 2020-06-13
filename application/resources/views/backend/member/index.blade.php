@@ -1,6 +1,6 @@
 @extends('backend.layouts.template')
 
-@section('pageTitle','Division')
+@section('pageTitle','Member')
 
 @push('customCss')
     <link href="{{url('backend/assets/global/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
@@ -12,7 +12,7 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li><a href="{{route('admin.dashboard')}}">Dashboard</a> <i class="fa fa-circle"></i></li>
-                <li><span>Division</span></li>
+                <li><span>Pelanggan</span></li>
             </ul>
         </div>
 
@@ -22,43 +22,53 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-share font-dark"></i> <span
-                                class="caption-subject font-dark bold uppercase">List Division</span>
+                                class="caption-subject font-dark bold uppercase">Daftar Pelanggan</span>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="row" style="margin-bottom: 10px;">
                             <div class="col-md-12 col-lg-12" style="text-align: right;">
-                                <button onclick="addData()" class="btn btn-primary">Add</button>
+                                <a href="{{route('admin.member.export')}}" target="_blank" class="btn btn-success">Export</a>
+                                <button onclick="addData()" class="btn btn-primary">Tambah</button>
                             </div>
                         </div>
                         <table id="myTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <td></td>
                                     <td class="all">
-                                        <input placeholder="Find Nama" type="text" class="form-control" name="s_name" onchange="filter()">
+                                        <input placeholder="Find Name" type="text" class="form-control" name="s_name" onchange="filter()">
                                     </td>
                                     <td class="all" >
-                                        <select class="form-control" name="s_status" onchange="filter()">
-                                            <option value="">Pilih Status</option>
-                                            @foreach(\App\Util\Constant::COMMON_STATUS_LIST as $value => $label)
-                                                <option value="{{$value}}">{{$label}}</option>
+                                        <input placeholder="Find Email" type="text" class="form-control" name="s_email" onchange="filter()">
+                                    </td>
+                                    <td class="all" >
+                                        <input placeholder="Find Phone" type="text" class="form-control" name="s_phone" onchange="filter()">
+                                    </td>
+                                    <td class="all" >
+                                        <input placeholder="Find Address" type="text" class="form-control" name="s_address" onchange="filter()">
+                                    </td>
+                                    <td class="all" >
+                                        <select class="form-control" name="s_types" onchange="filter()">
+                                            <option value="">Pilih Tipe</option>
+                                            @foreach(\App\Util\Constant::MEMBER_TYPES_LIST as $value)
+                                                <option value="{{$value}}">{{$value}}</option>
                                             @endforeach
                                         </select>
                                     </td>
                                     <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
+                                    <th style="min-width: 100px;">Nama</th>
+                                    <th style="min-width: 100px;">Email</th>
+                                    <th>Telepon</th>
+                                    <th style="min-width: 100px;">Address</th>
+                                    <th>Tipe</th>
+                                    <th style="min-width: 60px;">Updated</th>
                                     <th style="min-width: 150px">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
-                            <tfoot>
-
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -88,10 +98,13 @@
         'processing'  : true,
         'serverSide'  : true,
         'ajax'        : {
-            url: "{{ route('admin.division.data') }}",
+            url: "{{ route('admin.member.data') }}",
             data: function (d) {
                 d.name = $('[name=s_name]').val();
-                d.status = $('[name=s_status]').val();
+                d.email = $('[name=s_email]').val();
+                d.phone = $('[name=s_phone]').val();
+                d.address = $('[name=s_address]').val();
+                d.types = $('[name=s_types]').val();
             }
         },
         'dataType'    : 'json',
@@ -99,12 +112,16 @@
         'paging'      : true,
         'lengthChange': true,
         'columns'     : [
-            {data:'id', name: 'id'},
             {data:'name', name: 'name'},
-            {data:'status', name: 'status'},
+            {data:'email', name: 'email'},
+            {data:'phone', name: 'phone'},
+            {data:'address', name: 'address'},
+            {data:'types', name: 'types'},
+            {data:'updated_at', name: 'updated_at',searchable: false},
             {data:'aksi', name: 'aksi', orderable: false, searchable: false},
         ],
         'info'        : true,
+        'order'       : ['5','desc'],
         'autoWidth'   : false
     });
 
@@ -112,11 +129,19 @@
         table.draw();
     }
 
+    function addData() {
+        $('#myModal').modal('show');
+        $('#myModal form')[0].reset();
+        $('[name=id]').val(0);
+        $('[name=method]').val('ADD');
+        $('.modal-title').text('Tambah Data');
+    }
+
     function editData(id){
         $('#myModal form')[0].reset();
         $('[name=method]').val('EDIT');
         $.ajax({
-            url: "{{route('admin.division.get',['id'=>''])}}"+"/"+id,
+            url: "{{route('admin.member.get',['id'=>''])}}"+"/"+id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -124,15 +149,11 @@
                 $('.modal-title').text('Edit Data');
 
                 $('[name=id]').val(data.id);
-
-                var fields = [];
-                @foreach($model::FORM_FIELD as $field => $value)
-                    fields.push('{{ $field }}');
-                @endforeach
-
-                fields.map( field =>{
-                   $('[name='+field+']').val(data[field]);
-                });
+                $('[name=name]').val(data.name);
+                $('[name=email]').val(data.email);
+                $('[name=phone]').val(data.phone);
+                $('[name=types]').val(data.types);
+                $('[name=address]').val(data.address);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 swal({
@@ -145,15 +166,7 @@
         });
     }
 
-    function addData() {
-        $('#myModal').modal('show');
-        $('#myModal form')[0].reset();
-        $('[name=id]').val(0);
-        $('[name=method]').val('ADD');
-        $('.modal-title').text('Tambah Data');
-    }
-
-    function deleteData(id) {
+    function deletePengguna(id) {
         swal({
             title: "Yakin Hapus Data?",
             text : "Data akan dihapus permanen",
@@ -169,7 +182,7 @@
         .then((process) => {
             if(process){
                 $.ajax({
-                    url: "{{ route('admin.division.delete',['id'=>'']) }}" + '/' + id,
+                    url: "{{ route('admin.member.delete',['id'=>'']) }}" + '/' + id,
                     type: "POST",
                     data: {
                         '_token': '{{csrf_token()}}' 
@@ -201,7 +214,7 @@
     $('#submit').click(function(e){
       e.preventDefault();
       var id = $('#id').val();
-      url = "{{route('admin.division.save')}}";
+      url = "{{route('admin.member.save')}}";
       
       $('.form-group').removeClass('has-error');
       $('.help-block-error').html('');
@@ -230,11 +243,9 @@
                     timer: '3000'
                 });
                 var error_arr = [];
-
                 @foreach($model::FORM_VALIDATION as $field => $value)
                 error_arr.push('{{ $field }}');
                 @endforeach
-
                 for(var i=0;i < error_arr.length;i++){
                     if(error_arr[i] in data.error){
                         $('#'+error_arr[i]).addClass('has-error');

@@ -150,7 +150,6 @@ class UserController extends BackEndController
 
             $users = User::where('role','!=',Constant::USER_ROLE_ADMIN)
                 ->get();
-            $dataMember = [];
 
             $excel->sheet('user', function($sheet) use ($users) {
 

@@ -36,14 +36,8 @@ class SelectHelper {
         return Constant::COMMON_STATUS_LIST;
     }
 
-    public static function getCompany() {
-        $companies = Company::get();
-        $data = [];
-
-        foreach ($companies as $company){
-            $data[$company->id] = $company->name;
-        }
-        return $data;
+    public static function getMemberTypes() {
+        return Constant::MEMBER_TYPES_LIST;
     }
 
     public static function getNotification(){
@@ -63,8 +57,8 @@ class SelectHelper {
             return self::getUserList();
         }else if($type == 'getCommonStatus'){
             return self::getCommonStatus();
-        }else if($type == 'getCompany'){
-            return self::getCompany();
+        }else if($type == 'getMemberTypes'){
+            return self::getMemberTypes();
         }else if($type == 'getNotification'){
             return self::getNotification();
         }

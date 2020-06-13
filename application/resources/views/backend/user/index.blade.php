@@ -12,7 +12,7 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li><a href="{{route('admin.dashboard')}}">Dashboard</a> <i class="fa fa-circle"></i></li>
-                <li><span>Account</span></li>
+                <li><span>Akun</span></li>
             </ul>
         </div>
 
