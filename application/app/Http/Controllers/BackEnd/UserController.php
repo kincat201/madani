@@ -94,8 +94,8 @@ class UserController extends BackEndController
           return Constant::USER_ROLES[$user->role];
         })
         ->addColumn('aksi',function($users) {
-          return '<a href="'.route("admin.user.detail",["id"=>$users->id]).'" class="btn btn-success btn-xs">Detail</a>'.' '.'<a onclick="editPengguna('.$users->id.')" class="btn btn-info btn-xs">Edit</a>'.' '.
-          '<a onclick="deletePengguna('.$users->id.')"class="btn btn-danger btn-xs">Delete</a>';
+          return '<a href="'.route("admin.user.detail",["id"=>$users->id]).'" class="btn btn-success btn-xs">Detail</a>'.' '.'<a onclick="editData('.$users->id.')" class="btn btn-info btn-xs">Edit</a>'.' '.
+          '<a onclick="deleteData('.$users->id.')"class="btn btn-danger btn-xs">Delete</a>';
         })
         ->filter(function ($instance) use ($request) {
             if ($request->has('username') && !empty($request->username)) {

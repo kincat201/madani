@@ -166,7 +166,7 @@
         });
     }
 
-    function deletePengguna(id) {
+    function deleteData(id) {
         swal({
             title: "Yakin Hapus Data?",
             text : "Data akan dihapus permanen",

@@ -53,7 +53,7 @@
 					</li>
 					<li class="nav-item {{@$sidebar === 'category'? 'active' : ''}}">
 						<a
-								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
+								href="{{route('admin.categories')}}" class="nav-link nav-toggle"> <i
 									class="fa fa-users"></i> <span class="title">Kategori Produk</span> <span
 									class="arrow {{@$sidebar === 'category'? '' : 'hidden'}}"></span>
 						</a>

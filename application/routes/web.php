@@ -56,6 +56,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin:ADMIN']], func
     Route::get('/memberExport', 'BackEnd\MemberController@export')->name('admin.member.export');
     Route::get('/memberSearch/{search}', 'BackEnd\MemberController@search')->name('admin.member.search');
 
+    //Categories
+    Route::get('/categories', 'BackEnd\CategoryController@index')->name('admin.categories');
+    Route::get('/categoryData', 'BackEnd\CategoryController@indexData')->name('admin.category.data');
+    Route::get('/categoryGet/{id}', 'BackEnd\CategoryController@getData')->name('admin.category.get');
+    Route::post('/categorySave', 'BackEnd\CategoryController@save')->name('admin.category.save');
+    Route::post('/categoryDelete/{id}', 'BackEnd\CategoryController@delete')->name('admin.category.delete');
+    Route::get('/categoryExport', 'BackEnd\CategoryController@export')->name('admin.category.export');
+
     //notification
     Route::get('/notifications', 'BackEnd\NotificationController@index')->name('admin.notifications');
     Route::get('/notificationData', 'BackEnd\NotificationController@indexData')->name('admin.notification.data');

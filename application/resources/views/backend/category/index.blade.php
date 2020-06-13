@@ -1,6 +1,6 @@
 @extends('backend.layouts.template')
 
-@section('pageTitle','Account')
+@section('pageTitle','Category')
 
 @push('customCss')
     <link href="{{url('backend/assets/global/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
@@ -12,7 +12,7 @@
         <div class="page-bar">
             <ul class="page-breadcrumb">
                 <li><a href="{{route('admin.dashboard')}}">Dashboard</a> <i class="fa fa-circle"></i></li>
-                <li><span>Akun</span></li>
+                <li><span>Kategori Produk</span></li>
             </ul>
         </div>
 
@@ -22,49 +22,30 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-share font-dark"></i> <span
-                                class="caption-subject font-dark bold uppercase">List Account</span>
+                                class="caption-subject font-dark bold uppercase">Daftar Kategori Produk</span>
                         </div>
                     </div>
                     <div class="portlet-body">
                         <div class="row" style="margin-bottom: 10px;">
                             <div class="col-md-12 col-lg-12" style="text-align: right;">
-                                <a href="{{route('admin.user.export')}}" target="_blank" class="btn btn-success">Export</a>
-                                <button onclick="tambahData()" class="btn btn-primary">Add</button>
+                                <a href="{{route('admin.category.export')}}" target="_blank" class="btn btn-success">Export</a>
+                                <button onclick="addData()" class="btn btn-primary">Tambah</button>
                             </div>
                         </div>
                         <table id="myTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <td class="all">
-                                        <input placeholder="Find Username" type="text" class="form-control" name="s_username" onchange="filter()">
-                                    </td>
-                                    <td class="all">
                                         <input placeholder="Find Name" type="text" class="form-control" name="s_name" onchange="filter()">
                                     </td>
                                     <td class="all" >
-                                        <input placeholder="Find Email" type="text" class="form-control" name="s_email" onchange="filter()">
+                                        <input placeholder="Find Description" type="text" class="form-control" name="s_description" onchange="filter()">
                                     </td>
-                                    <td class="all" >
-                                        <input placeholder="Find Phone" type="text" class="form-control" name="s_phone" onchange="filter()">
-                                    </td>
-                                    <td class="all" >
-                                        <select class="form-control" name="s_role" onchange="filter()">
-                                            <option value="">Pilih Role</option>
-                                            @foreach(\App\Util\Constant::USER_ROLES as $role => $value)
-                                                <option value="{{$role}}">{{$value}}</option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <th>Username</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Telepon</th>
-                                    <th>Role</th>
-                                    <th>Created</th>
+                                    <th style="min-width: 100px;">Nama</th>
+                                    <th style="min-width: 100px;">Deskripsi</th>
                                     <th style="min-width: 150px">Aksi</th>
                                 </tr>
                             </thead>
@@ -76,7 +57,7 @@
         </div>
     </div>
 </div>
-@include('backend.user.modal')
+@include('backend.part.modal')
 @endsection 
 
 @push('customJs')
@@ -98,15 +79,10 @@
         'processing'  : true,
         'serverSide'  : true,
         'ajax'        : {
-            url: "{{ route('admin.user.data') }}",
+            url: "{{ route('admin.category.data') }}",
             data: function (d) {
-                d.username = $('[name=s_username]').val();
                 d.name = $('[name=s_name]').val();
-                d.email = $('[name=s_email]').val();
-                d.phone = $('[name=s_phone]').val();
-                d.city = $('[name=s_city]').val();
-                d.province = $('[name=s_province]').val();
-                d.role = $('[name=s_role]').val();
+                d.description = $('[name=s_description]').val();
             }
         },
         'dataType'    : 'json',
@@ -114,16 +90,12 @@
         'paging'      : true,
         'lengthChange': true,
         'columns'     : [
-            {data:'username', name: 'username'},
             {data:'name', name: 'name'},
-            {data:'email', name: 'email'},
-            {data:'phone', name: 'phone'},
-            {data:'roles', name: 'roles'},
-            {data:'created_at', name: 'created_at',searchable: false},
+            {data:'description', name: 'description'},
             {data:'aksi', name: 'aksi', orderable: false, searchable: false},
         ],
         'info'        : true,
-        'order'       : ['6','desc'],
+        'order'       : ['0','desc'],
         'autoWidth'   : false
     });
 
@@ -131,23 +103,19 @@
         table.draw();
     }
 
-    function tambahData() {
+    function addData() {
         $('#myModal').modal('show');
         $('#myModal form')[0].reset();
         $('[name=id]').val(0);
-        $('[name=username]').attr('disabled',false);
-        $('[name=password]').attr('placeholder','Masukan password');
         $('[name=method]').val('ADD');
         $('.modal-title').text('Tambah Data');
     }
 
     function editData(id){
         $('#myModal form')[0].reset();
-        $('[name=password]').attr('placeholder','Kosongkan password jika tidak ingin mengganti');
-        $('[name=username]').attr('disabled',true);
         $('[name=method]').val('EDIT');
         $.ajax({
-            url: "{{route('admin.user.get',['id'=>''])}}"+"/"+id,
+            url: "{{route('admin.category.get',['id'=>''])}}"+"/"+id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -156,10 +124,7 @@
 
                 $('[name=id]').val(data.id);
                 $('[name=name]').val(data.name);
-                $('[name=email]').val(data.email);
-                $('[name=phone]').val(data.phone);
-                $('[name=role]').val(data.role);
-                $('[name=username]').val(data.username);
+                $('[name=description]').val(data.description);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 swal({
@@ -188,7 +153,7 @@
         .then((process) => {
             if(process){
                 $.ajax({
-                    url: "{{ route('admin.user.delete',['id'=>'']) }}" + '/' + id,
+                    url: "{{ route('admin.category.delete',['id'=>'']) }}" + '/' + id,
                     type: "POST",
                     data: {
                         '_token': '{{csrf_token()}}' 
@@ -220,7 +185,7 @@
     $('#submit').click(function(e){
       e.preventDefault();
       var id = $('#id').val();
-      url = "{{route('admin.user.save')}}";
+      url = "{{route('admin.category.save')}}";
       
       $('.form-group').removeClass('has-error');
       $('.help-block-error').html('');
@@ -248,7 +213,10 @@
                     icon: 'error',
                     timer: '3000'
                 });
-                var error_arr = ['email','name','password','role','username','memberId'];
+                var error_arr = [];
+                @foreach($model::FORM_VALIDATION as $field => $value)
+                error_arr.push('{{ $field }}');
+                @endforeach
                 for(var i=0;i < error_arr.length;i++){
                     if(error_arr[i] in data.error){
                         $('#'+error_arr[i]).addClass('has-error');

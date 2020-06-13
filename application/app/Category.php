@@ -42,7 +42,9 @@ class Category extends Model
     ];
 
     const exportData = [
-
+        'id'=>'Kategory_id',
+        'name'=>'Nama',
+        'description'=>'Deskripsi',
     ];
 
     public function newQuery($excludeDeleted = true) {
