@@ -4,7 +4,7 @@
     ***********/
 /* Header search bar, toggler button & top menu */
 .page-header.navbar {
-  background-color: #34847d;
+  background-color: #3498db;
   /* Top notification menu/bar */
   /* Header seaech box */
   /* Toggler button for sidebar expand/collapse and responsive sidebar menu */ }
@@ -248,7 +248,7 @@
 /* Page sidebar */
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover,
 .page-sidebar {
-  background-color: #34847d;
+  background-color: #3498db;
   /* Default sidebar */
   /* light sidebar */
   /* Sidebar search */ }
@@ -333,7 +333,7 @@
       color: #ffffff; }
     .page-sidebar-closed .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu:hover .sub-menu, .page-sidebar-closed
     .page-sidebar .page-sidebar-menu:hover .sub-menu {
-      background-color: #34847d; }
+      background-color: #3498db; }
     .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu > li > a,
     .page-sidebar .page-sidebar-menu .sub-menu > li > a {
       color: #C9DFF5; }
@@ -432,7 +432,7 @@
     border-bottom: 1px solid #548bba; }
     .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search .input-group .form-control,
     .page-sidebar .sidebar-search .input-group .form-control {
-      background-color: #34847d;
+      background-color: #3498db;
       color: #6e9cc5; }
       .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search .input-group .form-control::-moz-placeholder,
       .page-sidebar .sidebar-search .input-group .form-control::-moz-placeholder {
@@ -452,7 +452,7 @@
     border: 1px solid #548bba; }
   .page-sidebar-closed .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search.open .input-group, .page-sidebar-closed
   .page-sidebar .sidebar-search.open .input-group {
-    background-color: #34847d; }
+    background-color: #3498db; }
   .page-sidebar-closed .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search.open .remove > i, .page-sidebar-closed
   .page-sidebar .sidebar-search.open .remove > i {
     color: #6e9cc5; }
@@ -468,11 +468,11 @@
       background: #3b6992; }
   .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search.sidebar-search-solid.open .input-group,
   .page-sidebar .sidebar-search.sidebar-search-solid.open .input-group {
-    border: 1px solid #34847d;
-    background: #34847d; }
+    border: 1px solid #3498db;
+    background: #3498db; }
     .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .sidebar-search.sidebar-search-solid.open .input-group .form-control,
     .page-sidebar .sidebar-search.sidebar-search-solid.open .input-group .form-control {
-      background: #34847d; }
+      background: #3498db; }
 
 .page-sidebar-reversed .page-sidebar-menu.page-sidebar-menu-light {
   /* 1st level links */ }
@@ -527,7 +527,7 @@
     /* Page sidebar */
     /* Page footer */ }
     .page-boxed .page-container {
-      background-color: #34847d;
+      background-color: #3498db;
       border-left: 1px solid #4a83b6;
       border-bottom: 1px solid #4a83b6; }
     .page-boxed.page-sidebar-reversed .page-container {
@@ -564,7 +564,7 @@
     background-color: #305778;
     /* light sidebar */ }
     .page-sidebar .page-sidebar-menu > li > a {
-      border-top: 1px solid #34847d; }
+      border-top: 1px solid #3498db; }
     .page-sidebar .page-sidebar-menu > li:hover > a, .page-sidebar .page-sidebar-menu > li.open > a {
       background: #366187; }
     .page-sidebar .page-sidebar-menu > li:last-child > a {
@@ -591,9 +591,9 @@
   .page-header.navbar {
     /* Top menu */ }
     .page-header.navbar .top-menu {
-      background-color: #34847d; }
+      background-color: #3498db; }
       .page-header-fixed-mobile .page-header.navbar .top-menu {
-        background-color: #34847d; }
+        background-color: #3498db; }
       .page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle {
         background-color: #3b7cb5; }
         .page-header-fixed-mobile .page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle {
@@ -605,7 +605,7 @@
     Boby
     ****/
 body {
-  background-color: #34847d; }
+  background-color: #3498db; }
 
 /****
  CSS3 Spinner Bar

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
-use App\Reservation;
+use App\Member;
 use App\User;
 use Illuminate\Http\Request;
 use Session;
@@ -19,7 +19,7 @@ class PageController extends FrontEndController
     public function index()
     {
         $data['sidebar'] = 'reservation';
-        $data['list'] = Reservation::orderBy('reservationDate','desc')->get();
+        $data['list'] = Member::get();
         return view('frontend.pages.home',$data);
     }
 

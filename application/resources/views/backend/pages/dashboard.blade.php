@@ -37,7 +37,7 @@
             <div class="col-lg-12 text-center">
                 <br>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <a class="dashboard-stat dashboard-stat-v2 blue" href="{{route('users')}}">
+                    <a class="dashboard-stat dashboard-stat-v2 blue" href="{{route('admin.users')}}">
                         <div class="visual">
                             <i class="fa fa-user"></i>
                         </div>
@@ -50,7 +50,7 @@
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <a class="dashboard-stat dashboard-stat-v2 red" href="{{route('admin.reservations')}}">
+                    <a class="dashboard-stat dashboard-stat-v2 red" href="{{route('admin.units')}}">
                         <div class="visual">
                             <i class="fa fa-list"></i>
                         </div>
