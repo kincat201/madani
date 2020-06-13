@@ -15,7 +15,7 @@
             <div class="page-bar">
                 <ul class="page-breadcrumb">
                     <li><a href="{{route('admin.dashboard')}}">Beranda</a> <i class="fa fa-circle"></i></li>
-                    <li><a href="{{route('users')}}">Member</a> <i class="fa fa-circle"></i></li>
+                    <li><a href="{{route('admin.users')}}">Member</a> <i class="fa fa-circle"></i></li>
                     <li><span>Detail Member</span></li>
                 </ul>
             </div>
@@ -55,7 +55,7 @@
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-9 text-right">
-                                    <a href="{{route('users')}}" class="btn default" >Kembali</a>
+                                    <a href="{{route('admin.users')}}" class="btn default" >Kembali</a>
                                 </div>
                             </div>
                         </div>

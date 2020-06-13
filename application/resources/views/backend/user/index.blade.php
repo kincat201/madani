@@ -28,7 +28,7 @@
                     <div class="portlet-body">
                         <div class="row" style="margin-bottom: 10px;">
                             <div class="col-md-12 col-lg-12" style="text-align: right;">
-                                <a href="{{route('user.export')}}" target="_blank" class="btn btn-success">Export</a>
+                                <a href="{{route('admin.user.export')}}" target="_blank" class="btn btn-success">Export</a>
                                 <button onclick="tambahData()" class="btn btn-primary">Add</button>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
         'processing'  : true,
         'serverSide'  : true,
         'ajax'        : {
-            url: "{{ route('user.data') }}",
+            url: "{{ route('admin.user.data') }}",
             data: function (d) {
                 d.username = $('[name=s_username]').val();
                 d.name = $('[name=s_name]').val();
@@ -147,7 +147,7 @@
         $('[name=username]').attr('disabled',true);
         $('[name=method]').val('EDIT');
         $.ajax({
-            url: "{{route('user.get',['id'=>''])}}"+"/"+id,
+            url: "{{route('admin.user.get',['id'=>''])}}"+"/"+id,
             type: "GET",
             dataType: "JSON",
             success: function(data) {
@@ -188,7 +188,7 @@
         .then((process) => {
             if(process){
                 $.ajax({
-                    url: "{{ route('user.delete',['id'=>'']) }}" + '/' + id,
+                    url: "{{ route('admin.user.delete',['id'=>'']) }}" + '/' + id,
                     type: "POST",
                     data: {
                         '_token': '{{csrf_token()}}' 
@@ -220,7 +220,7 @@
     $('#submit').click(function(e){
       e.preventDefault();
       var id = $('#id').val();
-      url = "{{route('user.save')}}";
+      url = "{{route('admin.user.save')}}";
       
       $('.form-group').removeClass('has-error');
       $('.help-block-error').html('');

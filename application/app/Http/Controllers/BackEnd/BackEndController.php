@@ -39,7 +39,7 @@ class BackEndController extends Controller
     {
         $data['sidebar'] = 'dashboard';
         $data['user'] = User::count();
-        $data['reservation'] = Reservation::count();
+        $data['reservation'] = 0;
 
         //set Asset Chart
         $periode = [];
@@ -61,7 +61,7 @@ class BackEndController extends Controller
             ];
         }
 
-        foreach (Reservation::get() as $pic){
+        foreach (User::get() as $pic){
             $picDate = strtotime($pic->created_at);
 
             foreach($periode as $key => $prd){

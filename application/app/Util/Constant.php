@@ -6,10 +6,16 @@ class Constant {
 
     const USER_ROLE_USER = 'USER';
     const USER_ROLE_ADMIN = 'ADMIN';
+    const USER_ROLE_CASHIER = 'CASHIER';
+    const USER_ROLE_DESIGNER = 'DESIGNER';
+    const USER_ROLE_ENGINEER = 'ENGINEER';
 
     const USER_ROLES = [
-        self::USER_ROLE_USER => 'Pengguna',
         self::USER_ROLE_ADMIN => 'Super Admin',
+        self::USER_ROLE_USER => 'Pengguna',
+        self::USER_ROLE_CASHIER => 'Kasir',
+        self::USER_ROLE_DESIGNER => 'Designer',
+        self::USER_ROLE_ENGINEER => 'Operator Mesin',
     ];
 
     const COMMON_STATUS_ACTIVE = 'ACTIVE';
@@ -34,21 +40,17 @@ class Constant {
     ];
 
     const NOTIFICATION_TYPE_OTHER = 'OTHER';
-    const NOTIFICATION_TYPE_RESERVATION = 'RESERVATION';
 
     const NOTIFICATION_TYPE = [
         self::NOTIFICATION_TYPE_OTHER => 'Lainnya',
-        self::NOTIFICATION_TYPE_RESERVATION => 'Reservasi',
     ];
 
     const NOTIFICATION_ICON = [
         self::NOTIFICATION_TYPE_OTHER => 'tags',
-        self::NOTIFICATION_TYPE_RESERVATION => 'list',
     ];
 
     const NOTIFICATION_LINK = [
         self::NOTIFICATION_TYPE_OTHER => 'settings',
-        self::NOTIFICATION_TYPE_RESERVATION => 'admin.reservations',
     ];
 
     const COMMON_YES = '1';
@@ -64,51 +66,60 @@ class Constant {
         self::COMMON_NO => 'danger',
     ];
 
-    const RESERVATION_STATUS_NEW = 'NEW';
-    const RESERVATION_STATUS_APPROVED = 'APPROVED';
-    const RESERVATION_STATUS_REJECTED = 'REJECTED';
+    const COMMON_STATUS_AVAILABLE = 'AVAILABLE';
+    const COMMON_STATUS_UNAVAILABLE = 'UNAVAILABLE';
+
+    const COMMON_STATUS_AVAILABLE_LIST = [
+        self::COMMON_STATUS_AVAILABLE => 'Tersedia',
+        self::COMMON_STATUS_UNAVAILABLE => 'Tidak Tersedia',
+    ];
+
+    const COMMON_STATUS_AVAILABLE_LABEL_LIST = [
+        self::COMMON_STATUS_AVAILABLE => 'success',
+        self::COMMON_STATUS_UNAVAILABLE => 'danger',
+    ];
+
+    const MEMBER_TYPES_GUEST = 'GUEST';
+    const MEMBER_TYPES_MEMBER = 'MEMBER';
+
+    const MEMBER_TYPES_LIST = [
+        self::MEMBER_TYPES_GUEST => 'Tamu',
+        self::MEMBER_TYPES_MEMBER => 'Pelanggan',
+    ];
+
+    const ORDER_STATUS_NEW = 'NEW';
+    const ORDER_STATUS_REQUEST_DESIGN = 'REQUEST_DESIGN';
+    const ORDER_STATUS_OFFERED_DESIGN = 'OFFERED_DESIGN';
+    const ORDER_STATUS_PROGRESS = 'PROGRESS';
+    const ORDER_STATUS_COMPLETED = 'COMPLETED';
+    const ORDER_STATUS_CANCELLED = 'CANCELLED';
 
     const RESERVATION_STATUS_LIST = [
-        self::RESERVATION_STATUS_NEW => 'Baru',
-        self::RESERVATION_STATUS_APPROVED => 'Disetujui',
-        self::RESERVATION_STATUS_REJECTED => 'Ditolak',
+        self::ORDER_STATUS_NEW => 'Baru',
+        self::ORDER_STATUS_REQUEST_DESIGN => 'Menunggu Design',
+        self::ORDER_STATUS_OFFERED_DESIGN => 'Tawaran Design',
+        self::ORDER_STATUS_PROGRESS => 'Diproses',
+        self::ORDER_STATUS_COMPLETED => 'Selesai',
+        self::ORDER_STATUS_CANCELLED => 'Dibatalkan',
     ];
 
     const RESERVATION_STATUS_LABEL_LIST = [
-        self::RESERVATION_STATUS_NEW => 'primary',
-        self::RESERVATION_STATUS_APPROVED => 'success',
-        self::RESERVATION_STATUS_REJECTED => 'danger',
+        self::ORDER_STATUS_NEW => 'primary',
+        self::ORDER_STATUS_REQUEST_DESIGN => 'success',
+        self::ORDER_STATUS_OFFERED_DESIGN => 'warning',
+        self::ORDER_STATUS_PROGRESS => 'success',
+        self::ORDER_STATUS_COMPLETED => 'info',
+        self::ORDER_STATUS_CANCELLED => 'danger',
     ];
 
-    const ROOM_BIG = 'BIG';
-    const ROOM_SMALL = 'SMALL';
-    const ROOM_SYNERGY = 'SYNERGY';
-    const ROOM_MIND = 'MIND';
-    const ROOM_PASSIONATE = 'PASSIONATE';
-    const ROOM_RESPECT = 'RESPECT';
-    const ROOM_PERFORMANCE = 'PERFORMANCE';
+    const STATUS_PAYMENT_UNPAID = 'UNPAID';
+    const STATUS_PAYMENT_HALF_PAID = 'HALF_UNPAID';
+    const STATUS_PAYMENT_PAID = 'PAID';
 
-    const ROOM_LIST = [
-        self::ROOM_BIG => 'Ruangan Meeting Besar',
-        self::ROOM_SMALL => 'Ruangan Meeting Kecil',
-        self::ROOM_SYNERGY => 'Ruang Meeting Synergy',
-        self::ROOM_MIND => 'Ruang Meeting Open Mind',
-        self::ROOM_PASSIONATE => 'Ruang Dealing Passionate',
-        self::ROOM_RESPECT => 'Ruang Dealing Respect',
-        self::ROOM_PERFORMANCE => 'Ruang Dealing Performance',
-    ];
-
-    const FOOD_NO = 'NO';
-    const FOOD_YES = 'YES';
-
-    const FOOD_LIST = [
-        self::FOOD_NO => 'Tidak Ada',
-        self::FOOD_YES => 'Snack / Makan',
-    ];
-
-    const FOOD_LABEL_LIST = [
-        self::FOOD_YES => 'primary',
-        self::FOOD_NO => 'danger',
+    const STATUS_PAYMENT_LIST = [
+        self::STATUS_PAYMENT_UNPAID => 'Belum Bayar',
+        self::STATUS_PAYMENT_HALF_PAID => 'Bayar DP',
+        self::STATUS_PAYMENT_PAID => 'Lunas',
     ];
 
 }
