@@ -12,18 +12,18 @@ class ConfigSeeder extends Seeder
     public function run()
     {
         DB::table('config')->insert([
-            'title' => 'Reservasi Ruangan',
+            'title' => 'Madani Jaya',
             'logo' => 'config/logo.png',
             'logoSecond' => 'config/logo-back.png',
             'icon' => 'config/favicon.ico',
-            'email' => 'teman@koperasi-astra.com',
-            'phone' => '089635594784',
-            'address' => 'Jl. Mitra Sunter Boulevard Blok C2 Kav 90 Sunter Jaya, Jakarta 14350',
-            'about' => 'Koperasi Astra merupakan salah satu upaya PT. Astra International Tbk, untuk menambah kesejahteraan karyawan tetapnya di seluruh anak perusahaan  melalui manfaat ekonomi yang dikelola Koperasi. Sebagai koperasi konsumen, Koperasi Astra tidak hanya memfasilitasi berbagai produk layanan simpan pinjam namun juga mampu meningkatkan kinerja melalui anak perusahaan yang bergerak dalam berbagai bidang.',
-            'facebook' => 'http://www.facebook.com',
+            'email' => 'madanijaya@gmail.com',
+            'phone' => '081398298744',
+            'address' => 'Jl. Kemakmuran No.1, Mekar Jaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16411',
+            'about' => 'Kami dari MADANI JAYA yang bergerak di bidang Copy Center, Sablon, Digital, Penjilidan & Percetakan, Kami Berdomisili di Kota Depok. Dengan di dukung tenaga yang profesional dan pelayanan yang ramah,dan kerja yang cepat. dengan harga yang kompetitif dan hasil yang berkualitas dan kerahasiaan dokumen yang pasti aman. MADANI JAYA juga melayani via online dan barang bisa dikirim lewat Tiki atau Tiki JNE',
+            'facebook' => 'http://www.facebook.com/madanidigitalprinting',
             'twitter' => 'http://www.twitter.com',
-            'instagram' => 'http://www.instagram.com',
-            'whatsapp' => '6289635594784',
+            'instagram' => 'https://www.instagram.com/madanidigitalprinting',
+            'whatsapp' => '6281398298744',
         ]);
     }
 }

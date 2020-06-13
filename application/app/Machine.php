@@ -5,19 +5,21 @@ namespace App;
 use App\Util\Constant;
 use Illuminate\Database\Eloquent\Model;
 
-class Division extends Model
+class Machine extends Model
 {
-    protected $table = 'division';
+    protected $table = 'machines';
     public $timestamps = false;
     protected $primaryKey = 'id'; // or null
 
     protected $fillable = [
         'name',
+        'description',
         'status',
     ];
 
     const FORM_FIELD = [
         'name' => 'text',
+        'description' => 'textarea',
         'status' => 'select',
     ];
 
@@ -25,6 +27,7 @@ class Division extends Model
 
     const FORM_LABEL = [
         'name' => 'Nama',
+        'description' => 'Deskripsi',
         'status' => 'Status',
     ];
 
@@ -48,16 +51,11 @@ class Division extends Model
 
     public function newQuery($excludeDeleted = true) {
         return parent::newQuery($excludeDeleted)
-            ->where('division.deleted', 0);
+            ->where('machines.deleted', 0);
     }
 
-    public function scopeActive($query)
+    public function orders()
     {
-        return $query->where('division.status', Constant::COMMON_STATUS_ACTIVE);
-    }
-
-    public function pics()
-    {
-        return $this->belongsToMany(Pic::class,'pic_division','divisionId','picId');
+        return $this->hasMany(OrderMachine::class,'machine_id','id');
     }
 }

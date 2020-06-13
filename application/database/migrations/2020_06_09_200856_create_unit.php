@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDivision extends Migration
+class CreateUnit extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDivision extends Migration
      */
     public function up()
     {
-        Schema::create('division', function (Blueprint $table) {
+        Schema::create('units', function (Blueprint $table) {
             $table->increments('id')->index('id');
-            $table->string('name')->nullable();
-            $table->string('status')->nullable();
+            $table->string('name')->index('unit_name')->nullable();
+            $table->string('description')->nullable();
             $table->integer('deleted')->default(0)->nullable();
         });
     }
@@ -28,6 +28,6 @@ class CreateDivision extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('division');
+        Schema::dropIfExists('units');
     }
 }

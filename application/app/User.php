@@ -22,7 +22,6 @@ class User extends Authenticatable
         'email',
         'role',
         'phone',
-        'birthDay',
     ];
 
     const FORM_DETAIL = [
@@ -31,7 +30,6 @@ class User extends Authenticatable
         'name' => 'Nama',
         'phone' => 'Telepon',
         'role' => 'Role',
-        'birthday' => 'Tanggal Lahir',
     ];
 
     const exportData = [
@@ -40,7 +38,6 @@ class User extends Authenticatable
         'name'=>'Name',
         'phone'=>'Phone',
         'role'=>'Role',
-        'birthday'=>'Birth Day',
         'created_at'=>'Created',
         'updated_at'=>'Updated',
     ];

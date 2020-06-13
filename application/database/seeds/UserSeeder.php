@@ -14,48 +14,48 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'kincat only',
-            'username' => 'kincat@gmail.com',
+            'name' => 'kincat admin',
+            'username' => 'kincat',
             'email' => 'kincat@gmail.com',
+            'role'	=> \App\Util\Constant::USER_ROLE_ADMIN,
             'phone' => '123456',
             'password' => bcrypt('1234'),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            'role'	=> 'ADMIN',
-            'birthDay' => '1995-11-01',
         ]);
 
         DB::table('users')->insert([
-            'name' => 'kincat only',
-            'username' => 'kincat1@gmail.com',
+            'name' => 'kincat cashier',
+            'username' => 'kincat1',
             'email' => 'kincat1@gmail.com',
+            'role'  => \App\Util\Constant::USER_ROLE_CASHIER,
             'phone' => '123456',
             'password' => bcrypt('1234'),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
-            'role'  => 'USER',
-            'birthDay' => '1995-11-01',
         ]);
 
-        $faker = Faker\Factory::create();
+        DB::table('users')->insert([
+            'name' => 'kincat designer',
+            'username' => 'kincat2',
+            'email' => 'kincat2@gmail.com',
+            'role'  => \App\Util\Constant::USER_ROLE_DESIGNER,
+            'phone' => '123456',
+            'password' => bcrypt('1234'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
 
-        $users = array();
-
-        for ($i=0; $i < 50; $i++) {
-            $data['name'] = $faker->name;
-            $data['username'] = $faker->email;
-            $data['email'] = $faker->email;
-            $data['phone'] = $faker->e164PhoneNumber;
-            $data['password'] = bcrypt('1234');
-            $data['role'] = 'USER';
-            $data['birthDay'] = $faker->date();
-            $data['created_at'] = $faker->dateTime();
-            $data['updated_at'] = $faker->dateTime();
-            array_push($users, $data);
-        }
-
-        DB::table('users')->insert($users);
-
+        DB::table('users')->insert([
+            'name' => 'kincat engineer',
+            'username' => 'kincat3',
+            'email' => 'kincat3@gmail.com',
+            'role'  => \App\Util\Constant::USER_ROLE_ENGINEER,
+            'phone' => '123456',
+            'password' => bcrypt('1234'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
 
     }
 }
