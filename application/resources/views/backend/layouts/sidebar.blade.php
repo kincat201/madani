@@ -76,16 +76,16 @@
 				<ul class="sub-menu">
 					<li class="nav-item {{@$sidebar === 'order_new'? 'active' : ''}}">
 						<a
-								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-users"></i> <span class="title">Pesanan Baru</span> <span
+								href="{{route('admin.order.get',0)}}" class="nav-link nav-toggle"> <i
+									class="fa fa-cart-plus"></i> <span class="title">Pesanan Baru</span> <span
 									class="arrow {{@$sidebar === 'order_new'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
 					<li class="nav-item {{@$sidebar === 'order'? 'active' : ''}}">
 						<a
-								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
-									class="fa fa-users"></i> <span class="title">Daftar Pesanan</span> <span
-									class="arrow {{@$sidebar === 'member'? '' : 'hidden'}}"></span>
+								href="{{route('admin.orders')}}" class="nav-link nav-toggle"> <i
+									class="fa fa-list"></i> <span class="title">Daftar Pesanan</span> <span
+									class="arrow {{@$sidebar === 'order'? '' : 'hidden'}}"></span>
 						</a>
 					</li>
 				</ul>

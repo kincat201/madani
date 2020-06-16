@@ -19,10 +19,10 @@ class CreateOrderDetail extends Migration
             $table->integer('product_id')->index('product_id')->nullable();
             $table->string('remark')->nullable();
             $table->integer('qty')->nullable();
-            $table->decimal('price',15,2)->nullable();
-            $table->decimal('hpp',15,2)->nullable();
-            $table->decimal('total_price',15,2)->nullable();
-            $table->decimal('total_hpp',15,2)->nullable();
+            $table->decimal('price',15,0)->nullable();
+            $table->decimal('hpp',15,0)->nullable();
+            $table->decimal('total_price',15,0)->nullable();
+            $table->decimal('total_hpp',15,0)->nullable();
             $table->integer('deleted')->default(0)->nullable();
         });
     }

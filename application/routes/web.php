@@ -80,6 +80,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin:ADMIN']], func
     Route::post('/productDelete/{id}', 'BackEnd\ProductController@delete')->name('admin.product.delete');
     Route::get('/productExport', 'BackEnd\ProductController@export')->name('admin.product.export');
 
+    //Orders
+    Route::get('/orders', 'BackEnd\OrderController@index')->name('admin.orders');
+    Route::get('/orderData', 'BackEnd\OrderController@indexData')->name('admin.order.data');
+    Route::get('/orderGet/{id}', 'BackEnd\OrderController@getData')->name('admin.order.get');
+    Route::post('/orderSave', 'BackEnd\OrderController@save')->name('admin.order.save');
+    Route::post('/orderDelete/{id}', 'BackEnd\OrderController@delete')->name('admin.order.delete');
+    Route::get('/orderExport', 'BackEnd\OrderController@export')->name('admin.order.export');
+
     //notification
     Route::get('/notifications', 'BackEnd\NotificationController@index')->name('admin.notifications');
     Route::get('/notificationData', 'BackEnd\NotificationController@indexData')->name('admin.notification.data');
