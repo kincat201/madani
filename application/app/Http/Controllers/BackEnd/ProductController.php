@@ -64,12 +64,15 @@ class ProductController extends BackEndController
         if(empty($data->id)){
             $data = new Product();
             $qty = 0;
+            $data->image = 'products/default.png';
         }else{
             $qty = $data->qty;
         }
 
+        $request->qty = str_replace('.','', $request->qty);
+
         $data->fill((array)$request->all());
-        $data->prices = $request->prices;
+        $data->qty = $request->qty;
 
         $iconImage = $data->image;
 
@@ -78,12 +81,22 @@ class ProductController extends BackEndController
             if(!empty($iconImage) && file_exists('storage/'.$iconImage)){
                 unlink('storage/'.$iconImage);
             }
-            $iconImage = $image->store('product','public');
+            $iconImage = $image->store('products','public');
         }
 
         $data->image = $iconImage;
 
         if($data->save()){
+            $data->variants()->delete();
+            foreach(json_decode($request->prices) as $data_price){
+                $data->variants()->insert([
+                    'product_id'=>$data->id,
+                    'types' => $data_price->types,
+                    'remark' => $data_price->remark,
+                    'price' => str_replace('.','', $data_price->price),
+                    'hpp' => str_replace('.','', $data_price->hpp),
+                ]);
+            }
             ProductStockService::setProductStock($data->id,0, 'PRODUCT', $qty, $request->qty);
             return Response::json(array('status'=>true,'message'=>'Data berhasil disimpan'));
         }else{
@@ -129,6 +142,9 @@ class ProductController extends BackEndController
         }
 
         return DataTables::of($datas)
+            ->editColumn('qty',function($data) {
+                return number_format($data->qty);
+            })
             ->addColumn('category_id',function($data) {
                 return $data->category->name;
             })

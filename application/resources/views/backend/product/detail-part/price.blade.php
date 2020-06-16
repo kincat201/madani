@@ -27,7 +27,7 @@
                         </tr>
                         </thead>
                         <tbody id="listPrice"></tbody>
-                        <input type="hidden" name="prices" value="{{ @$model->prices }}">
+                        <input type="hidden" name="prices" value="{{ json_encode(@$model->variants) }}">
                     </table>
                 </div>
             </div>
@@ -51,14 +51,14 @@
                         <div class="form-group col-md-6">
                             <label class="control-label col-sm-12" for="price">Harga</label>
                             <div class="col-sm-12" id="price0">
-                                <input type="number" class="form-control" name="price0" placeholder="Harga">
+                                <input type="number text" class="form-control autonumeric" name="price0" placeholder="Harga">
                                 <div id="price0_error" class="help-block help-block-error"> </div>
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label col-sm-12" for="hpp">HPP</label>
                             <div class="col-sm-12" id="hpp0">
-                                <input type="number" class="form-control" name="hpp0" placeholder="Hpp">
+                                <input type="text" class="form-control autonumeric" name="hpp0" placeholder="Hpp">
                                 <div id="hpp0_error" class="help-block help-block-error"> </div>
                             </div>
                         </div>
@@ -99,23 +99,19 @@
 
 @push('customJs')
     <script type="text/javascript">
-        var dataPrice = {!! !empty(@$model->prices) ? json_encode(@$model->prices) : '[]' !!}
-            dataPrice = dataPrice instanceof Array ? dataPrice : JSON.parse(dataPrice);
+        var dataPrice = {!! !empty(@$model->variants) ? json_encode(@$model->variants) : '[]' !!};
         var currentIndex = dataPrice.length > 0 ? dataPrice.length : 1;
+        var priceTypes = {!! json_encode(\App\Util\Constant::PRODUCT_TYPE_PRICE_LIST) !!};
 
         dataPrice.forEach(function (data,index) {
             var no = (index+1);
             currentIndex++;
             var row = '<tr id="ds_'+no+'">\n' +
-                '                    <td style="text-align: center">'+data.price+'</td>\n' +
+                '                    <td style="text-align: center">'+parseInt(data.price,0).toLocaleString('de-De')+'</td>\n' +
                 '                    <td style="text-align: center">\n' +
-                '                      '+data.hpp+'\n' +
+                '                      '+parseInt(data.hpp,0).toLocaleString('de-De')+'\n' +
                 '                    </td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                        @foreach($types as $type => $value)\n' +
-                '                        ' + (data.types == '{{ $type }}' ? '{{ $value }}' : '') +'\n' +
-                '                        @endforeach\n' +
-                '                    </td>\n' +
+                '                    <td style="text-align: center">\n' + priceTypes[data.types] +'</td>\n' +
                 '                    <td style="text-align: center">\n' +
                 '                      '+data.remark+'\n' +
                 '                    </td>\n' +
@@ -142,15 +138,11 @@
                 });
             }
             var row = '<tr id="ds_'+currentIndex+'">\n' +
-                '                    <td style="text-align: center">'+$('[name=price0]').val()+'</td>\n' +
+                '                    <td style="text-align: center">'+$('[name=price0]').val().toLocaleString('de-De')+'</td>\n' +
                 '                    <td style="text-align: center">\n' +
-                '                      '+$('[name=hpp0]').val()+'\n' +
+                '                      '+$('[name=hpp0]').val().toLocaleString('de-De')+'\n' +
                 '                    </td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                        @foreach($types as $type => $value)\n' +
-                '                        ' + ($('[name=types0]').val() == '{{ $type }}' ? '{{ $value }}' : '') +'\n' +
-                '                        @endforeach\n' +
-                '                    </td>\n' +
+                '                    <td style="text-align: center">\n' + priceTypes[$('[name=types0]').val()] +'</td>\n' +
                 '                    <td style="text-align: center">\n' +
                 '                      '+$('[name=remark0]').val()+'\n' +
                 '                    </td>\n' +

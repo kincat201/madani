@@ -16,9 +16,10 @@ class CreateProductVarian extends Migration
         Schema::create('product_variants', function (Blueprint $table) {
             $table->increments('id')->index('id');
             $table->integer('product_id')->index('product_id')->nullable();
+            $table->string('types')->nullable();
             $table->string('remark')->nullable();
-            $table->decimal('price',15,2)->nullable();
-            $table->decimal('hpp',15,2)->nullable();
+            $table->decimal('price',15,0)->nullable();
+            $table->decimal('hpp',15,0)->nullable();
         });
     }
 

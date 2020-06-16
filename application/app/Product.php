@@ -19,6 +19,7 @@ class Product extends Model
         'status',
         'prices',
         'online',
+        'image',
     ];
 
     const FORM_FIELD = [
@@ -88,6 +89,11 @@ class Product extends Model
     public function orderDetail()
     {
         return $this->hasMany(OrderDetail::class,'product_id','id');
+    }
+
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class,'product_id','id');
     }
 
     public function unit()

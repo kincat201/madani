@@ -9,16 +9,14 @@ use Illuminate\Support\Facades\Mail;
 class ProductStockService {
     public static function setProductStock($product_id, $order_id, $types, $current, $after){
 
-        if($current == $after) return;
+        if($current == $after) return false;
 
-        return ProductStock::insert([
+        return ProductStock::create([
             'product_id' => $product_id,
             'order_detail_id' => $order_id,
             'types' => $types,
             'qty_before' => $current,
             'qty_after' => $after,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
         ]);
     }
 }

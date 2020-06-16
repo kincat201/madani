@@ -21,7 +21,7 @@
                                     @if($field == 'text')
                                         <input type="{{$field}}" name="{{$keyField}}" class="form-control" value="{{@$model->$keyField}}" placeholder="{{$model::FORM_LABEL[$keyField]}}">
                                     @elseif($field=='number')
-                                        <input type="number" name="{{$keyField}}" class="form-control" maxlength="" value="{{@$model->$keyField}}" placeholder="{{$model::FORM_LABEL[$keyField]}}">
+                                        <input type="text" name="{{$keyField}}" class="form-control autonumeric" maxlength="" value="{{@$model->$keyField}}" placeholder="{{$model::FORM_LABEL[$keyField]}}">
                                     @elseif($field=='date')
                                         <input type="text" name="{{$keyField}}" class="form-control datepickerinput" maxlength="" value="{{@$model->$keyField}}" placeholder="{{$model::FORM_LABEL[$keyField]}}">
                                     @elseif($field == 'image')

@@ -269,6 +269,19 @@
                     }
                 });
             }
+
+            function clearAutoNumeric(){
+                $('input').each(function(i){
+                    var self = $(this);
+                    try{
+                        var v = self.autoNumeric('get');
+                        self.autoNumeric('destroy');
+                        self.val(v);
+                    }catch(err){
+                        //console.log("Not an autonumeric field: " + self.attr("name"));
+                    }
+                });
+            }
         </script>
         
         @stack('customJs')

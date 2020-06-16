@@ -62,8 +62,8 @@ class Constant {
     ];
 
     const COMMON_YESNO_LABEL_LIST = [
-        self::COMMON_YES => 'info',
-        self::COMMON_NO => 'danger',
+        self::COMMON_YES => 'Ya',
+        self::COMMON_NO => 'Tidak',
     ];
 
     const COMMON_STATUS_AVAILABLE = 'AVAILABLE';
