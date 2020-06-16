@@ -1,8 +1,10 @@
 <?php
 namespace App\Helpers;
 
+use App\Category;
 use App\Company;
 use App\Notification;
+use App\Unit;
 use App\User;
 use App\Util\Constant;
 
@@ -52,6 +54,30 @@ class SelectHelper {
 
     }
 
+    public static function getCategoryList(){
+        $datas = Category::orderBy('name','asc')->get();
+
+        $result = [];
+
+        foreach ($datas as $data){
+            $result[$data->id] = $data->name;
+        }
+
+        return $result;
+    }
+
+    public static function getUnitList(){
+        $datas = Unit::orderBy('name','asc')->get();
+
+        $result = [];
+
+        foreach ($datas as $data){
+            $result[$data->id] = $data->name;
+        }
+
+        return $result;
+    }
+
     public static function getSelectList($type){
         if($type == 'getUserList'){
             return self::getUserList();
@@ -59,6 +85,12 @@ class SelectHelper {
             return self::getCommonStatus();
         }else if($type == 'getMemberTypes'){
             return self::getMemberTypes();
+        }else if($type == 'getCategoryList'){
+            return self::getCategoryList();
+        }else if($type == 'getUnitList'){
+            return self::getUnitList();
+        }else if($type == 'getProductOnlineStatus'){
+            return self::getProductOnlineStatus();
         }else if($type == 'getNotification'){
             return self::getNotification();
         }

@@ -46,7 +46,7 @@
 				<ul class="sub-menu">
 					<li class="nav-item {{@$sidebar === 'product'? 'active' : ''}}">
 						<a
-								href="{{route('admin.users')}}" class="nav-link nav-toggle"> <i
+								href="{{route('admin.products')}}" class="nav-link nav-toggle"> <i
 									class="fa fa-product-hunt"></i> <span class="title">Daftar Produk</span> <span
 									class="arrow {{@$sidebar === 'product'? '' : 'hidden'}}"></span>
 						</a>

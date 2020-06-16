@@ -122,4 +122,16 @@ class Constant {
         self::STATUS_PAYMENT_PAID => 'Lunas',
     ];
 
+    const PRODUCT_TYPE_PRICE_SINGLE = 'SINGLE';
+    const PRODUCT_TYPE_PRICE_FIFTY = 'FIFTY';
+    const PRODUCT_TYPE_PRICE_HUNDRED = 'HUNDRED';
+    const PRODUCT_TYPE_PRICE_FIVE_HUNDRED = 'FIVE_HUNDRED';
+
+    const PRODUCT_TYPE_PRICE_LIST = [
+        self::PRODUCT_TYPE_PRICE_SINGLE => 'Satuan',
+        self::PRODUCT_TYPE_PRICE_FIFTY => 'Min 50',
+        self::PRODUCT_TYPE_PRICE_HUNDRED => 'Min 100',
+        self::PRODUCT_TYPE_PRICE_FIVE_HUNDRED => 'Min 500',
+    ];
+
 }

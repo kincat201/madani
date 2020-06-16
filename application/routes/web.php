@@ -72,6 +72,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin:ADMIN']], func
     Route::post('/unitDelete/{id}', 'BackEnd\UnitController@delete')->name('admin.unit.delete');
     Route::get('/unitExport', 'BackEnd\UnitController@export')->name('admin.unit.export');
 
+    //Products
+    Route::get('/products', 'BackEnd\ProductController@index')->name('admin.products');
+    Route::get('/productData', 'BackEnd\ProductController@indexData')->name('admin.product.data');
+    Route::get('/productGet/{id}', 'BackEnd\ProductController@getData')->name('admin.product.get');
+    Route::post('/productSave', 'BackEnd\ProductController@save')->name('admin.product.save');
+    Route::post('/productDelete/{id}', 'BackEnd\ProductController@delete')->name('admin.product.delete');
+    Route::get('/productExport', 'BackEnd\ProductController@export')->name('admin.product.export');
+
     //notification
     Route::get('/notifications', 'BackEnd\NotificationController@index')->name('admin.notifications');
     Route::get('/notificationData', 'BackEnd\NotificationController@indexData')->name('admin.notification.data');
