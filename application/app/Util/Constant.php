@@ -11,11 +11,18 @@ class Constant {
     const USER_ROLE_ENGINEER = 'ENGINEER';
 
     const USER_ROLES = [
-        self::USER_ROLE_ADMIN => 'Super Admin',
         self::USER_ROLE_USER => 'Pengguna',
+        self::USER_ROLE_ADMIN => 'Super Admin',
         self::USER_ROLE_CASHIER => 'Kasir',
         self::USER_ROLE_DESIGNER => 'Designer',
         self::USER_ROLE_ENGINEER => 'Operator Mesin',
+    ];
+
+    const ADMIN_ROLES_LIST = [
+        self::USER_ROLE_ADMIN,
+        self::USER_ROLE_CASHIER,
+        self::USER_ROLE_DESIGNER,
+        self::USER_ROLE_ENGINEER,
     ];
 
     const COMMON_STATUS_ACTIVE = 'ACTIVE';
@@ -120,6 +127,14 @@ class Constant {
         self::STATUS_PAYMENT_UNPAID => 'Belum Bayar',
         self::STATUS_PAYMENT_HALF_PAID => 'Bayar DP',
         self::STATUS_PAYMENT_PAID => 'Lunas',
+    ];
+
+    const PAYMENT_METHOD_CASH = 'CASH';
+    const PAYMENT_METHOD_TRANSFER = 'TRANSFER';
+
+    const PAYMENT_METHOD_LIST = [
+        self::PAYMENT_METHOD_CASH => 'Tunai',
+        self::PAYMENT_METHOD_TRANSFER => 'Transfer',
     ];
 
     const PRODUCT_TYPE_PRICE_SINGLE = 'SINGLE';
