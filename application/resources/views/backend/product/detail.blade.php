@@ -82,6 +82,16 @@
             $('.form-group').removeClass('has-error');
             $('.help-block-error').html('');
 
+            if($('[name=prices]').val() == "null" || $('[name=prices]').val() == "[]" || $('[name=prices]').val() == ""){
+                swal({
+                    title: 'Periksa Data Kembali',
+                    text: 'Minimal masukan satu harga',
+                    icon: 'error',
+                    timer: '3000'
+                });
+                return;
+            }
+
             swal({
                 title: "Yakin Simpan Data?",
                 text : "Data akan disimpan",

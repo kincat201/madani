@@ -14,7 +14,7 @@
                             <label class="control-label">Design Tersedia</label>
                             <select class="form-control" name="is_design">
                                 @foreach(\App\Util\Constant::COMMON_YESNO_LABEL_LIST as $key => $val)
-                                    <option value="{{ $key }}" {{ @$model->$keyField == $key ? 'selected' : '' }}>{{ $val }}</option>
+                                    <option value="{{ $key }}" {{ @$model->is_design == $key ? 'selected' : '' }}>{{ $val }}</option>
                                 @endforeach
                             </select>
                             <div class="help-block"></div>
@@ -23,8 +23,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group" id="deadline">
-                            <label class="control-label required-form">Deadline</label>
-                            <input type="text" name="deadline" class="form-control datepickerinput" maxlength="" value="" placeholder="Deadline">
+                            <label class="control-label">Deadline</label>
+                            <input type="text" name="deadline" class="form-control datepickerinput" maxlength="" value="{{ @$model->deadline }}" placeholder="Deadline">
                             <div class="help-block"></div>
                             <div id="deadline_error" class="help-block help-block-error"> </div>
                         </div>
@@ -34,7 +34,7 @@
                     <div class="col-md-6">
                         <div class="form-group" id="design_fee">
                             <label class="control-label">Harga Design</label>
-                            <input type="text" name="design_fee" onchange="calculate()" class="form-control autonumeric" value="" placeholder="Harga Design jika ada">
+                            <input type="text" name="design_fee" onchange="calculate()" class="form-control autonumeric" value="{{ @$model->design_fee }}" placeholder="Harga Design jika ada">
                             <div class="help-block"></div>
                             <div id="design_fee_error" class="help-block help-block-error"> </div>
                         </div>
@@ -42,7 +42,7 @@
                     <div class="col-md-6">
                         <div class="form-group" id="finishing_fee">
                             <label class="control-label">Harga Finishing</label>
-                            <input type="text" name="finishing_fee" onchange="calculate()" class="form-control autonumeric" value="" placeholder="Harga Finishing jika ada">
+                            <input type="text" name="finishing_fee" onchange="calculate()" class="form-control autonumeric" value="{{ @$model->finishing_fee }}" placeholder="Harga Finishing jika ada">
                             <div class="help-block"></div>
                             <div id="finishing_fee_error" class="help-block help-block-error"> </div>
                         </div>

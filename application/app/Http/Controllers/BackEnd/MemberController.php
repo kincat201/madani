@@ -166,7 +166,7 @@ class MemberController extends BackEndController
 
     public function search($query){
         return Response::json(
-            Member::where('email','like','%'.$query.'%')
+            Member::where('phone','like','%'.$query.'%')
                 ->orWhere('name','like','%'.$query.'%')
                 ->get()
         );

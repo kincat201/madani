@@ -95,25 +95,22 @@ class Constant {
     ];
 
     const ORDER_STATUS_NEW = 'NEW';
-    const ORDER_STATUS_REQUEST_DESIGN = 'REQUEST_DESIGN';
-    const ORDER_STATUS_OFFERED_DESIGN = 'OFFERED_DESIGN';
+    const ORDER_STATUS_PAYMENT_COMPLETE = 'PAYMENT_COMPLETE';
     const ORDER_STATUS_PROGRESS = 'PROGRESS';
     const ORDER_STATUS_COMPLETED = 'COMPLETED';
     const ORDER_STATUS_CANCELLED = 'CANCELLED';
 
-    const RESERVATION_STATUS_LIST = [
+    const ORDER_STATUS_LIST = [
         self::ORDER_STATUS_NEW => 'Baru',
-        self::ORDER_STATUS_REQUEST_DESIGN => 'Menunggu Design',
-        self::ORDER_STATUS_OFFERED_DESIGN => 'Tawaran Design',
+        self::ORDER_STATUS_PAYMENT_COMPLETE => 'Sudah Dibayar',
         self::ORDER_STATUS_PROGRESS => 'Diproses',
         self::ORDER_STATUS_COMPLETED => 'Selesai',
         self::ORDER_STATUS_CANCELLED => 'Dibatalkan',
     ];
 
-    const RESERVATION_STATUS_LABEL_LIST = [
+    const ORDER_STATUS_LABEL_LIST = [
         self::ORDER_STATUS_NEW => 'primary',
-        self::ORDER_STATUS_REQUEST_DESIGN => 'success',
-        self::ORDER_STATUS_OFFERED_DESIGN => 'warning',
+        self::ORDER_STATUS_PAYMENT_COMPLETE => 'warning',
         self::ORDER_STATUS_PROGRESS => 'success',
         self::ORDER_STATUS_COMPLETED => 'info',
         self::ORDER_STATUS_CANCELLED => 'danger',
@@ -127,6 +124,12 @@ class Constant {
         self::STATUS_PAYMENT_UNPAID => 'Belum Bayar',
         self::STATUS_PAYMENT_HALF_PAID => 'Bayar DP',
         self::STATUS_PAYMENT_PAID => 'Lunas',
+    ];
+
+    const STATUS_PAYMENT_LABEL_LIST = [
+        self::STATUS_PAYMENT_UNPAID => 'danger',
+        self::STATUS_PAYMENT_HALF_PAID => 'warning',
+        self::STATUS_PAYMENT_PAID => 'success',
     ];
 
     const PAYMENT_METHOD_CASH = 'CASH';
@@ -147,6 +150,24 @@ class Constant {
         self::PRODUCT_TYPE_PRICE_FIFTY => 'Min 50',
         self::PRODUCT_TYPE_PRICE_HUNDRED => 'Min 100',
         self::PRODUCT_TYPE_PRICE_FIVE_HUNDRED => 'Min 500',
+    ];
+
+    const STOCK_TYPE_PRODUCT = 'PRODUCT';
+    const STOCK_TYPE_ORDER = 'ORDER';
+
+    const STOCK_TYPE_LIST = [
+        self::STOCK_TYPE_PRODUCT => 'Product',
+        self::STOCK_TYPE_ORDER => 'Order',
+    ];
+
+    const ORDER_MACHINE_STATUS_PROGRESS = 'PROGRESS';
+    const ORDER_MACHINE_STATUS_COMPLETE = 'COMPLETE';
+    const ORDER_MACHINE_STATUS_CANCELLED = 'CANCELLED';
+
+    const ORDER_MACHINE_STATUS_LIST = [
+        self::ORDER_MACHINE_STATUS_PROGRESS => 'Progress',
+        self::ORDER_MACHINE_STATUS_COMPLETE => 'Complete',
+        self::ORDER_MACHINE_STATUS_CANCELLED => 'Cancelled',
     ];
 
 }

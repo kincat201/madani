@@ -10,7 +10,9 @@
             <div id="add">
                 <div class="row">
                     <div class="col-sm-6" style="margin-bottom: 20px;padding-left: 31px;">
+                        @if(@$model->status == \App\Util\Constant::ORDER_STATUS_NEW || @$model->status == \App\Util\Constant::ORDER_STATUS_PAYMENT_COMPLETE)
                         <button class="btn btn-sm btn-success" type="button" onclick="addItem(0)">Tambah Item</button>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -27,7 +29,7 @@
                         </tr>
                         </thead>
                         <tbody id="listItem"></tbody>
-                        <input type="hidden" name="items" value="{{ @$model->prices }}">
+                        <input type="hidden" name="items" value="{{ @$model->items }}">
                     </table>
                 </div>
             </div>
@@ -100,130 +102,3 @@
 </div>
 <!-- End Modal -->
 
-
-@push('customJs')
-    <script type="text/javascript">
-        var dataItem = {!! !empty(@$model->orderDetail) ? json_encode(@$model->orderDetail) : '[]' !!};
-        var currentIndex = dataItem.length > 0 ? dataItem.length : 1;
-        var priceTypes = {!! json_encode(\App\Util\Constant::PRODUCT_TYPE_PRICE_LIST) !!};
-
-        dataItem.forEach(function (data,index) {
-            var no = (index+1);
-            currentIndex++;
-            var row = '<tr id="ds_'+no+'">\n' +
-                '                    <td style="text-align: center">'+data.product.name + ' - ' + data.remark + ' ('+priceTypes[data.price_types]+')' + '</td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                      '+parseInt(data.qty,0).toLocaleString('de-DE')+'\n' +
-                '                    </td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                      '+parseInt(data.price,0).toLocaleString('de-DE')+'\n' +
-                '                    </td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                      '+parseInt(data.total_price,0).toLocaleString('de-DE')+'\n' +
-                '                    </td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                      <button class="btn btn-sm btn-warning" onclick="deleteItem('+no+')" type="button"><i class="fa fa-trash"></i></button>\n' +
-                '                    </td>\n' +
-                '                  </tr>';
-
-            calculateTotalItem(parseInt(data.price,0) * parseInt(data.qty,0));
-
-            $('#listItem').append(row);
-        });
-
-        function addItem(id) {
-            $('#myModal').modal('show');
-            $('.modal-title').text('Tambah Item');
-        }
-
-        function saveItem() {
-            if($('[name=product0]').val() == '' || $('[name=price0]').val() == '' || $('[name=qty0]').val() == ''){
-                $('#myModal').modal('hide');
-                return swal({
-                    title: 'Gagal Simpan Data',
-                    text: 'Produk, Harga dan Qty tidak boleh kosong!',
-                    icon: 'error',
-                    timer: '3000'
-                });
-            }
-            var product = JSON.parse($('[name=product0]').val());
-            var price = JSON.parse($('[name=price0]').val());
-            var qty = $('[name=qty0]').val();
-            var total = parseInt(price.price,0) * parseInt(qty,0);
-            var total_hpp = parseInt(price.hpp,0) * parseInt(qty,0);
-
-            calculateTotalItem(total);
-
-            var row = '<tr id="ds_'+currentIndex+'">\n' +
-                '                    <td style="text-align: center">'+product.name+ ' - ' + price.remark + ' ('+priceTypes[price.types]+')' +'</td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                      '+parseInt(qty).toLocaleString('de-De')+'\n' +
-                '                    </td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                      '+parseInt(price.price).toLocaleString('de-De')+'\n' +
-                '                    </td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                      '+total.toLocaleString('de-De')+'\n' +
-                '                    </td>\n' +
-                '                    <td style="text-align: center">\n' +
-                '                      <button class="btn btn-sm btn-warning" onclick="deleteItem('+currentIndex+')" type="button"><i class="fa fa-trash"></i></button>\n' +
-                '                    </td>\n' +
-                '                  </tr>';
-            $('#listItem').append(row);
-
-            dataItem.push({
-                product: $('[name=price0]').val(),
-                qty: $('[name=hpp0]').val(),
-                price: $('[name=types0]').val(),
-                total: total,
-                total_hpp: total_hpp,
-            });
-
-            currentIndex++;
-
-            resetItem(0)
-
-            $('[name=items]').val(JSON.stringify(dataItem));
-
-            $('#myModal').modal('hide');
-        }
-
-        function resetItem(id) {
-            $('[name=category'+id+']').val('');
-            $('[name=product'+id+']').val('');
-            $('[name=qty'+id+']').val(0);
-            $('[name=price'+id+']').val('');
-            $('[name=product0]').empty();
-            $('[name=price0]').empty();
-        }
-
-        function deleteItem(id) {
-            $('#ds_'+id).remove();
-            var total = parseInt(dataItem[id-1].total,0);
-            calculateTotalItem(-total);
-            dataItem.splice(id-1,1);
-            $('[name=items]').val(JSON.stringify(dataItem));
-        }
-
-        function setProduct() {
-            if($('[name=category0]').val() =='') return $('[name=product0]').empty().append('<option value="">Pilih Produk</option>');
-            $('[name=product0]').empty().append('<option value="">Pilih Produk</option>');
-            $('[name=category0] option:selected').data('object').products.forEach(function(product){
-                $('[name=product0]').append("<option value='"+JSON.stringify(product)+"' data-object='"+JSON.stringify(product)+"'>"+product.name+"</option>");
-            });
-        }
-
-        function setPrice() {
-            if($('[name=product0]').val() =='') return $('[name=price0]').empty().append('<option value="">Pilih Harga</option>');
-            $('[name=price0]').empty().append('<option value="">Pilih Harga</option>');
-            $('[name=product0] option:selected').data('object').variants.forEach(function(price){
-                $('[name=price0]').append("<option value='"+JSON.stringify(price)+"'>Rp. "+parseInt(price.price,0).toLocaleString('de-DE') + " - " + price.remark + " ("+priceTypes[price.types]+")" + "</option>");
-            });
-        }
-
-        function calculateTotalItem(amount){
-            total_item = parseInt(total_item,0) + parseInt(amount,0);
-            calculate();
-        }
-    </script>
-@endpush

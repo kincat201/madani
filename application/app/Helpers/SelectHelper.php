@@ -3,6 +3,7 @@ namespace App\Helpers;
 
 use App\Category;
 use App\Company;
+use App\Machine;
 use App\Notification;
 use App\Unit;
 use App\User;
@@ -78,6 +79,20 @@ class SelectHelper {
         return $result;
     }
 
+    public static function getMachineList(){
+        $datas = Machine::orderBy('name','asc')->get();
+
+        $result = [];
+
+        $result[''] = 'Pilih Mesin';
+
+        foreach ($datas as $data){
+            $result[$data->id] = $data->name;
+        }
+
+        return $result;
+    }
+
     public static function getSelectList($type){
         if($type == 'getUserList'){
             return self::getUserList();
@@ -89,8 +104,8 @@ class SelectHelper {
             return self::getCategoryList();
         }else if($type == 'getUnitList'){
             return self::getUnitList();
-        }else if($type == 'getProductOnlineStatus'){
-            return self::getProductOnlineStatus();
+        }else if($type == 'getMachineList'){
+            return self::getMachineList();
         }else if($type == 'getNotification'){
             return self::getNotification();
         }

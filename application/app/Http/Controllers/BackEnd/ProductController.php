@@ -23,7 +23,7 @@ class ProductController extends BackEndController
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
         parent::__construct();
     }
 
@@ -97,7 +97,7 @@ class ProductController extends BackEndController
                     'hpp' => str_replace('.','', $data_price->hpp),
                 ]);
             }
-            ProductStockService::setProductStock($data->id,0, 'PRODUCT', $qty, $request->qty);
+            ProductStockService::setProductStock($data->id,0, Constant::STOCK_TYPE_PRODUCT, $qty, $request->qty);
             return Response::json(array('status'=>true,'message'=>'Data berhasil disimpan'));
         }else{
             return Response::json(array('status'=>false,'message'=>'Data gagal simpan, coba lagi'));

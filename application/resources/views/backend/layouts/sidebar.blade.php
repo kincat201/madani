@@ -90,9 +90,6 @@
 					</li>
 				</ul>
 			</li>
-
-			@endif
-			@if(@\Auth::user()->role == \App\Util\Constant::USER_ROLE_ADMIN)
 			<li class="nav-item {{in_array(@$sidebar,$setting)? 'active' : ''}}">
 				<a href="javascript" class="nav-link nav-toggle"> <i
 						class="fa fa-gears"></i> <span class="title">Pengaturan</span>
@@ -107,6 +104,32 @@
 				</ul>
 			</li>
 			@endif
+            @if(@\Auth::user()->role != \App\Util\Constant::USER_ROLE_ADMIN)
+                <li class="nav-item {{ in_array(@$sidebar,$order) ? 'active' : ''}}">
+                    <a href="javascript" class="nav-link nav-toggle"> <i
+                                class="fa fa-database"></i> <span class="title">Pesanan</span>
+                        <span class="arrow {{ in_array(@$sidebar,$order) ? '' : 'hidden'}}"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        @if(@\Auth::user()->role == \App\Util\Constant::USER_ROLE_DESIGNER)
+                        <li class="nav-item {{@$sidebar === 'order_new'? 'active' : ''}}">
+                            <a
+                                href="{{route('admin.order.get',0)}}" class="nav-link nav-toggle"> <i
+                                    class="fa fa-cart-plus"></i> <span class="title">Pesanan Baru</span> <span
+                                    class="arrow {{@$sidebar === 'order_new'? '' : 'hidden'}}"></span>
+                            </a>
+                        </li>
+                        @endif
+                        <li class="nav-item {{@$sidebar === 'order'? 'active' : ''}}">
+                            <a
+                                href="{{route('admin.orders')}}" class="nav-link nav-toggle"> <i
+                                    class="fa fa-list"></i> <span class="title">Daftar Pesanan</span> <span
+                                    class="arrow {{@$sidebar === 'order'? '' : 'hidden'}}"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
 			<li class="nav-item {{@$sidebar === 'notification'? 'active' : ''}} "><a
 					href="{{route('admin.notifications')}}" class="nav-link nav-toggle"> <i
 						class="fa fa-envelope"></i> <span class="title">Notifikasi {{ $notification['count'] > 0 ? '('.$notification['count'].')' : '' }}</span> <span

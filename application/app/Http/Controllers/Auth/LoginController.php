@@ -37,7 +37,7 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        if ( Auth::user()->role == Constant::USER_ROLE_ADMIN) {
+        if ( Auth::user()->role != Constant::USER_ROLE_USER) {
             return 'admin';
         }
         //Auth::logout();

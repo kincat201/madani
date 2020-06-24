@@ -2,8 +2,11 @@
     <ul class="nav navbar-nav pull-right">
         <li class="dropdown dropdown-user">
             <a class="dropdown-toggle padding-besides" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                {{--<img alt="" class="img-circle" src="{{url('plugin/theme/assets/layouts/layout/img/avatar3_small.jpg')}}" />
-                <span class="username username-hide-on-mobile"> </span>--}}
+                Hi, {{ \Auth::user()->name }}
+            </a>
+        </li>
+        <li class="dropdown dropdown-user">
+            <a class="dropdown-toggle padding-besides" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                 <i class="fa fa-envelope"></i>
                 <span style="font-size: 10px;margin-top: -6px;margin-left: -1px;position: absolute;">{{ $notification['count'] }}</span>
             </a>

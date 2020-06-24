@@ -14,17 +14,10 @@ class Order extends Model
         'member_id',
         'code',
         'is_design',
-        'payment_date',
         'deadline',
         'design_fee',
         'marketing_fee',
         'finishing_fee',
-        'down_payment',
-        'total_payment',
-        'grand_total',
-        'payment_method',
-        'payment_status',
-        'status',
         'remark',
     ];
 
@@ -45,6 +38,8 @@ class Order extends Model
     ];
 
     const FORM_VALIDATION = [
+        'phone' => 'required',
+        'name' => 'required',
     ];
 
     const exportData = [
@@ -56,7 +51,7 @@ class Order extends Model
             ->where('orders.deleted', 0);
     }
 
-    public function orderDetail()
+    public function items()
     {
         return $this->hasMany(OrderDetail::class,'order_id','id');
     }
