@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\FrontEnd;
 
 use App\Member;
+use App\Order;
 use App\User;
 use Illuminate\Http\Request;
 use Session;
 use Validator;
 use Response;
+
+use PDF;
 
 class PageController extends FrontEndController
 {
@@ -104,6 +107,14 @@ class PageController extends FrontEndController
         }else{
             return response()->json(array('status'=>false,'message'=>'Data gagal simpan, coba lagi'));
         }
+    }
+
+    public function invoice($id){
+        $order = Order::with(['member','items.product','orderMachine'])->find($id);
+        //return view('pdf.invoice',['order'=>$order,'title'=>'Kwitansi Pesanan']);
+
+        $pdf = PDF::loadView('pdf.invoice',['order'=>$order,'title'=>'Kwitansi Pesanan']);
+        return $pdf->download('order_'.$order->code.'.pdf');
     }
 }
 

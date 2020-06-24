@@ -176,6 +176,7 @@ class OrderController extends BackEndController
             })
             ->addColumn('aksi',function($data) {
                 $action = '<a href="'.route('admin.order.get',$data->id).'" class="btn btn-info btn-xs">Detail</a>';
+                $action .= '<a href="'.route('order.invoice',$data->id).'" target="_blank" class="btn btn-default btn-xs">Invoice</a>';
                 if($data->status == Constant::ORDER_STATUS_NEW){
                     $action .= '<a onclick="deleteData('.$data->id.')"class="btn btn-danger btn-xs">Hapus</a>';
                 }

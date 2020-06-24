@@ -36,10 +36,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/app/Http/Controllers/BackEnd/OrderController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="256" column="30" selection-start-line="256" selection-start-column="30" selection-end-line="256" selection-end-column="30" />
+            <state relative-caret-position="-182">
+              <caret line="176" column="44" lean-forward="true" selection-start-line="176" selection-start-column="44" selection-end-line="176" selection-end-column="44" />
               <folding>
                 <element signature="e#48#65#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/app/Http/Controllers/FrontEnd/PageController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+              <folding>
+                <element signature="e#49#64#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -54,14 +66,43 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/app/Service/OrderService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="47" column="76" lean-forward="true" selection-start-line="47" selection-start-column="76" selection-end-line="47" selection-end-column="76" />
+            <state relative-caret-position="290">
+              <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
               <folding>
                 <element signature="e#30#44#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/resources/views/pdf/invoice.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="107">
+              <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+              <folding>
+                <element signature="e#779#803#0#HTML" expanded="true" />
+                <element signature="e#753#783#0#HTML" expanded="true" />
+                <element signature="e#813#837#0#HTML" expanded="true" />
+                <element signature="e#1292#1316#0#HTML" expanded="true" />
+                <element signature="e#1519#1543#0#HTML" expanded="true" />
+                <element signature="e#1519#1543#0#HTML" expanded="true" />
+                <element signature="e#1752#1776#0#HTML" expanded="true" />
+                <element signature="e#2001#2025#0#HTML" expanded="true" />
+                <element signature="e#2250#2274#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/resources/views/pdf/template.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="53" column="16" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -88,24 +129,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/resources/views/backend/order/detail-part/machine.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="40" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/resources/views/backend/part/modal.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="32" column="29" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="32" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/resources/views/backend/order/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="413">
@@ -117,17 +140,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/resources/views/backend/unit/index.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="184" column="4" selection-start-line="184" selection-start-column="4" selection-end-line="238" selection-end-column="7" />
+            <state relative-caret-position="221">
+              <caret line="22" column="91" lean-forward="true" selection-start-line="22" selection-start-column="91" selection-end-line="22" selection-end-column="91" />
             </state>
           </provider>
         </entry>
@@ -191,8 +205,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/app/Member.php" />
-        <option value="$PROJECT_DIR$/application/resources/views/backend/member/index.blade.php" />
         <option value="$PROJECT_DIR$/application/resources/views/backend/category/index.blade.php" />
         <option value="$PROJECT_DIR$/application/app/Category.php" />
         <option value="$PROJECT_DIR$/application/app/Http/Controllers/BackEnd/UserController.php" />
@@ -201,7 +213,6 @@
         <option value="$PROJECT_DIR$/application/resources/views/backend/unit/index.blade.php" />
         <option value="$PROJECT_DIR$/application/app/Http/Controllers/BackEnd/UnitController.php" />
         <option value="$PROJECT_DIR$/application/app/Unit.php" />
-        <option value="$PROJECT_DIR$/application/app/Http/Controllers/FrontEnd/PageController.php" />
         <option value="$PROJECT_DIR$/backend/assets/global/css/login.min.css" />
         <option value="$PROJECT_DIR$/backend/assets/global/css/components.min.css" />
         <option value="$PROJECT_DIR$/application/resources/views/backend/pages/dashboard.blade.php" />
@@ -237,11 +248,14 @@
         <option value="$PROJECT_DIR$/application/app/Order.php" />
         <option value="$PROJECT_DIR$/application/app/Helpers/SelectHelper.php" />
         <option value="$PROJECT_DIR$/application/resources/views/backend/order/detail-part/machine.blade.php" />
-        <option value="$PROJECT_DIR$/application/routes/web.php" />
         <option value="$USER_HOME$/AppData/Local/Temp/fz3temp-2/Env.json" />
-        <option value="$PROJECT_DIR$/application/app/Http/Controllers/BackEnd/OrderController.php" />
         <option value="$PROJECT_DIR$/application/resources/views/backend/order/index.blade.php" />
         <option value="$PROJECT_DIR$/application/app/Service/OrderService.php" />
+        <option value="$PROJECT_DIR$/application/routes/web.php" />
+        <option value="$PROJECT_DIR$/application/app/Http/Controllers/BackEnd/OrderController.php" />
+        <option value="$PROJECT_DIR$/application/resources/views/pdf/template.blade.php" />
+        <option value="$PROJECT_DIR$/application/resources/views/pdf/invoice.blade.php" />
+        <option value="$PROJECT_DIR$/application/app/Http/Controllers/FrontEnd/PageController.php" />
       </list>
     </option>
   </component>
@@ -400,6 +414,15 @@
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="FrontEnd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="madani" type="b2602c69:ProjectViewProjectNode" />
+              <item name="madani" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
               <item name="Middleware" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -434,70 +457,6 @@
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="madani" type="b2602c69:ProjectViewProjectNode" />
-              <item name="madani" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="madani" type="b2602c69:ProjectViewProjectNode" />
-              <item name="madani" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="madani" type="b2602c69:ProjectViewProjectNode" />
-              <item name="madani" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="order" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="madani" type="b2602c69:ProjectViewProjectNode" />
-              <item name="madani" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="order" type="462c0819:PsiDirectoryNode" />
-              <item name="detail-part" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="madani" type="b2602c69:ProjectViewProjectNode" />
-              <item name="madani" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="madani" type="b2602c69:ProjectViewProjectNode" />
-              <item name="madani" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="product" type="462c0819:PsiDirectoryNode" />
-              <item name="detail-part" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="madani" type="b2602c69:ProjectViewProjectNode" />
-              <item name="madani" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="unit" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="madani" type="b2602c69:ProjectViewProjectNode" />
@@ -547,7 +506,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jsit_shop" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/application/resources/views/pdf" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -560,6 +519,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\madani\application\resources\views\pdf" />
       <recent name="C:\xampp\htdocs\madani\application\resources\views\backend\order" />
       <recent name="C:\xampp\htdocs\madani\application\resources\views\backend\product" />
       <recent name="C:\xampp\htdocs\madani\application\app\Http\Controllers\BackEnd" />
@@ -592,18 +552,18 @@
       <workItem from="1591836083185" duration="2260000" />
       <workItem from="1591888788394" duration="31132000" />
       <workItem from="1592317338638" duration="16778000" />
-      <workItem from="1592715505654" duration="23314000" />
+      <workItem from="1592715505654" duration="25956000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88033000" />
+    <option name="totallyTimeSpent" value="90675000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26639676" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26639676" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -629,27 +589,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/database/seeds/DatabaseSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/database/seeds/MachinesSeeder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/filesystems.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-437">
-          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/app/Helpers/FileHelper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -982,13 +921,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/app/OrderDetail.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -1020,22 +952,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/app/Service/OrderService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
+          <folding>
+            <element signature="e#30#44#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="22" column="91" lean-forward="true" selection-start-line="22" selection-start-column="91" selection-end-line="22" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/resources/views/pdf/template.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="53" column="16" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/resources/views/pdf/invoice.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="56" column="38" lean-forward="true" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+          <folding>
+            <element signature="e#779#803#0#HTML" expanded="true" />
+            <element signature="e#753#783#0#HTML" expanded="true" />
+            <element signature="e#813#837#0#HTML" expanded="true" />
+            <element signature="e#1292#1316#0#HTML" expanded="true" />
+            <element signature="e#1519#1543#0#HTML" expanded="true" />
+            <element signature="e#1519#1543#0#HTML" expanded="true" />
+            <element signature="e#1752#1776#0#HTML" expanded="true" />
+            <element signature="e#2001#2025#0#HTML" expanded="true" />
+            <element signature="e#2250#2274#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/app/Http/Controllers/BackEnd/OrderController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="256" column="30" selection-start-line="256" selection-start-column="30" selection-end-line="256" selection-end-column="30" />
+        <state relative-caret-position="-182">
+          <caret line="176" column="44" lean-forward="true" selection-start-line="176" selection-start-column="44" selection-end-line="176" selection-end-column="44" />
           <folding>
             <element signature="e#48#65#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/app/Service/OrderService.php">
+    <entry file="file://$PROJECT_DIR$/application/app/Http/Controllers/FrontEnd/PageController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="47" column="76" lean-forward="true" selection-start-line="47" selection-start-column="76" selection-end-line="47" selection-end-column="76" />
+        <state relative-caret-position="204">
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
           <folding>
-            <element signature="e#30#44#0#PHP" expanded="true" />
+            <element signature="e#49#64#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

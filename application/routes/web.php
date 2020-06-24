@@ -20,6 +20,7 @@ Route::post('/reset-password', 'Frontend\PageController@resetPassword')->name('p
 Route::get('/login', 'BackEnd\BackEndController@login')->name('login');
 Route::get('/register', 'FrontEnd\PageController@register')->name('register');
 Route::post('/save-register', 'FrontEnd\PageController@saveRegister')->name('register.save');
+Route::get('/orderInvoice/{id}', 'FrontEnd\PageController@invoice')->name('order.invoice');
 
 Route::group(['prefix' => 'pic', 'middleware' => ['auth']], function () {
     Route::post('/save-account', 'FrontEnd\PicController@saveAccount')->name('pic.save.account');
