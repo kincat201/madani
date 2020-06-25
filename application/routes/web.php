@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'BackEnd\BackEndController@login')->name('home');
+Route::get('/import', 'FrontEnd\PageController@import')->name('import');
 
 Route::post('/register-member', 'Auth\RegisterController@registerMember')->name('register.member');
 Route::post('/reset-password', 'Frontend\PageController@resetPassword')->name('pic.reset.password');

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use App\ImportProduct;
 use App\Member;
 use App\Order;
+use App\Product;
+use App\ProductVariant;
+use App\Unit;
 use App\User;
+use App\Util\Constant;
 use Illuminate\Http\Request;
 use Session;
 use Validator;
@@ -115,6 +120,54 @@ class PageController extends FrontEndController
 
         $pdf = PDF::loadView('pdf.invoice',['order'=>$order,'title'=>'Kwitansi Pesanan']);
         return $pdf->download('order_'.$order->code.'.pdf');
+    }
+
+    public function import(){
+        $imports = ImportProduct::all();
+        $units = [];
+        $units_name = [];
+        foreach (Unit::all() as $unit){
+            $units[] = $unit->id;
+            $units_name[] = $unit->name;
+        }
+        foreach ($imports as $key => $import){
+            if($key == 0) continue;
+            $data = explode(';',$import);
+
+            $product = new Product();
+            $product->name = $data[1];
+            $product->category_id = $data[2];
+            $product->unit_id = $units[array_search($data[3],$units_name)];
+            $product->status = Constant::COMMON_STATUS_ACTIVE;
+            $product->online = Constant::COMMON_STATUS_INACTIVE;
+            $product->save();
+
+            for ($i = 4;$i<=7;$i++){
+                if (!empty($data[$i])) {
+                    $detail = explode('-', $data[$i]);
+                    if(!empty($detail[1])){
+                        $product_variant = new ProductVariant();
+                        $product_variant->product_id = $product->id;
+                        $product_variant->remark = $detail[0];
+                        $product_variant->hpp = $detail[1];
+                        $product_variant->price = $detail[2];
+                        $product_variant->types = Constant::PRODUCT_TYPE_PRICE_SINGLE;
+                        $product_variant->save();
+
+                        if (!empty($detail[3])) {
+                            $product_variant = new ProductVariant();
+                            $product_variant->product_id = $product->id;
+                            $product_variant->remark = $detail[0];
+                            $product_variant->hpp = $detail[1];
+                            $product_variant->price = $detail[3];
+                            $product_variant->types = Constant::PRODUCT_TYPE_PRICE_FIFTY;
+                            $product_variant->save();
+                        }
+                    }
+                }
+            }
+        }
+        return response()->json($imports);
     }
 }
 

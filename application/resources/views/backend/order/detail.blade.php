@@ -198,7 +198,7 @@
             var no = (index+1);
             currentIndex++;
             var row = '<tr id="ds_'+no+'">\n' +
-                '                    <td style="text-align: center">'+data.product.name + ' - ' + data.remark + ' ('+priceTypes[data.product_type]+')' + '</td>\n' +
+                '                    <td style="text-align: center">'+data.product.name + ' - ' + (data.remark ? data.remark : '') + ' ('+priceTypes[data.product_type]+')' + '</td>\n' +
                 '                    <td style="text-align: center">\n' +
                 '                      '+parseInt(data.qty,0).toLocaleString('de-DE')+'\n' +
                 '                    </td>\n' +
@@ -242,7 +242,7 @@
             calculateTotalItem(total);
 
             var row = '<tr id="ds_'+currentIndex+'">\n' +
-                '                    <td style="text-align: center">'+product.name+ ' - ' + price.remark + ' ('+priceTypes[price.types]+')' +'</td>\n' +
+                '                    <td style="text-align: center">'+product.name+ ' - ' + ( price.remark ? price.remark : '') + ' ('+priceTypes[price.types]+')' +'</td>\n' +
                 '                    <td style="text-align: center">\n' +
                 '                      '+parseInt(qty).toLocaleString('de-De')+'\n' +
                 '                    </td>\n' +

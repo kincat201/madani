@@ -61,7 +61,7 @@
                     @foreach($order->items as $key => $product)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{ucwords($product->product->name . ' ('.$product->remark.')' )}}</td>
+                            <td>{{ucwords($product->product->name . (!empty($product->remark) ? ' ('.$product->remark.')' : '' ) )}}</td>
                             <td>Rp {{number_format($product->price)}}</td>
                             <td>{{ number_format($product->qty) }}</td>
                             <td>{{ number_format($product->total_price) }}</td>
