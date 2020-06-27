@@ -108,6 +108,7 @@
         $('#myModal form')[0].reset();
         $('[name=id]').val(0);
         $('[name=method]').val('ADD');
+        $('#previewImage').attr('src','{{ url('storage/categories/default.png') }}');
         $('.modal-title').text('Tambah Data');
     }
 
@@ -125,6 +126,7 @@
                 $('[name=id]').val(data.id);
                 $('[name=name]').val(data.name);
                 $('[name=description]').val(data.description);
+                $('#previewImage').attr('src','{{url('storage')}}/'+data.image);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 swal({
@@ -195,8 +197,10 @@
       $.ajax({
         url:url,
         type:'POST',
-          // data: $('#myModal form').serialize(),
-        data: $('#myModal form').serialize(),
+        data: new FormData($("#myModal form")[0]),
+        processData: false,
+        contentType: false,
+        async:false,
         success: function(data){
             if(data.status){
                 table.ajax.reload();

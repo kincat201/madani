@@ -14,11 +14,13 @@ class Category extends Model
     protected $fillable = [
         'name',
         'description',
+        'image',
     ];
 
     const FORM_FIELD = [
         'name' => 'text',
         'description' => 'textarea',
+        'image' => 'image',
     ];
 
     const FORM_DISABLED = [];
@@ -26,6 +28,7 @@ class Category extends Model
     const FORM_LABEL = [
         'name' => 'Nama',
         'description' => 'Deskripsi',
+        'image' => 'Thumbnail',
     ];
 
     const FORM_HELP_LIST = [];

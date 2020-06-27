@@ -17,6 +17,7 @@ class CreateCategory extends Migration
             $table->increments('id')->index('id');
             $table->string('name')->nullable();
             $table->string('description')->nullable();
+            $table->string('image')->default('categories/default.png');
             $table->integer('deleted')->default(0)->nullable();
         });
     }

@@ -44,6 +44,10 @@ class CategoryController extends BackEndController
             $validate_rule[$key] = $value;
         }
 
+        if($request->id == 0){
+            $validate_rule['image'] = 'required|image';
+        }
+
         $validation = Validator::make($request->all(),$validate_rule);
 
         if($validation->fails()){
@@ -61,6 +65,18 @@ class CategoryController extends BackEndController
         }
 
         $data->fill((array)$request->all());
+
+        $categoryImage = $data->image;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            if(!empty($categoryImage) && file_exists('storage/'.$categoryImage)){
+                unlink('storage/'.$categoryImage);
+            }
+            $categoryImage = $image->store('categories','public');
+        }
+
+        $data->image = $categoryImage;
 
         if($data->save()){
             return Response::json(array('status'=>true,'message'=>'Data berhasil disimpan'));

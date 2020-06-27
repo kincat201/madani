@@ -25,6 +25,10 @@
                     <input type="text" name="{{$keyField}}" class="form-control datepickerinput" placeholder="{{$model::FORM_LABEL[$keyField]}}">
                   @elseif($field == 'file')
                     <input type="{{$field}}" name="{{$keyField}}" class="form-control" placeholder="{{$model::FORM_LABEL[$keyField]}}">
+                  @elseif($field == 'image')
+                    <input type="file" name="{{$keyField}}" class="form-control" value="{{@$model->$keyField}}" {{!empty($model->id)?(in_array($keyField,$model::FORM_DISABLED)?'disabled':''):''}} placeholder="{{$model::FORM_LABEL[$keyField]}}">
+                    <br>
+                    <img src="" width="200" height="150" id="previewImage">
                   @elseif($field == 'select')
                     <select class="form-control" name="{{$keyField}}">
                       @foreach(\App\Helpers\SelectHelper::getSelectList($model::FORM_SELECT_LIST[$keyField]) as $key => $val)
