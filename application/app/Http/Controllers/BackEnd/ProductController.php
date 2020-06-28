@@ -74,17 +74,17 @@ class ProductController extends BackEndController
         $data->fill((array)$request->all());
         $data->qty = $request->qty;
 
-        $iconImage = $data->image;
+        $productImage = $data->image;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            if(!empty($iconImage) && file_exists('storage/'.$iconImage)){
-                unlink('storage/'.$iconImage);
+            if(!empty($productImage) && file_exists('storage/'.$productImage)){
+                unlink('storage/'.$productImage);
             }
-            $iconImage = $image->store('products','public');
+            $productImage = $image->store('products','public');
         }
 
-        $data->image = $iconImage;
+        $data->image = $productImage;
 
         if($data->save()){
             $data->variants()->delete();

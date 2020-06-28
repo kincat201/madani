@@ -99,8 +99,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin:'.implode(',',
     Route::post('/notificationClear', 'BackEnd\NotificationController@clear')->name('admin.notification.clear');
 
     //SETTING
-    Route::get('/settings', 'BackEnd\SettingController@index')->name('settings');
-    Route::post('/settingSave', 'BackEnd\SettingController@save')->name('setting.save');
+    Route::get('/settings', 'BackEnd\SettingController@index')->name('admin.settings');
+    Route::post('/settingSave', 'BackEnd\SettingController@save')->name('admin.setting.save');
+    Route::get('/abouts', 'BackEnd\SettingController@about')->name('admin.abouts');
+    Route::post('/aboutSave', 'BackEnd\SettingController@aboutSave')->name('admin.about.save');
+    Route::get('/faqs', 'BackEnd\SettingController@faq')->name('admin.faqs');
+    Route::post('/faqSave', 'BackEnd\SettingController@faqSave')->name('admin.faq.save');
+    Route::get('/sliders', 'BackEnd\SettingController@slider')->name('admin.sliders');
+    Route::post('/sliderSave', 'BackEnd\SettingController@sliderSave')->name('admin.slider.save');
+    Route::post('/sliderDelete', 'BackEnd\SettingController@sliderDelete')->name('admin.slider.delete');
+    Route::get('/banks', 'BackEnd\SettingController@bank')->name('admin.banks');
+    Route::post('/bankSave', 'BackEnd\SettingController@bankSave')->name('admin.bank.save');
 });
 
 Route::get('/province', 'BackEnd\BackEndController@getProvince')->name('get.province');

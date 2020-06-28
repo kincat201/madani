@@ -97,10 +97,30 @@
 			</a>
 				<ul class="sub-menu">
 					<li class="nav-item {{@$sidebar === 'general'? 'active' : ''}}"><a
-							href="{{route('settings')}}" class="nav-link nav-toggle"> <i
+							href="{{route('admin.settings')}}" class="nav-link nav-toggle"> <i
 								class="icon-share"></i> <span class="title">Umum</span> <span
 								class="arrow {{@$sidebar === 'general'? '' : 'hidden'}}"></span>
 					</a></li>
+                    <li>
+                        <a href="{{route('admin.abouts')}}">
+                            <i class="icon-bulb"></i>
+                            Tentang</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.faqs')}}">
+                            <i class="icon-question"></i>
+                            Bantuan & FAQ</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.sliders')}}">
+                            <i class="icon-picture"></i>
+                            Slider</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.banks')}}">
+                            <i class="fa fa-bank"></i>
+                            Bank</a>
+                    </li>
 				</ul>
 			</li>
 			@endif

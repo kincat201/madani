@@ -27,6 +27,10 @@ class CreateConfig extends Migration
             $table->string('twitter')->nullable();
             $table->string('whatsapp')->nullable();
             $table->text('about')->nullable();
+            $table->text('aboutDetail')->nullable();
+            $table->text('faq')->nullable();
+            $table->text('slider')->nullable();
+            $table->text('bank')->nullable();
         });
     }
 

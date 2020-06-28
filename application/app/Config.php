@@ -76,4 +76,50 @@ class Config extends Model
         'address' => 'required',
     ];
 
+    const ABOUT_FIELD = [
+        'title' => 'text',
+        'banner' => 'file',
+        'header1' => 'text',
+        'image1' => 'file',
+        'content1' => 'textarea',
+        'image2' => 'file',
+        'header2' => 'text',
+        'content2' => 'textarea',
+    ];
+
+    const ABOUT_LABEL = [
+        'title' => 'Judul',
+        'banner' => 'Gambar Header',
+        'header1' => 'Judul Section 1',
+        'image1' => 'Gambar Section 1',
+        'content1' => 'Konten Section 1',
+        'image2' => 'Gambar Section 2',
+        'header2' => 'Judul Section 2',
+        'content2' => 'Konten Section 2',
+    ];
+
+    const ABOUT_LABEL_LIST = ['banner','image1','image2'];
+
+    const ABOUT_LABEL_HELP = [
+        'banner' => 'Format File(PNG,JPG),Ukuran Max(100kb), Ukuran Gambar (1920 x 239)',
+        'image1' => 'Format File(PNG,JPG),Ukuran Max(400kb), Ukuran Gambar (1200 x 1200)',
+        'image2' => 'Format File(PNG,JPG),Ukuran Max(400kb), Ukuran Gambar (1200 x 1200)',
+    ];
+
+    const FAQ_FIELD = [
+        'title' => 'text',
+        'banner' => 'file',
+    ];
+
+    const FAQ_LABEL = [
+        'title' => 'Judul',
+        'banner' => 'Gambar Header',
+    ];
+
+    const FAQ_LABEL_LIST = ['banner'];
+
+    const FAQ_LABEL_HELP = [
+        'banner' => 'Format File(PNG,JPG),Ukuran Max(100kb), Ukuran Gambar (1920 x 239)',
+    ];
+
 }

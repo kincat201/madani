@@ -42,7 +42,7 @@
                                 {{csrf_field()}}
                                 @php
                                     $i = 0;
-                                    @$banks = json_decode($model->bank);
+                                    @$banks = json_decode($config->bank);
                                 @endphp
                                 <hr>
                                 <div class="row">
@@ -123,7 +123,7 @@
                         $('.help-block-error').html('');
 
                         $.ajax({
-                            url: "{{ route('bank.save') }}",
+                            url: "{{ route('admin.bank.save') }}",
                             type: "POST",
                             data: new FormData($("#formSetting")[0]),
                             processData: false,

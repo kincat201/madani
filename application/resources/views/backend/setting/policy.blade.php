@@ -132,7 +132,7 @@
                         $('.help-block-error').html('');
 
                         $.ajax({
-                            url: "{{ route('policy.save') }}",
+                            url: "{{ route('admin.policy.save') }}",
                             type: "POST",
                             data: new FormData($("#formSetting")[0]),
                             processData: false,
