@@ -96,6 +96,17 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class,'product_id','id');
     }
 
+    public function prices()
+    {
+        $prices = $this->join('product_variants','product_variants.product_id','=','products.id')
+        ->where('product_variants.types',Constant::PRODUCT_TYPE_PRICE_SINGLE)->first();
+        if(empty($prices->id)){
+            return 0;
+        } else {
+            return $prices->price;
+        }
+    }
+
     public function unit()
     {
         return $this->belongsTo(Unit::class,'unit_id','id');
@@ -104,5 +115,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class,'category_id','id');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('products.status',Constant::COMMON_STATUS_ACTIVE);
     }
 }

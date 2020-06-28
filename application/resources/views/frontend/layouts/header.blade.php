@@ -1,333 +1,158 @@
-<!-- begin:: Header -->
-<div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed " data-ktheader-minimize="on">
-    <div class="kt-header__top">
-        <div class="kt-container">
+<!-- Header -->
+<header class="header-v2">
+	<!-- Header desktop -->
+	<div class="container-menu-desktop trans-03">
+		<div class="wrap-menu-desktop">
+			<nav class="limiter-menu-desktop p-l-45">
+				
+				<!-- Logo desktop -->		
+				<a href="{{route('home')}}" class="logo">
+					<img src="{{url('storage/'.$CONF->logo)}}" alt="{{$CONF->title}}">
+				</a>
 
-            <!-- begin:: Brand -->
-            <div class="kt-header__brand   kt-grid__item" id="kt_header_brand">
-                <div class="kt-header__brand-logo">
-                    <a href="{{ route('home') }}">
-                        <img alt="Logo" src="{{ url('storage/'.$CONF->logo) }}" />
-                    </a>
-                </div>
-            </div>
+				<!-- Menu desktop -->
+				<div class="menu-desktop">
+					<ul class="main-menu">
+						<li class="{{request()->is('/')?'active-menu':''}}">
+							<a href="{{route('home')}}">Beranda</a>
+						</li>
 
-            <!-- end:: Brand -->
+						@php
+							$productLink = ['product','product/*','cart','checkout','confirm']
+						@endphp
+						<li class="{{in_array(request()->segment(1),$productLink)?'active-menu':''}}">
+							<a href="{{route('product')}}">Belanja</a>
+						</li>
 
-            <!-- begin:: Header Topbar -->
-            <div class="kt-header__topbar">
+						<li class="{{request()->is('help')?'active-menu':''}}">
+							<a href="{{route('help')}}">Bantuan & FAQ</a>
+						</li>
 
-                <!--begin: Notifications -->
-                <div class="kt-header__topbar-item">
-                    <div class="kt-header__topbar-wrapper" data-offset="10px,10px">
-                        <span class="kt-header__topbar-icon kt-header__topbar-icon-custom kt-header__topbar-icon--warning"> <i class="fa fa-phone"></i> &nbsp;&nbsp; {{ $CONF->phone }}</span><br>
-                    </div>
-                </div>
+						<li class="{{request()->is('about')?'active-menu':''}}">
+							<a href="{{route('about')}}">Tentang</a>
+						</li>
 
-                <!--end: Notifications -->
+						<li class="{{request()->is('contact')?'active-menu':''}}">
+							<a href="{{route('contact')}}">Kontak</a>
+						</li>
+						@php
+							$memberLink = ['login','myprofile','password','myorder']
+						@endphp
+						<li class="{{in_array(request()->segment(1),$memberLink)?'active-menu':''}}">
+							@if(@\Auth::user()->role == \App\Util\Constant::USER_ROLE_ADMIN)
+							<a href="{{route('admin.dashboard')}}">Dashboard</a>
+							@elseif(\Auth::user())
+							<a href="javascript:;">Member <i class="fa fa-angle-down"></i></a>
+							<ul class="sub-menu">
+								<li><a href="{{route('member')}}">Profil</a></li>
+								<li><a href="{{route('member.order')}}">Daftar Pesanan</a></li>
+								<li><a href="{{route('logout')}}">Keluar</a></li>
+							</ul>
+							@else
+							<a href="{{route('login')}}">Member</a>
+							@endif
+						</li>
+					</ul>
+				</div>	
 
-                <!--begin: Notifications -->
-                <div class="kt-header__topbar-item">
-                    <div class="kt-header__topbar-wrapper" data-offset="10px,10px">
-                        <span class="kt-header__topbar-icon kt-header__topbar-icon-custom kt-header__topbar-icon--info"> <i class="fa fa-envelope"></i> &nbsp;&nbsp; {{ $CONF->email }}</span><br>
-                    </div>
-                </div>
+				<!-- Icon header -->
+				<div class="wrap-icon-header flex-w flex-r-m h-full">
+					<div class="flex-c-m h-full p-r-24">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
+							<i class="zmdi zmdi-search"></i>
+						</div>
+					</div>
+						
+					<div class="flex-c-m h-full p-l-18 p-r-25 bor5">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" id="cartCount" data-notify="{{count(Session::get('carts'))}}">
+							<i class="zmdi zmdi-shopping-cart"></i>
+						</div>
+					</div>
+						
+					<div class="flex-c-m h-full p-lr-19">
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-sidebar">
+							<i class="zmdi zmdi-menu"></i>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>	
+	</div>
 
-                <!--end: Notifications -->
+	<!-- Header Mobile -->
+	<div class="wrap-header-mobile">
+		<!-- Logo moblie -->		
+		<div class="logo-mobile">
+			<a href="{{route('home')}}" class="logo">
+				<img src="{{url('storage/'.$CONF->logo)}}" alt="{{$CONF->title}}">
+			</a>
+		</div>
 
-                @if(!empty(\Auth::user()->id))
-                    <!--begin: Notifications -->
-                    <div class="kt-header__topbar-item dropdown">
-                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px">
-                                        <span class="kt-header__topbar-icon kt-header__topbar-icon--success">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon kt-svg-icon--success">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect id="bound" x="0" y="0" width="24" height="24" />
-                                                    <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" id="Combined-Shape" fill="#000000" />
-                                                    <circle id="Oval" fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
-                                                </g>
-                                            </svg>
+		<!-- Icon header -->
+		<div class="wrap-icon-header flex-w flex-r-m h-full m-r-15">
+			<div class="flex-c-m h-full p-r-10">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 js-show-modal-search">
+					<i class="zmdi zmdi-search"></i>
+				</div>
+			</div>
 
-                                            <!--<i class="flaticon2-bell-alarm-symbol"></i>-->
-                                        </span>
-                            <span class="kt-hidden kt-badge kt-badge--danger"></span>
-                        </div>
-                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
-                            <form>
+			<div class="flex-c-m h-full p-lr-10 bor5">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
+					<i class="zmdi zmdi-shopping-cart"></i>
+				</div>
+			</div>
+		</div>
 
-                                <!--begin: Head -->
-                                <div class="kt-head kt-head--skin-light kt-head--fit-x kt-head--fit-b">
-                                    <h3 class="kt-head__title">
-                                        Notifikasi
-                                        &nbsp;
-                                        <span class="btn btn-label-primary btn-sm btn-bold btn-font-md"> {{ \Auth::user()->unreadNotifications->count() ? \Auth::user()->unreadNotifications->count().' Pesan' : '' }}</span>
-                                    </h3>
-                                </div>
+		<!-- Button show menu -->
+		<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+			<span class="hamburger-box">
+				<span class="hamburger-inner"></span>
+			</span>
+		</div>
+	</div>
 
-                                <!--end: Head -->
-                                <div class="tab-content">
-                                    <div class="tab-pane active show" id="topbar_notifications_notifications" role="tabpanel">
-                                        <div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200">
-                                            @foreach(\Auth::user()->latestNotifications as $notification)
-                                            <a href="javascript:;" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-image-file kt-font-success"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        {{ $notification->subject }}
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        {{ \Carbon\Carbon::parse($notification->created_at)->format('Y/m/d H:i') }}
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            @endforeach
-                                            {{--<a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-box-1 kt-font-brand"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        New customer is registered
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        3 hrs ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-chart2 kt-font-danger"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        Application has been approved
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        3 hrs ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-image-file kt-font-warning"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        New file has been uploaded
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        5 hrs ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-bar-chart kt-font-info"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        New user feedback received
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        8 hrs ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-pie-chart-2 kt-font-success"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        System reboot has been successfully completed
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        12 hrs ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-favourite kt-font-danger"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        New order has been placed
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        15 hrs ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item kt-notification__item--read">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-safe kt-font-primary"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        Company meeting canceled
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        19 hrs ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-psd kt-font-success"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        New report has been received
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        23 hrs ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon-download-1 kt-font-danger"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        Finance report has been generated
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        25 hrs ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon-security kt-font-warning"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        New customer comment recieved
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        2 days ago
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <a href="#" class="kt-notification__item">
-                                                <div class="kt-notification__item-icon">
-                                                    <i class="flaticon2-pie-chart kt-font-success"></i>
-                                                </div>
-                                                <div class="kt-notification__item-details">
-                                                    <div class="kt-notification__item-title">
-                                                        New customer is registered
-                                                    </div>
-                                                    <div class="kt-notification__item-time">
-                                                        3 days ago
-                                                    </div>
-                                                </div>
-                                            </a>--}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
 
-                    <!--end: Notifications -->
+	<!-- Menu Mobile -->
+	<div class="menu-mobile">
+		<ul class="main-menu-m">
+			<li class="{{request()->is('/')?'active-menu':''}}">
+				<a href="{{route('home')}}">Beranda</a>
+			</li>
 
-                    <!--begin: User bar -->
-                    <div class="kt-header__topbar-item kt-header__topbar-item--user">
-                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px">
-                            <span class="kt-hidden kt-header__topbar-welcome">Hi,</span>
-                            <span class="kt-hidden kt-header__topbar-username">Nick</span>
-                            <img class="kt-hidden-" alt="Pic" src="{{ url('storage/'.\Auth::user()->photo) }}" />
-                            <span class="kt-header__topbar-icon kt-header__topbar-icon--brand kt-hidden"><b>S</b></span>
-                        </div>
-                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+			@php
+				$productLink = ['product','product/*','cart','checkout','confirm']
+			@endphp
+			<li class="{{in_array(request()->segment(1),$productLink)?'active-menu':''}}">
+				<a href="{{route('product')}}">Belanja</a>
+			</li>
 
-                            <!--begin: Head -->
-                            <div class="kt-user-card kt-user-card--skin-light kt-notification-item-padding-x">
-                                <div class="kt-user-card__avatar">
-                                    <img class="kt-hidden-" alt="Pic" src="{{ url('storage/'.\Auth::user()->photo) }}" />
+			<li class="{{request()->is('help')?'active-menu':''}}">
+				<a href="{{route('help')}}">Bantuan & FAQ</a>
+			</li>
 
-                                    <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-                                    <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold kt-hidden">S</span>
-                                </div>
-                                <div class="kt-user-card__name">
-                                    Hallo, {{ \Auth::user()->name }}
-                                </div>
-                            </div>
+			<li class="{{request()->is('about')?'active-menu':''}}">
+				<a href="{{route('about')}}">Tentang</a>
+			</li>
 
-                            <!--end: Head -->
+			<li class="{{request()->is('contact')?'active-menu':''}}">
+				<a href="{{route('contact')}}">Kontak</a>
+			</li>
+		</ul>
+	</div>
 
-                            <!--begin: Navigation -->
-                            <div class="kt-notification">
-                                <a href="javascript:;" data-toggle="modal" data-target="#modal_profile" class="kt-notification__item">
-                                    <div class="kt-notification__item-icon">
-                                        <i class="flaticon2-calendar-3 kt-font-success"></i>
-                                    </div>
-                                    <div class="kt-notification__item-details">
-                                        <div class="kt-notification__item-title kt-font-bold">
-                                            Akun
-                                        </div>
-                                        <div class="kt-notification__item-time">
-                                            Ubah data akun
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="kt-notification__custom">
-                                    <a href="{{ route('logout') }}" class="btn btn-label-brand btn-sm btn-bold">Keluar</a>
-                                </div>
-                            </div>
+	<!-- Modal Search -->
+	<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+		<div class="container-search-header">
+			<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+				<img src="{{url('frontend/images/icons/icon-close2.png')}}" alt="CLOSE">
+			</button>
 
-                            <!--end: Navigation -->
-                        </div>
-                    </div>
-
-                    <!--end: User bar -->
-                @else
-                    <!--begin: Login -->
-                    <a href="{{ route('login') }}">
-                        <div class="kt-header__topbar-item">
-                            <div class="kt-header__topbar-wrapper" data-offset="10px,10px">
-                                <span class="kt-header__topbar-icon kt-header__topbar-icon-custom kt-header__topbar-icon--success"> <i class="fa fa-lock"></i> &nbsp;&nbsp; Masuk</span><br>
-                            </div>
-                        </div>
-                    </a>
-                    <!--end: Login -->
-                @endif
-            </div>
-
-            <!-- end:: Header Topbar -->
-        </div>
-    </div>
-    <div class="kt-header__bottom">
-        <div class="kt-container">
-
-            <!-- begin: Header Menu -->
-            <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
-            <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
-                <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
-                    <ul class="kt-menu__nav ">
-                        <li class="kt-menu__item  {{ $sidebar == 'reservation' ? 'kt-menu__item--open kt-menu__item--here' : '' }} kt-menu__item--submenu kt-menu__item--rel">
-                            <a href="{{ route('home') }}" class="kt-menu__link"><span class="kt-menu__link-text">Reservasi</span></a>
-                        </li>
-                        @if(!empty(\Auth::user()->id))
-                        <li class="kt-menu__item  kt-menu__item--submenu kt-menu__item--rel">
-                            <a href="{{ route('logout') }}" class="kt-menu__link"><span class="kt-menu__link-text">Keluar</span></a>
-                        </li>
-                        @else
-                        <li class="kt-menu__item {{ $sidebar == 'pic-register' ? 'kt-menu__item--open kt-menu__item--here' : '' }} kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                            <a href="{{ route('register') }}" class="kt-menu__link"><span class="kt-menu__link-text">Pendaftaran</span></a>
-                        </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-
-            <!-- end: Header Menu -->
-        </div>
-    </div>
-</div>
-
-<!-- end:: Header -->
+			<form action="{{route('product')}}" method="get" class="wrap-search-header flex-w p-l-15">
+				<button type="submit" class="flex-c-m trans-04">
+					<i class="zmdi zmdi-search"></i>
+				</button>
+				<input class="plh3" type="text" name="keyword" placeholder="Cari Produk">
+			</form>
+		</div>
+	</div>
+</header>

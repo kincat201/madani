@@ -20,7 +20,7 @@
 					<!-- item gallery sidebar -->
 					<div class="wrap-item-gallery m-b-10">
 						<a class="item-gallery bg-img1" href="{{route('productDetail',['id'=>$randProduct->id])}}" 
-						style="background-image: url('{{url('storage/'.json_decode($randProduct->images)[0])}}');"></a>
+						style="background-image: url('{{url('storage/'.$randProduct->image)}}');"></a>
 					</div>
 					@endforeach
 				</div>

@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use App\Category;
 use App\ImportProduct;
 use App\Member;
 use App\Order;
+use App\OrderDetail;
+use App\OrderProduct;
 use App\Product;
 use App\ProductVariant;
+use App\Service\MailerService;
 use App\Unit;
 use App\User;
 use App\Util\Constant;
@@ -26,92 +30,49 @@ class PageController extends FrontEndController
 
     public function index()
     {
-        $data['sidebar'] = 'reservation';
-        $data['list'] = Member::get();
-        return view('frontend.pages.home',$data);
+        $categories = Category::where('deleted',0)->limit(3)->orderBy('id','asc')->get();
+        $news = Product::active()
+            ->orderBy('created_at','desc')
+            ->limit(7)
+            ->get();
+        $bests = OrderDetail::withCount('product')
+            ->orderBy('product_count', 'desc')
+            ->limit(7)
+            ->get();
+
+        return view('frontend.pages.home',[
+            'categories' => $categories,
+            'news' => $news,
+            'bests' => $bests
+        ]);
     }
 
-    public function register(){
-        $data['sidebar'] = 'pic-register';
-        $data['model'] = User::class;
-        return view('auth.frontend.register', $data);
-    }
-
-    public function saveRegister(Request $request){
-        $validate_rule = array();
-
-        $validate_rule['email'] = 'required|email';
-        $validate_rule['name'] = 'required';
-        $validate_rule['phone'] = 'required';
-        $validate_rule['birthDay'] = 'required|date';
-        $validate_rule['password'] = 'required|confirmed|min:6';
-        $validate_rule['username'] = 'required|unique:users,username';
-
-        $validation = Validator::make($request->all(),$validate_rule);
-
-        if($validation->fails()){
-            $data['status'] = false;
-            $data['message'] = 'Periksa Data Kembali!';
-            $data['error'] = $validation->errors();
-
-            return response()->json($data);
-        }
-
-        $user = new User();
-        $user->fill((array) $request->all());
-        $user->password = bcrypt($request->password);
-
-        if($user->save()){
-            return Response::json(array('status'=>true,'message'=>'Data berhasil disimpan'));
-        }else{
-            return Response::json(array('status'=>false,'message'=>'Data gagal simpan, coba lagi'));
-        }
-    }
-
-    public function login(){
-        return view('auth.frontend.login');
-    }
-
-    public function password(){
-        return view('auth.frontend.password');
-    }
-
-    public function resetPassword(Request $request)
+    public function contact()
     {
-        $validate_rule = array();
-        $validate_rule['username'] = 'required';
-        $validate_rule['birthDay'] = 'required';
-        $validate_rule['password'] = 'required|confirmed';
+        return view('frontend.pages.contact');
+    }
 
-        $validation = Validator::make($request->all(),$validate_rule);
+    public function sendContact(Request $request)
+    {
+        $contact = new stdClass();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->message = $request->message;
+        MailerService::contact($contact);
 
-        if($validation->fails()){
-            $data['status'] = false;
-            $data['message'] = 'Periksa Data Kembali!';
-            $data['error'] = $validation->errors();
+        return view('frontend.pages.contact')->with('success','Terima kasih telah menghubungi kami');
+    }
 
-            return response()->json($data);
-        }
+    public function about(){
+        return view('frontend.pages.about');
+    }
 
-        $data = User::select('users.id')
-            ->where('username',$request->username)
-            ->where('birthDay', $request->birthDay)
-            ->first();
-        if(empty($data->id)){
-            $data['status'] = false;
-            $data['message'] = 'Data akun tidak ditemukan';
-
-            return response()->json($data);
-        }
-        $user = User::find($data->id);
-        $user->password = bcrypt($request->password);
-
-        if($user->save()){
-            \Auth::login($user);
-            return response()->json(array('status'=>true,'message'=>'Data berhasil disimpan'));
-        }else{
-            return response()->json(array('status'=>false,'message'=>'Data gagal simpan, coba lagi'));
-        }
+    public function help(){
+        $features = Product::where('label',1)
+            ->orderBy('created_at','desc')
+            ->limit(4)
+            ->get();
+        return view('frontend.pages.help',['features'=>$features]);
     }
 
     public function invoice($id){

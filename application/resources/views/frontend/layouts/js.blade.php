@@ -1,218 +1,365 @@
-<!-- begin::Global Config(global config for global JS sciprts) -->
-<script>
-    var KTAppOptions = {
-        "colors": {
-            "state": {
-                "brand": "#3d94fb",
-                "light": "#ffffff",
-                "dark": "#282a3c",
-                "primary": "#5867dd",
-                "success": "#34bfa3",
-                "info": "#3d94fb",
-                "warning": "#ffb822",
-                "danger": "#fd27eb"
-            },
-            "base": {
-                "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
-                "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
-            }
-        }
-    };
-</script>
+	
+	<script src="{{url('frontend/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
 
-<!-- end::Global Config -->
+	<script src="{{url('frontend/vendor/animsition/js/animsition.min.js')}}"></script>
 
-<!--begin:: Global Mandatory Vendors -->
-<script src="{{ url('frontend/vendors/general/jquery/dist/jquery.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/popper.js/dist/umd/popper.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/js-cookie/src/js.cookie.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/moment/min/moment.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/tooltip.js/dist/umd/tooltip.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/perfect-scrollbar/dist/perfect-scrollbar.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/sticky-js/dist/sticky.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/wnumb/wNumb.js') }}" type="text/javascript"></script>
+	<script src="{{url('frontend/vendor/bootstrap/js/popper.js')}}"></script>
+	<script src="{{url('frontend/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
-<!--end:: Global Mandatory Vendors -->
+	<script src="{{url('frontend/vendor/select2/select2.min.js')}}"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
 
-<!--begin:: Global Optional Vendors -->
-<script src="{{ url('frontend/vendors/general/jquery-form/dist/jquery.form.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/block-ui/jquery.blockUI.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/components/vendors/bootstrap-datepicker/init.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/components/vendors/bootstrap-timepicker/init.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-maxlength/src/bootstrap-maxlength.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/vendors/bootstrap-multiselectsplitter/bootstrap-multiselectsplitter.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-select/dist/js/bootstrap-select.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-switch/dist/js/bootstrap-switch.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/components/vendors/bootstrap-switch/init.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/select2/dist/js/select2.full.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/ion-rangeslider/js/ion.rangeSlider.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/typeahead.js/dist/typeahead.bundle.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/handlebars/dist/handlebars.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/inputmask/dist/jquery.inputmask.bundle.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/inputmask/dist/inputmask/inputmask.date.extensions.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/inputmask/dist/inputmask/inputmask.numeric.extensions.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/nouislider/distribute/nouislider.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/owl.carousel/dist/owl.carousel.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/autosize/dist/autosize.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/clipboard/dist/clipboard.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/dropzone/dist/dropzone.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/summernote/dist/summernote.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/markdown/lib/markdown.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-markdown/js/bootstrap-markdown.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/components/vendors/bootstrap-markdown/init.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/bootstrap-notify/bootstrap-notify.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/components/vendors/bootstrap-notify/init.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/jquery-validation/dist/jquery.validate.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/jquery-validation/dist/additional-methods.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/components/vendors/jquery-validation/init.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/toastr/build/toastr.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/raphael/raphael.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/morris.js/morris.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/chart.js/dist/Chart.bundle.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/vendors/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/vendors/jquery-idletimer/idle-timer.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/waypoints/lib/jquery.waypoints.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/counterup/jquery.counterup.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/es6-promise-polyfill/promise.min.js') }}" type="text/javascript"></script>
-{{--<script src="{{ url('frontend/vendors/general/sweetalert2/dist/sweetalert2.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/components/vendors/sweetalert2/init.js') }}" type="text/javascript"></script>--}}
-<!-- Sweet Alert -->
-<script src="{{url('backend/assets/global/sweetalert.min.js')}}"></script>
-<!-- Sweet Alert -->
-<script src="{{ url('frontend/vendors/general/jquery.repeater/src/lib.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/jquery.repeater/src/jquery.input.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/jquery.repeater/src/repeater.js') }}" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/general/dompurify/dist/purify.js') }}" type="text/javascript"></script>
+	<script src="{{url('frontend/vendor/daterangepicker/moment.min.js')}}"></script>
+	<script src="{{url('frontend/vendor/daterangepicker/daterangepicker.js')}}"></script>
 
-<!--end:: Global Optional Vendors -->
+	<script src="{{url('frontend/vendor/slick/slick.min.js')}}"></script>
+	<script src="{{url('frontend/js/slick-custom.js')}}"></script>
 
-<!--begin::Global Theme Bundle(used by all pages) -->
-<script src="{{ url('frontend/demo/demo5/base/scripts.bundle.js') }}" type="text/javascript"></script>
+	<script src="{{url('frontend/vendor/parallax100/parallax100.js')}}"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
 
-<!--end::Global Theme Bundle -->
+	<script src="{{url('frontend/vendor/MagnificPopup/jquery.magnific-popup.min.js')}}"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
 
-<!--begin::Page Vendors(used by this page) -->
-<script src="{{ url('frontend/vendors/custom/fullcalendar/fullcalendar.bundle.js') }}" type="text/javascript"></script>
-<script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script>
-<script src="{{ url('frontend/vendors/custom/gmaps/gmaps.js') }}" type="text/javascript"></script>
+	<script src="{{url('frontend/vendor/isotope/isotope.pkgd.min.js')}}"></script>
 
-<!--end::Page Vendors -->
+	<script src="{{url('frontend/vendor/sweetalert/sweetalert.min.js')}}"></script>
+	<script>
+		/*$('.js-addwish-b2').on('click', function(e){
+			e.preventDefault();
+		});
 
-<!--begin::Page Scripts(used by this page) -->
-<script src="{{ url('frontend/app/custom/general/dashboard.js') }}" type="text/javascript"></script>
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
 
-<!--end::Page Scripts -->
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
 
-<!--begin::Global App Bundle(used by all pages) -->
-<script src="{{ url('frontend/app/bundle/app.bundle.js') }}" type="text/javascript"></script>
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
-<!--end::Global App Bundle -->
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
 
-<script src="{{ url('frontend/vendors/custom/ion.calendar-2.0.2/js/ion.calendar.js') }}"></script>
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});*/
 
-<!-- Auto Numeric -->
-<script src="{{url('backend/assets/global/autonumeric.min.js')}}"></script>
-<!-- Auto Numeric -->
+		/*---------------------------------------------*/
 
-<script src="{{ url('frontend/app/custom/general/crud/forms/widgets/select2.js') }}" type="text/javascript"></script>
+		/*$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});*/
+	</script>
 
+	<script src="{{url('frontend/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
 
-<script>
-    $(".datepickerinput").ionDatePicker({
-        years: "{{ \Carbon\Carbon::now()->subYear(80)->format('Y').'-'.\Carbon\Carbon::now()->addYear(3)->format('Y') }}",                    // years diapason
-        format: "YYYY-MM-DD",
-    });
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
 
-    $(".timepicker").timepicker({
-        showMeridian : false,
-        showSeconds: true
-    });
+	<script>
+        var productUrl = "{{url('product')}}";
+        var productPath = "{{url('storage')}}";
+        var productList = [];
+        var countCart = 0;
+        @foreach(Session::get('carts') as $cart)
+			productList.push({{$cart['product']}});
+			countCart++;
+		@endforeach
+	</script>
 
-    $(function() {
-        var autonumericDecimalOptions = {
-            digitGroupSeparator: '.',
-            decimalPlacesOverride:0,
-            decimalCharacter  : ',',
-            allowDecimalPadding: false,
-            unformatOnSubmit : true
-        };
+	<script src="{{url('frontend/js/main.js')}}"></script>
 
-        new AutoNumeric.multiple('.autonumeric', autonumericDecimalOptions);
-    });
-
-    function saveProfile(){
-        $('.form-group').removeClass('has-error');
-        $('.help-block-error').html('');
-
+	<script type="text/javascript">
+		@if(session('error'))
         swal({
-            title: "Yakin Simpan Data?",
-            text : "Data akan disimpan",
-            icon: "warning",
-            buttons: {
-                cancel:true,
-                confirm: {
-                    text:'Simpan!',
-                    closeModal: false,
-                },
-            },
-        })
-        .then((process) => {
-            if(process){
-                $('.form-group').removeClass('has-error');
-                $('.help-block-error').html('');
-
-                $.ajax({
-                    url: "{{ route('pic.save.account') }}",
-                    type: "POST",
-                    data: new FormData($("#form_profile")[0]),
-                    processData: false,
-                    contentType: false,
-                    async:false,
-                    success: function(response) {
-                        if(response.status){
-                            swal({
-                                title: 'Berhasil Simpan Data',
-                                text: response.message,
-                                icon: 'success',
-                                timer: '3000'
-                            }).then((done)=>{
-                                location.reload();
-                            });
-                        }else{
-                            swal({
-                                title: 'Gagal Simpan Data',
-                                text: response.message,
-                                icon: 'error',
-                                timer: '3000'
-                            });
-                            var error_arr = ['name-profile','password-profile','newPassword-profile'];
-
-                            for(var i=0;i < error_arr.length;i++){
-                                if(error_arr[i] in response.error){
-                                    $('#'+error_arr[i]).addClass('has-error');
-                                    $('#'+error_arr[i]+'_error').html(response.error[error_arr[i]]);
-                                }
-                            }
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        swal({
-                            title: 'System Error',
-                            text: errorThrown,
-                            icon: 'error',
-                            timer: '3000'
-                        });
-                    }
-                });
-            }else{
-                swal('Data tidak jadi disimpan');
-            }
+            title: 'System Error!',
+            text: '{!! session('error') !!}',
+            icon: "error",
         });
-    }
-</script>
+		@endif
+
+		@if(session('success'))
+        swal({
+            title: '{!! session('success') !!}',
+            text: '{!! session('message') !!}',
+            icon: "success",
+        });
+		@endif
+
+		function addCart(type){
+	        $('.modal-loading').addClass('modal-loading-show');
+	        if($('[name=previewMember]').val() == 1 && '{{\Auth::user()}}' == ''){
+                $('.modal-loading').removeClass('modal-loading-show');
+                return swal({
+                    title:'Produk Member',
+                    text: 'Produk hanya bisa dibeli oleh member, silahkan login dahulu!',
+                    icon: "warning",
+                });
+			}
+	        var product='';var qty='';var size='';var color = '';
+	        if(type == 1){
+	            $('.js-modal1').removeClass('show-modal1');
+	            product = $('[name=previewId]').val();
+	            qty = $('[name=previewQty]').val();
+	            size = $('[name=previewSize]').val();
+	            color = $('[name=previewColor]').val();
+	        }else if(type == 2){
+	            product = $('[name=productId]').val();
+	            qty = $('[name=productQty]').val();
+	            size = $('[name=productSize]').val();
+	            color = $('[name=productColor]').val();
+	        }
+	        $.ajax({
+	            url : '{{route("addCart")}}',
+	            type: "POST",
+	            dataType: "JSON",
+	            data: {
+	                    product:product,
+	                    qty:qty,
+	                    size:size,
+	                    color:color,
+	                    _token: '{{ csrf_token() }}'
+	                },
+	            success: function(response)
+	            {
+	                if(response.status)
+	                {
+	                    swal({
+	                        title:'Berhasil Tambah Produk',
+	                        text: response.message,
+	                        icon: "success",
+	                    })
+                    	updateCart(response.data);
+	        			$('.modal-loading').removeClass('modal-loading-show');
+                    }else{ 
+	                    swal({
+	                        title: 'Gagal Tambah Produk',
+	                        icon: "error",
+	                        text: response.message
+	                    });
+	        			$('.modal-loading').removeClass('modal-loading-show');
+	                }
+	            },
+	            error: function (jqXHR, textStatus, errorThrown)
+	            {
+	                swal({
+	                    title: 'system error!',
+	                    text: errorThrown,
+	                    icon: "error",
+	                });
+	        		$('.modal-loading').removeClass('modal-loading-show');
+	            }
+	        });
+	    }
+
+	    function updateCart(data){
+
+		    if(data.totalCount == 1)$('#cartItems').html('');
+
+	    	var item = '<li class="header-cart-item flex-w flex-t m-b-12 cartItem'+data.product+'" id="cartItem'+data.product+'">\
+    			<a href="javascript:;" onclick="removeCart('+data.product+')" title="Hapus Item" alt="Hapus Item">\
+					<div class="header-cart-item-img">\
+						<img src="'+data.image+'" alt="'+data.name+'">\
+					</div>\
+				</a>\
+				<div class="header-cart-item-txt p-t-8">\
+					<a href="'+data.detail+'" class="header-cart-item-name m-b-18 hov-cl1 trans-04">\
+						'+data.name+'\
+					</a>\
+					<span class="header-cart-item-info">\
+						'+data.qty+' x Rp. '+data.price+'\
+					</span>\
+				</div>\
+			</li>';
+			$('#cartItems').append(item);
+
+	    	$('#cartCount').attr('data-notify',data.totalCount);
+	    	$('.cartTotal').html('Total: Rp. '+data.totalNow);
+	    }
+
+	    function removeCart(product){
+	    	swal({
+                title: "Yakin Hapus Item Ini?",
+                text : "Data item cart ini akan dihilangkan",
+                icon: "warning",
+                buttons: {
+                    cancel:true,
+                    confirm: {
+                        text:'Hapus!',
+                        closeModal: false,
+                    },
+                  },
+                })
+            .then((process) => {
+                if(process){
+                	$('.modal-loading').addClass('modal-loading-show');
+                	$.ajax({
+                        url : '{{ route("removeCart") }}',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                                product:product,
+                                _token: '{{ csrf_token() }}',
+                            },
+                        success: function(response)
+                        {
+                            if(response.status) 
+                            {
+                            	swal({
+                                    title:'Berhasil Hapus Produk',
+                                    text: response.message,
+                                    icon: "success",
+                                });
+
+                                $('.cartItem'+response.product).remove();
+                                $('#cartCount').attr('data-notify',response.totalCount);
+	    						$('.cartTotal').html('Total: Rp. '+response.totalNow);
+	    						$('.modal-loading').removeClass('modal-loading-show');
+	    						countCart = response.totalCount;
+	    						var index = productList.indexOf(product);
+	    						if(index !== -1) productList.splice(index,1);
+                            }else{ 
+                                swal({
+                                    title: 'Gagal Hapus Produk',
+                                    icon: "error",
+                                    text: response.message
+                                });
+                                $('.modal-loading').removeClass('modal-loading-show');
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown)
+                        {
+                            swal({
+                                title: 'system error!',
+                                text: errorThrown,
+                                icon: "error",
+                            });
+                            $('.modal-loading').removeClass('modal-loading-show');
+                        }
+                    });
+                }else{
+                    swal('Data produk tidak jadi dihapus');
+                }
+            });
+	    }
+
+        function WayBill(){
+	        if($('[name=waybill]').val() == ''){
+                swal({
+                    title: 'Periksa Nomor Resi',
+                    icon: "error",
+                    text: 'Nomor resi tidak boleh kosong!',
+                });
+			}
+            swal({
+                title: "Yakin Lacak Pengiriman?",
+                text : "Pastikan memasukan nomor resi yang benar!",
+                icon: "warning",
+                buttons: {
+                    cancel:true,
+                    confirm: {
+                        text:'Lacak!',
+                        closeModal: false,
+                    },
+                },
+            })
+			.then((process) => {
+                if(process){
+                    $('.modal-loading').addClass('modal-loading-show');
+                    $.ajax({
+                        url : '{{ url("getWaybill") }}',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            waybill:$('[name=waybill]').val(),
+                            courier:'jne',
+                            _token: '{{ csrf_token() }}',
+                        },
+                        success: function(response)
+                        {
+                            if(response.status)
+                            {
+                                $('.modal-loading').removeClass('modal-loading-show');
+                                swal({
+                                    title: 'Berhasil Lacak Pengiriman',
+                                    icon: "success",
+                                    text: 'Data pengiriman ditemukan',
+									timer: '2000',
+                                }).then((done) => {
+                                	$('.js-modal2').addClass('show-modal1');
+									$('#waybillId').html('Nomor Resi : '+response.data.summary.waybill_number);
+									$('#waybillStatus').html(response.data.summary.status);
+                                	$('#waybillCourier').html(response.data.summary.courier_name);
+									$('#waybillService').html(response.data.summary.service_code);
+									$('#waybillDate').html(response.data.summary.waybill_date);
+									$('#waybillShipper').html(response.data.summary.shipper_name);
+									$('#waybillReceiver').html(response.data.summary.receiver_name);
+									$('#waybillOrigin').html(response.data.summary.origin);
+									$('#waybillDestination').html(response.data.summary.destination);
+								});
+                            }else{
+                                swal({
+                                    title: 'Gagal Lacak Pengiriman',
+                                    icon: "error",
+                                    text: response.message
+                                });
+                                $('.modal-loading').removeClass('modal-loading-show');
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown)
+                        {
+                            swal({
+                                title: 'Gagal Lacak Pengiriman',
+                                icon: "error",
+                                text: 'Resi yang Anda masukkan salah atau belum terdaftar.',
+                            });
+                            $('.modal-loading').removeClass('modal-loading-show');
+                        }
+                    });
+                }else{
+                    swal('Tidak jadi lacak pengiriman');
+        		}
+        	});
+        }
+	</script>

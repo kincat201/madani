@@ -66,6 +66,7 @@
                                             @endforeach
                                         </select>
                                     </td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th style="min-width: 100px;">Nama</th>
@@ -74,7 +75,7 @@
                                     <th style="min-width: 100px;">Unit</th>
                                     <th style="min-width: 100px;">Jumlah</th>
                                     <th style="min-width: 100px;">Status</th>
-                                    <th style="min-width: 150px">Aksi</th>
+                                    <th style="min-width: 100px">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>

@@ -1,64 +1,28 @@
-<!--begin::Fonts -->
-<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
-<script>
-	WebFont.load({
-		google: {"families":["Poppins:300,400,500,600,700"]},
-		active: function() {
-			sessionStorage.fonts = true;
-		}
-	});
-</script>
+	<link rel="icon" type="image/png" href="{{url('storage/'.$CONF->icon)}}"/>
 
-<!--end::Fonts -->
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/vendor/bootstrap/css/bootstrap.min.css')}}">
 
-<!--begin::Page Vendors Styles(used by this page) -->
-<link href="{{ url('frontend/vendors/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
 
-<!--end::Page Vendors Styles -->
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/fonts/iconic/css/material-design-iconic-font.min.css')}}">
 
-<!--begin:: Global Mandatory Vendors -->
-<link href="{{ url('frontend/vendors/general/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/fonts/linearicons-v1.0.0/icon-font.min.css')}}">
 
-<!--end:: Global Mandatory Vendors -->
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/vendor/animate/animate.css')}}">
+	
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/vendor/css-hamburgers/hamburgers.min.css')}}">
 
-<!--begin:: Global Optional Vendors -->
-<link href="{{ url('frontend/vendors/general/tether/dist/css/tether.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/bootstrap-select/dist/css/bootstrap-select.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/select2/dist/css/select2.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/ion-rangeslider/css/ion.rangeSlider.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/nouislider/distribute/nouislider.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/owl.carousel/dist/assets/owl.carousel.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/owl.carousel/dist/assets/owl.theme.default.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/dropzone/dist/dropzone.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/summernote/dist/summernote.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/bootstrap-markdown/css/bootstrap-markdown.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/animate.css/animate.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/toastr/build/toastr.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/morris.js/morris.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/sweetalert2/dist/sweetalert2.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/general/socicon/css/socicon.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/custom/vendors/line-awesome/css/line-awesome.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/custom/vendors/flaticon/flaticon.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/custom/vendors/flaticon2/flaticon.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/vendors/custom/vendors/fontawesome5/css/all.min.css') }}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/vendor/animsition/css/animsition.min.css')}}">
 
-<!--end:: Global Optional Vendors -->
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/vendor/select2/select2.min.css')}}">
+	
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/vendor/daterangepicker/daterangepicker.css')}}">
 
-<!--begin::Global Theme Styles(used by all pages) -->
-<link href="{{ url('frontend/demo/demo5/base/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ url('frontend/custom/css/custom.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{url('frontend/vendors/custom/ion.calendar-2.0.2/css/ion.calendar.css')}}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/vendor/slick/slick.css')}}">
 
-<link href="{{ url('frontend/assets/vendors/general/select2/dist/css/select2.css') }}" rel="stylesheet" type="text/css" />
-<!--end::Global Theme Styles -->
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/vendor/MagnificPopup/magnific-popup.css')}}">
 
-<!--begin::Layout Skins(used by all pages) -->
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
 
-<!--end::Layout Skins -->
-<link rel="shortcut icon" href="{{ url('storage/'.$CONF->icon) }}" />
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/css/util.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url('frontend/css/main.css')}}">

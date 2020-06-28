@@ -6,176 +6,189 @@
 
 @endpush
 
-@section('breadcrumb')
-    <div class="kt-subheader__main">
-        <h3 class="kt-subheader__title">
-            Sistem Informasi Reservasi Ruangan </h3>
-        <span class="kt-subheader__separator kt-hidden"></span>
-        <div class="kt-subheader__breadcrumbs">
-        </div>
-    </div>
-@endsection
-
 @section('content')
 
-    <!-- begin:: Content -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="kt-portlet">
-                <div class="kt-portlet__head">
-                    <div class="kt-portlet__head-label">
-                        <h3 class="kt-portlet__head-title kt-font-primary">
-                            Daftar Reservasi
-                        </h3>
-                    </div>
-                    <div class="kt-portlet__head-toolbar">
-                        <div class="kt-portlet__head-actions">
-                            <a href="{{ route('reservation.detail',['id'=>0]) }}" class="btn btn-outline-brand btn-bold btn-sm">Tambah Reservasi</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="kt-portlet__body">
+	<!-- Slider -->
+	<section class="section-slide">
+		<div class="wrap-slick1 rs1-slick1">
+			<div class="slick1">
+				@foreach(json_decode($CONF->slider) as $slider)
+				<div class="item-slick1" style="background-image: url({{url('storage/'.$slider->image)}});">
+					<div class="container h-full">
+						<div class="flex-col-l-m h-full p-t-100 p-b-30">
+							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
+								<span class="ltext-202 cl2 respon2">
+									{{$slider->title}}
+								</span>
+							</div>
+								
+							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
+								<h2 class="ltext-104 cl2 p-t-19 p-b-43 respon1">
+									{{$slider->description}}
+								</h2>
+							</div>
+								
+							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
+								<a href="{{$slider->link}}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+									{{$slider->linkText}}
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				@endforeach
+			</div>
+		</div>
+	</section>
 
-                    <!--begin: Datatable -->
-                    <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
-                        <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Meeting</th>
-                            <th>Ruangan</th>
-                            <th>Peserta</th>
-                            <th>PIC</th>
-                            <th>Tanggal</th>
-                            <th>Waktu</th>
-                            <th>Konsumsi</th>
-                            <th>Status</th>
-                            <th>Keterangan</th>
-                            <th>Aksi</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($list as $dataKey => $dataVal)
-                            <tr>
-                                <td>{{ $dataKey+1 }}</td>
-                                <td>{{ $dataVal->title }}</td>
-                                <td>{{ \App\Util\Constant::ROOM_LIST[$dataVal->room] }}</td>
-                                <td>{{ $dataVal->amount }}</td>
-                                <td>{{ $dataVal->pic }}</td>
-                                <td>{{ $dataVal->reservationDate }}</td>
-                                <td>{{ \Carbon\Carbon::parse($dataVal->reservationTimeFrom)->format('H:i').' - ' . \Carbon\Carbon::parse($dataVal->reservationTimeTo)->format('H:i') }}</td>
-                                <td><label class="text-{{ \App\Util\Constant::FOOD_LABEL_LIST[$dataVal->food] }}">{{\App\Util\Constant::FOOD_LIST[$dataVal->food]}}</label></td>
-                                <td><label class="text-{{ \App\Util\Constant::RESERVATION_STATUS_LABEL_LIST[$dataVal->status] }}">{{\App\Util\Constant::RESERVATION_STATUS_LIST[$dataVal->status]}}</label></td>
-                                <td>{{ $dataVal->remark }}</td>
-                                <td>
-                                    @if(@\Auth::user()->id == $dataVal->userId)
-                                    <a href="{{ route('reservation.detail',['id'=>$dataVal->id]) }}" class="btn btn-info btn-xs">Detail</a>
-                                    <a onclick="deleteData('{{ $dataVal->id }}')" class="btn btn-warning btn-xs">Delete</a>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+	<!-- Banner -->
+	<div class="sec-banner bg0">
+		<div class="flex-w flex-c-m">
+			@foreach($categories as $category)
+			<div class="size-202 m-lr-auto respon4">
+				<!-- Block1 -->
+				<div class="block1 wrap-pic-w">
+					<img src="{{url('storage/'.$category->image)}}" alt="{{$category->name}}">
 
-                    <!--end: Datatable -->
-                </div>
-            </div>
-        </div>
-    </div>
+					<a href="{{url('product?category='.$category->id)}}" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+						<div class="block1-txt-child1 flex-col-l">
+							<span class="block1-name ltext-102 trans-04 p-b-8">
+								{{$category->name}}
+							</span>
 
-    <!-- end:: Content -->
+							<span class="block1-info stext-102 trans-04">
+								{{$category->description}}
+							</span>
+						</div>
+
+						<div class="block1-txt-child2 p-b-4 trans-05">
+							<div class="block1-link stext-101 cl0 trans-09">
+								Lihat
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			@endforeach
+		</div>
+	</div>
+
+
+	<!-- Product -->
+	<section class="sec-product bg0 p-t-100 p-b-50">
+		<div class="container">
+			<div class="p-b-32">
+				<h3 class="ltext-105 cl5 txt-center respon1">
+					Etalase Produk
+				</h3>
+			</div>
+
+			<!-- Tab01 -->
+			<div class="tab01">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item p-b-10">
+						<a class="nav-link active" data-toggle="tab" href="#best-seller" role="tab">Terlaris</a>
+					</li>
+
+					<li class="nav-item p-b-10">
+						<a class="nav-link" data-toggle="tab" href="#sale" role="tab">Terbaru</a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content p-t-50">
+					<!-- - -->
+					<div class="tab-pane fade show active" id="best-seller" role="tabpanel">
+						<!-- Slide2 -->
+						<div class="wrap-slick2">
+							<div class="slick2">
+								@foreach($bests as $best)
+								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+									<!-- Block2 -->
+									<div class="block2">
+										<div class="block2-pic hov-img0 label-new label-{{$best->label}}" data-label="Terlaris">
+											<img src="{{url('storage/'.$best->product->image)}}" alt="{{$best->product->name}}">
+
+											<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" product-id="{{$best->product->id}}">
+												Lihat
+											</a>
+										</div>
+
+										<div class="block2-txt flex-w flex-t p-t-14">
+											<div class="block2-txt-child1 flex-col-l ">
+												<a href="{{route('productDetail',['id'=>$best->product->id])}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+													{{ucwords($best->product->name)}}
+												</a>
+
+												<span class="stext-105 cl3">
+													Rp. {{number_format(@$best->product->prices())}}
+												</span>
+											</div>
+
+											<div class="block2-txt-child2 flex-r p-t-3">
+												<a href="{{route('productDetail',['id'=>$best->product->id])}}" class="btn-addwish-b2 dis-block pos-relative" style="color:#999">
+													<i class="fa fa-archive" style="margin-left: 2px"></i>&nbsp;{{number_format($best->product->qty)}}
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								@endforeach
+							</div>
+						</div>
+					</div>
+
+					<!-- - -->
+					<div class="tab-pane fade" id="sale" role="tabpanel">
+						<!-- Slide2 -->
+						<div class="wrap-slick2">
+							<div class="slick2">
+								@foreach($news as $new)
+									<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
+										<!-- Block2 -->
+										<div class="block2">
+											<div class="block2-pic hov-img0 label-new" data-label="Terbaru">
+												<img src="{{url('storage/'.$new->image)}}" alt="{{$new->name}}">
+
+												<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" product-id="{{$new->id}}">
+													Quick View
+												</a>
+											</div>
+
+											<div class="block2-txt flex-w flex-t p-t-14">
+												<div class="block2-txt-child1 flex-col-l ">
+													<a href="{{route('productDetail',['id'=>$new->id])}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+														{{ucwords($new->name)}}
+													</a>
+
+													<span class="stext-105 cl3">
+													Rp. {{number_format(@$new->prices())}}
+												</span>
+												</div>
+
+												<div class="block2-txt-child2 flex-r p-t-3">
+													<a href="{{route('productDetail',['id'=>$new->id])}}" class="btn-addwish-b2 dis-block pos-relative" style="color:#999">
+														<i class="fa fa-archive" style="margin-left: 2px"></i>&nbsp;{{number_format($new->stock)}}
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								@endforeach
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	@include('frontend.layouts.preview')
 
 @endsection
 
 @push('customJs')
-    <!--begin::Page Vendors(used by this page) -->
-    <script src="{{ url('frontend/vendors/custom/datatables/datatables.bundle.js') }}" type="text/javascript"></script>
-
-    <!--end::Page Vendors -->
-
-    <!--begin::Page Scripts(used by this page) -->
-    <script>
-        "use strict";
-        var KTDatatablesBasicScrollable = function() {
-
-            var initTable1 = function() {
-                var table = $('#kt_table_1');
-
-                // begin first table
-                table.DataTable({
-                    scrollY: '100vh',
-                    scrollX: true,
-                    scrollCollapse: true,
-                    columnDefs: [
-                        {
-                            targets: -1,
-                            orderable: false,
-                        },
-                    ],
-                });
-            };
-
-            return {
-
-                //main function to initiate the module
-                init: function() {
-                    initTable1();
-                },
-
-            };
-
-        }();
-
-        jQuery(document).ready(function() {
-            KTDatatablesBasicScrollable.init();
-        });
-
-        function deleteData(id) {
-            swal({
-                title: "Yakin Hapus Data?",
-                text : "Data akan dihapus permanen",
-                icon: "warning",
-                buttons: {
-                    cancel:true,
-                    confirm: {
-                        text:'Hapus!',
-                        closeModal: false,
-                    },
-                },
-            })
-                .then((process) => {
-                    if(process){
-                        $.ajax({
-                            url: "{{ route('reservation.delete',['id'=>'']) }}" + '/' + id,
-                            type: "POST",
-                            data: {
-                                '_token': '{{csrf_token()}}'
-                            },
-                            success: function(data) {
-                                swal({
-                                    title: 'Berhasil Hapus Data!',
-                                    text: 'Data berhasil di hapus',
-                                    icon: 'success',
-                                    timer: '3000'
-                                }).then((after)=>{
-                                    location.reload();
-                                });
-                            },
-                            error: function(jqXHR, textStatus, errorThrown){
-                                swal({
-                                    title: 'System Error',
-                                    text: errorThrown,
-                                    icon: 'error',
-                                    timer: '3000'
-                                });
-                            }
-                        });
-                    }else{
-                        swal('Data tidak jadi dihapus');
-                    }
-                });
-        }
-    </script>
-    <!--end::Page Scripts -->
 
 @endpush

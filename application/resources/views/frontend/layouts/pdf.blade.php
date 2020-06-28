@@ -23,7 +23,7 @@
             }
 
             table{
-                font-size: 11px;
+                font-size: 14px;
                 border: 0;
             }
 
@@ -53,14 +53,14 @@
     <body>
         <header>
             <div class="header">
-                <img  style="position: absolute;left: 105px;" src="{{ url('storage'.'/'.$CONF->logo) }}" alt="logo" width="155">
-                <h2 style="text-align: right; margin-right: 100px; padding-bottom:10px;">PENGAJUAN SIMPANAN</h2>
+                <h2>Pesanan</h2>
+                <img  style="display: inline;" src="{{ url('storage'.'/'.$CONF->logo) }}" alt="logo" width="155">
             </div>
         </header>
-        <article style="padding-top:120px">
+        <article style="padding-top:250px">
             @yield('content')
         </article>
-        <footer style="position: absolute;bottom: 0; width: 100%;text-align: center;">
+        <footer>
             Copyright © {{date('Y')}} {{$CONF->title}}. All Rights Reserved
         </footer>
     </body>

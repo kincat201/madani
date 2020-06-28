@@ -13,25 +13,45 @@
 
 Auth::routes();
 
-Route::get('/', 'BackEnd\BackEndController@login')->name('home');
-Route::get('/import', 'FrontEnd\PageController@import')->name('import');
+//Route::get('/', 'BackEnd\BackEndController@login')->name('home');
+//Route::get('/import', 'FrontEnd\PageController@import')->name('import');
 
-Route::post('/register-member', 'Auth\RegisterController@registerMember')->name('register.member');
-Route::post('/reset-password', 'Frontend\PageController@resetPassword')->name('pic.reset.password');
+// PAGES //
+Route::get('/', 'FrontEnd\PageController@index')->name('home');
+Route::get('/about', 'FrontEnd\PageController@about')->name('about');
+Route::get('/help', 'FrontEnd\PageController@help')->name('help');
+Route::get('/contact', 'FrontEnd\PageController@contact')->name('contact');
+Route::post('/contact', 'FrontEnd\PageController@contactSend')->name('contactSend');
+
 Route::get('/login', 'BackEnd\BackEndController@login')->name('login');
-Route::get('/register', 'FrontEnd\PageController@register')->name('register');
-Route::post('/save-register', 'FrontEnd\PageController@saveRegister')->name('register.save');
 Route::get('/orderInvoice/{id}', 'FrontEnd\PageController@invoice')->name('order.invoice');
 
-Route::group(['prefix' => 'pic', 'middleware' => ['auth']], function () {
-    Route::post('/save-account', 'FrontEnd\PicController@saveAccount')->name('pic.save.account');
-});
 
-Route::group(['prefix' => 'reservation', 'middleware' => ['auth']], function () {
-    Route::get('/reservationDetail/{id}', 'FrontEnd\ReservationController@reservationDetail')->name('reservation.detail');
-    Route::post('/reservationSave', 'FrontEnd\ReservationController@reservationSave')->name('reservation.save');
-    Route::post('/reservationDelete/{id}', 'FrontEnd\ReservationController@reservationDelete')->name('reservation.delete');
-});
+//PRODUCT
+Route::get('/product', 'FrontEnd\ProductController@index')->name('product');
+Route::get('/product/loadMore', 'FrontEnd\ProductController@loadMore')->name('loadMore');
+Route::get('/product/{id}', 'FrontEnd\ProductController@detail')->name('productDetail');
+Route::get('/product/preview/{id}', 'FrontEnd\ProductController@productPreview')->name('productPreview');
+Route::get('/product/category/{id}', 'FrontEnd\ProductController@productCategory')->name('productCategory');
+
+//ORDER//
+Route::get('/checkout', 'FrontEnd\OrderController@checkout')->name('checkout');
+Route::post('/checkout', 'FrontEnd\OrderController@saveCheckout')->name('saveCheckout');
+Route::post('/saveCart', 'FrontEnd\OrderController@saveCart')->name('saveCart');
+Route::get('/cart', 'FrontEnd\OrderController@cart')->name('cart');
+Route::post('/addCart', 'FrontEnd\OrderController@addCart')->name('addCart');
+Route::post('/removeCart', 'FrontEnd\OrderController@removeCart')->name('removeCart');
+Route::post('/updateCart', 'FrontEnd\OrderController@updateCart')->name('updateCart');
+Route::get('/emptyCart', 'FrontEnd\OrderController@emptyCart')->name('emptyCart');
+Route::get('/confirm/{code}', 'FrontEnd\OrderController@confirm')->name('confirm');
+Route::post('/confirm', 'FrontEnd\OrderController@saveConfirm')->name('saveConfirm');
+Route::get('/getCity/{id}', 'FrontEnd\OrderController@getCity')->name('getCity');
+Route::get('/getSubdistrict/{id}', 'FrontEnd\OrderController@getSubdistrict')->name('getSubdistrict');
+Route::get('/getKabupaten/{id}', 'FrontEnd\OrderController@getKabupaten')->name('getKabupaten');
+Route::get('/getKecamatan/{id}', 'FrontEnd\OrderController@getKecamatan')->name('getKecamatan');
+Route::get('/getCost/{id}/{courier}', 'FrontEnd\OrderController@getCost')->name('getCost');
+Route::post('/getWaybill', 'FrontEnd\OrderController@getWaybill')->name('getWaybill');
+Route::get('/order-download/{id}', 'FrontEnd\OrderController@download')->name('donwloadOrder');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/login', 'BackEnd\BackEndController@login')->name('admin.login');

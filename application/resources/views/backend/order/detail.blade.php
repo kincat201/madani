@@ -37,7 +37,7 @@
                                     <span class="caption-subject bold uppercase">Data Pesanan</span>
                                 </div>
                                 <div class="actions">
-                                    @if(@$model->status == \App\Util\Constant::ORDER_STATUS_NEW || @$model->status == \App\Util\Constant::ORDER_STATUS_PAYMENT_COMPLETE)
+                                    @if( empty(@$model->status) || (@$model->status == \App\Util\Constant::ORDER_STATUS_NEW || @$model->status == \App\Util\Constant::ORDER_STATUS_PAYMENT_COMPLETE))
                                     <button type="button" class="btn btn-primary" onclick="save()">Simpan</button>
                                     @endif
                                     <a href="{{route('admin.orders')}}" class="btn default" >Kembali</a>
@@ -91,16 +91,19 @@
         @endif
 
         function calculate(){
-            var design_fee = parseInt($('[name=design_fee]').val().replace('.',''),0);
-            var finishing_fee = parseInt($('[name=finishing_fee]').val().replace('.',''),0);
+            var design_fee = parseInt($('[name=design_fee]').val().replace(/[^\d,-]/g,''),0);
+            var finishing_fee = parseInt($('[name=finishing_fee]').val().replace(/[^\d,-]/g,''),0);
 
             grand_total = (design_fee ? design_fee : 0) + (finishing_fee ? finishing_fee : 0) + total_item;
             $('[name=grand_total]').val(grand_total);
             $('#grand_total').html('Rp. '+parseInt(grand_total,0).toLocaleString('de-DE'));
 
             @if(\Auth::user()->role == \App\Util\Constant::USER_ROLE_CASHIER || \Auth::user()->role == \App\Util\Constant::USER_ROLE_ADMIN)
-            var down_payment = parseInt($('[name=down_payment]').val().replace('.',''),0);
-            AutoNumeric.set('[name=total_payment]',grand_total - down_payment);
+            var down_payment = parseInt($('[name=down_payment]').val().replace(/[^\d,-]/g,''),0);
+            var total_payment = grand_total - down_payment;
+            console.log($('[name=down_payment]').val().replace(/[^\d,-]/g,''));
+            console.log(total_payment);
+            AutoNumeric.set('[name=total_payment]',total_payment);
             @endif
         }
 

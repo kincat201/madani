@@ -13,48 +13,38 @@
     @include('frontend.layouts.css')
     @stack('customCss')
 </head>
-<body class="kt-page--loading-enabled kt-page--loading kt-page--fixed kt-header--fixed kt-header--minimize-topbar kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+<body class="animsition">
 
-    @include('frontend.layouts.header-mobile')
+    @include('frontend.layouts.header')
 
-<div class="kt-grid kt-grid--hor kt-grid--root">
-    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
-        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper " id="kt_wrapper">
+    @include('frontend.layouts.cart')
 
-            @include('frontend.layouts.header')
+    @include('frontend.layouts.sidebar')
 
-            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-grid--stretch">
-                <div class="kt-container kt-body  kt-grid kt-grid--ver" id="kt_body">
-                    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
-                        <!-- begin:: Subheader -->
-                        <div class="kt-subheader   kt-grid__item" id="kt_subheader">
-                            @yield('breadcrumb')
-                        </div>
+    @yield('content')
 
-                        <!-- end:: Subheader -->
-                        @yield('content')
-                    </div>
-                </div>
-            </div>
+    @include('frontend.layouts.footer')
 
-            @include('frontend.layouts.footer')
+    {{--@include('frontend.layouts.preview')--}}
 
-            @include('frontend.layouts.modal')
-        </div>
-    </div>
-</div>
-
-<!-- end:: Page -->
-
-<!-- begin::Scrolltop -->
-<div id="kt_scrolltop" class="kt-scrolltop">
-    <i class="fa fa-arrow-up"></i>
-</div>
-
-<!-- end::Scrolltop -->
+    @include('frontend.layouts.modal')
 
     @include('frontend.layouts.js')
 
     @stack('customJs')
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/5c67b62e77e0730ce0433693/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 </html>

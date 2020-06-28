@@ -10,7 +10,7 @@
             <div id="add">
                 <div class="row">
                     <div class="col-sm-6" style="margin-bottom: 20px;padding-left: 31px;">
-                        @if(@$model->status == \App\Util\Constant::ORDER_STATUS_NEW || @$model->status == \App\Util\Constant::ORDER_STATUS_PAYMENT_COMPLETE)
+                        @if( empty(@$model->status) || (@$model->status == \App\Util\Constant::ORDER_STATUS_NEW || @$model->status == \App\Util\Constant::ORDER_STATUS_PAYMENT_COMPLETE))
                         <button class="btn btn-sm btn-success" type="button" onclick="addItem(0)">Tambah Item</button>
                         @endif
                     </div>
