@@ -78,12 +78,42 @@ class Product extends Model
     ];
 
     const exportData = [
+        'id'=>'Produk Id',
+        'name'=>'Nama',
+        'description'=>'Deskripsi',
+        'category_id'=>'Kategori',
+        'unit_id'=>'Unit',
+        'qty'=>'Jumlah',
+        'status'=>'Status',
+        'online'=>'Status',
+    ];
 
+    const exportDataStock = [
+        'product_id'=>'Produk Id',
+        'product'=>'Produk',
+        'order_detail_id'=>'Order',
+        'types'=>'Tipe',
+        'qty_before'=>'Jumlah Sebelum',
+        'qty_after'=>'Jumlah Setelah',
+    ];
+
+    const exportDataVariant = [
+        'product_id'=>'Produk Id',
+        'product'=>'Produk',
+        'types'=>'Tipe',
+        'remark'=>'Jenis',
+        'price'=>'Harga',
+        'hpp'=>'Modal',
     ];
 
     public function newQuery($excludeDeleted = true) {
         return parent::newQuery($excludeDeleted)
             ->where('products.deleted', 0);
+    }
+
+    public function stocks()
+    {
+        return $this->hasMany(ProductStock::class,'product_id','id');
     }
 
     public function orderDetail()
@@ -98,13 +128,10 @@ class Product extends Model
 
     public function prices()
     {
-        $prices = $this->join('product_variants','product_variants.product_id','=','products.id')
-        ->where('product_variants.types',Constant::PRODUCT_TYPE_PRICE_SINGLE)->first();
-        if(empty($prices->id)){
-            return 0;
-        } else {
-            return $prices->price;
-        }
+        $data = $this->variants()->where('types',Constant::PRODUCT_TYPE_PRICE_SINGLE)->first();
+
+        return !empty($data->price) ? $data->price : 0;
+
     }
 
     public function unit()

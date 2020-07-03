@@ -50,4 +50,9 @@ class ProductStock extends Model
     {
         return $this->belongsTo(Product::class,'product_id','id');
     }
+
+    public function orderDetail()
+    {
+        return $this->belongsTo(OrderDetail::class,'order_detail_id','id');
+    }
 }

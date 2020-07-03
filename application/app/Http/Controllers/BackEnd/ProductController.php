@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackEnd;
 
 use App\Helpers\FileHelper;
 use App\Product;
+use App\ProductStock;
 use App\Service\ProductStockService;
 use App\Util\Constant;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class ProductController extends BackEndController
 
         $validation = Validator::make($request->all(),$validate_rule);
 
-        $error_price = empty($request->prices) || count($request->prices ) <= 0 ? true : false;
+        $error_price = empty($request->prices) || count(json_decode($request->prices)) <= 0 ? true : false;
 
         if($validation->fails() || $error_price){
             $data['status'] = false;
@@ -166,17 +167,22 @@ class ProductController extends BackEndController
 
     public function export()
     {
-        return Excel::create( 'export_unit_'.time() , function($excel) {
+        return Excel::create( 'export_product_'.time() , function($excel) {
 
             // Set the title
             $excel->setTitle('Export Data Product');
 
             // Call them separately
-            $excel->setDescription('Data unit');
+            $excel->setDescription('Data product');
 
-            $datas = Product::all();
+            $datas = Product::with(['unit','category','stocks.orderDetail.order','variants'])->get();
 
-            $excel->sheet('unit', function($sheet) use ($datas) {
+            $excel->sheet('produk', function($sheet) use ($datas) {
+
+                foreach ($datas as $key => $data){
+                    $datas[$key]->category_id = $data->category->name;
+                    $datas[$key]->unit_id = $data->unit->name;
+                }
 
                 // Sheet manipulation
                 $sheet->loadView('backend.part.export',['datas'=>$datas,'model'=>Product::class]);
@@ -189,8 +195,93 @@ class ProductController extends BackEndController
                 ));
             });
 
+            $excel->sheet('stock', function($sheet) use ($datas) {
+
+                $dataStock = [];
+                foreach ($datas as $key => $data){
+                    foreach ($data->stocks as $stockKey => $stock){
+                        $stock->product = $data->name;
+                        $stock->order_detail_id = !empty($stock->order_detail_id) ? $stock->orderDetail->order->code : '-';
+                        $stock->types = Constant::STOCK_TYPE_LIST[$stock->types];
+                        $dataStock[] = $stock;
+                    }
+                }
+
+                // Sheet manipulation
+                $sheet->loadView('backend.product.export.custom-export',['datas'=>$dataStock,'model'=>Product::exportDataStock]);
+
+                $sheet->setStyle(array(
+                    'font' => array(
+                        'name'      =>  'Times New Roman',
+                        'size'      =>  12,
+                    )
+                ));
+            });
+
+            $excel->sheet('variant', function($sheet) use ($datas) {
+
+                $dataVariant = [];
+                foreach ($datas as $key => $data){
+                    foreach ($data->variants as $stockVariant => $variant){
+                        $variant->product = $data->name;
+                        $variant->types = Constant::PRODUCT_TYPE_PRICE_LIST[$variant->types];
+                        $dataVariant[] = $variant;
+                    }
+                }
+
+                // Sheet manipulation
+                $sheet->loadView('backend.product.export.custom-export',['datas'=>$dataVariant,'model'=>Product::exportDataVariant]);
+
+                $sheet->setStyle(array(
+                    'font' => array(
+                        'name'      =>  'Times New Roman',
+                        'size'      =>  12,
+                    )
+                ));
+            });
+
         })
         // ;
         ->download('xls');
+    }
+
+    public function stockData(Request $request){
+        $datas = ProductStock::with(['product','orderDetail.order'])->orderBy('created_at','asc');
+
+        $filter = [
+            'types'=> '='
+        ];
+
+        foreach ($filter as $key => $operator){
+            $relationFilter = explode('.',$key);
+            $currentKey = $key;
+            if(count($relationFilter)>1){
+                $currentKey = $relationFilter[0];
+            } else{
+                $key = 'product_stocks.'.$key;
+            }
+            if ($request->has($currentKey) && !empty($request->$currentKey) ) {
+                if($operator == 'like'){
+                    $datas->where($key,$operator,'%'.$request->$currentKey.'%');
+                } else {
+                    $datas->where($key,$operator,$request->$currentKey);
+                }
+            }
+        }
+
+        return DataTables::of($datas)
+            ->editColumn('qty_before',function($data) {
+                return number_format($data->qty_before);
+            })
+            ->editColumn('qty_after',function($data) {
+                return number_format($data->qty_after);
+            })
+            ->editColumn('types',function($data) {
+                return Constant::STOCK_TYPE_LIST[$data->types];
+            })
+            ->addColumn('code',function($data) {
+                return !empty($data->orderDetail) ? $data->orderDetail->order->code : '-';
+            })
+            ->escapeColumns([])->make(true);
     }
 }

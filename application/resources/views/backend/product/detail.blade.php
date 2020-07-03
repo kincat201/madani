@@ -6,6 +6,7 @@
     <style>
         .required-form:after { content:" *"; color:#ff3358 }
     </style>
+    <link href="{{url('backend/assets/global/datatables/datatables.min.css')}}" rel="stylesheet" type="text/css" />
 @endpush
 
 @section('content')
@@ -52,12 +53,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    {{--<div class="col-md-6">
-                                        @include('backend.pic.detail-part.member')
+                                    <div class="col-md-12">
+                                        @include('backend.product.detail-part.stock')
                                     </div>
-                                    <div class="col-md-6">
-                                        @include('backend.pic.detail-part.relation')
-                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -75,6 +73,50 @@
 
 @push('customJs')
     <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+
+    <script src="{{url('backend/assets/global/datatable.js')}}"
+            type="text/javascript"></script>
+    <script
+            src="{{url('backend/assets/global/datatables/datatables.min.js')}}"
+            type="text/javascript"></script>
+    <script
+            src="{{url('backend/assets/global/datatables/plugins/bootstrap/datatables.bootstrap.js')}}"
+            type="text/javascript"></script>
+    <script
+            src="{{url('backend/assets/global/table-datatables-responsive.min.js')}}"
+            type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var table = $('#myTable').DataTable({
+            'processing'  : true,
+            'serverSide'  : true,
+            'ajax'        : {
+                url: "{{ route('admin.product.stock') }}",
+                data: function (d) {
+                    d.types = $('[name=s_types]').val();
+                }
+            },
+            'dataType'    : 'json',
+            'searching'   : false,
+            'paging'      : true,
+            'lengthChange': true,
+            'columns'     : [
+                {data:'created_at', name: 'created_at'},
+                {data:'types', name: 'types'},
+                {data:'code', name: 'code', orderable: false},
+                {data:'qty_before', name: 'qty_before'},
+                {data:'qty_after', name: 'qty_after'},
+            ],
+            'info'        : true,
+            'order'       : ['0','desc'],
+            'autoWidth'   : false
+        });
+
+        function filter() {
+            table.draw();
+        }
+
+    </script>
 
     <script>
 

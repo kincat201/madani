@@ -26,7 +26,7 @@
         <link href="{{url('backend/assets/global/bootstrap-datetimepicker.min.css')}}" rel="stylesheet" type="text/css" />
 
         <link href="{{url('backend/assets/global/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css"/>
-        <link href="{{ url('frontend/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.css') }}" rel="stylesheet" type="text/css" />
+        {{--<link href="{{ url('frontend/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.css') }}" rel="stylesheet" type="text/css" />--}}
 
         <link rel="icon" type="image/png" href="{{url('storage/'.$CONF->icon)}}"/>
 
@@ -180,18 +180,18 @@
         <script src="{{url('backend/assets/global/jquery-ui.min.js')}}"></script>
         <!-- Sweet Alert -->
 
-        <script src="{{ url('frontend/vendors/general/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}" type="text/javascript"></script>
-        <script src="{{ url('frontend/vendors/custom/components/vendors/bootstrap-timepicker/init.js') }}" type="text/javascript"></script>
+{{--        <script src="{{ url('frontend/vendors/general/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}" type="text/javascript"></script>--}}
+{{--        <script src="{{ url('frontend/vendors/custom/components/vendors/bootstrap-timepicker/init.js') }}" type="text/javascript"></script>--}}
 
         <script>
             $('.datepickerinput').datetimepicker({
                 'format':'YYYY-MM-DD'
             });
 
-            $(".timepicker").timepicker({
-                showMeridian : false,
-                showSeconds: true
-            });
+            // $(".timepicker").timepicker({
+            //     showMeridian : false,
+            //     showSeconds: true
+            // });
 
             $(function() {
                 var autonumericDecimalOptions = {
