@@ -90,8 +90,10 @@ class OrderController extends BackEndController
         $data->fill((array)$request->all());
 
         $reformating = ['design_fee','finishing_fee','down_payment','total_payment','grand_total'];
+
         foreach ($reformating as $reform){
             $data->$reform = str_replace('.','',$request->$reform);
+            $request->$reform = str_replace('.','',$request->$reform);
         }
 
         $status_before = $data->status;
