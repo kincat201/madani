@@ -154,10 +154,12 @@ class Constant {
 
     const STOCK_TYPE_PRODUCT = 'PRODUCT';
     const STOCK_TYPE_ORDER = 'ORDER';
+    const STOCK_TYPE_ORDER_CANCEL = 'ORDER_CANCEL';
 
     const STOCK_TYPE_LIST = [
         self::STOCK_TYPE_PRODUCT => 'Product',
         self::STOCK_TYPE_ORDER => 'Order',
+        self::STOCK_TYPE_ORDER_CANCEL => 'Cancel',
     ];
 
     const ORDER_MACHINE_STATUS_PROGRESS = 'PROGRESS';

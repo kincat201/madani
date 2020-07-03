@@ -25,7 +25,7 @@ Route::post('/contact', 'FrontEnd\PageController@contactSend')->name('contactSen
 
 Route::get('/login', 'BackEnd\BackEndController@login')->name('login');
 Route::get('/orderInvoice/{id}', 'FrontEnd\PageController@invoice')->name('order.invoice');
-
+Route::get('/testPrint', 'FrontEnd\PageController@testPrint')->name('testPrint');
 
 //PRODUCT
 Route::get('/product', 'FrontEnd\ProductController@index')->name('product');
@@ -101,6 +101,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin:'.implode(',',
     Route::post('/productSave', 'BackEnd\ProductController@save')->name('admin.product.save');
     Route::post('/productDelete/{id}', 'BackEnd\ProductController@delete')->name('admin.product.delete');
     Route::get('/productExport', 'BackEnd\ProductController@export')->name('admin.product.export');
+    Route::get('/productStock', 'BackEnd\ProductController@stockData')->name('admin.product.stock');
 
     //Orders
     Route::get('/orders', 'BackEnd\OrderController@index')->name('admin.orders');
@@ -112,6 +113,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','admin:'.implode(',',
     Route::post('/orderPayment', 'BackEnd\OrderController@setPayment')->name('admin.order.payment');
     Route::post('/orderStatus', 'BackEnd\OrderController@setStatus')->name('admin.order.status');
     Route::get('/orderMachine/{id}', 'BackEnd\OrderController@getMachine')->name('admin.order.machine');
+    Route::get('/orderReceipt/{id}', 'BackEnd\OrderController@getReceipt')->name('admin.order.receipt');
 
     //notification
     Route::get('/notifications', 'BackEnd\NotificationController@index')->name('admin.notifications');

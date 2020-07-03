@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackEnd;
 
 use App\Category;
+use App\Config;
 use App\Member;
 use App\Order;
 use App\OrderMachine;
@@ -13,6 +14,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use DataTables;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 use Validator;
 use Response;
 use Input;
@@ -177,6 +180,7 @@ class OrderController extends BackEndController
             ->addColumn('aksi',function($data) {
                 $action = '<a href="'.route('admin.order.get',$data->id).'" class="btn btn-info btn-xs">Detail</a>';
                 $action .= '<a href="'.route('order.invoice',$data->id).'" target="_blank" class="btn btn-default btn-xs">Invoice</a>';
+                $action .= '<a href="'.route('admin.order.receipt',$data->id).'" target="_blank" class="btn btn-default btn-xs">Receipt</a>';
                 if($data->status == Constant::ORDER_STATUS_NEW){
                     $action .= '<a onclick="deleteData('.$data->id.')"class="btn btn-danger btn-xs">Hapus</a>';
                 }
@@ -193,7 +197,7 @@ class OrderController extends BackEndController
                         $action .= '<a onclick="paidData(' . $data->id . ')"class="btn btn-default btn-xs">Lunas</a>';
                     }
                 }
-                if($data->status != Constant::ORDER_STATUS_NEW){
+                if($data->status != Constant::ORDER_STATUS_NEW && $data->status != Constant::ORDER_MACHINE_STATUS_CANCELLED && $data->status != Constant::ORDER_STATUS_COMPLETED){
                     $action .= '<a onclick="cancelData('.$data->id.')"class="btn btn-danger btn-xs">Batal</a>';
                 }
                 return $action;
@@ -262,5 +266,98 @@ class OrderController extends BackEndController
 
     public function getMachine($id){
         return Response::json(Order::with('orderMachine')->where('id',$id)->first());
+    }
+
+    public function getReceipt($id){
+        try {
+            $order = Order::where('id',$id)->with(['member','items.product','orderMachine'])->first();
+            if(empty($order->id)){
+                return Response::json(array('status'=>false,'message'=>'Order tidak ditemukan!'));
+            }
+
+            $connector = new WindowsPrintConnector("posprinter");
+            $printer = new Printer($connector);
+
+            //https://www.youtube.com/watch?v=9GRVEdWuxmA
+            //https://drive.google.com/file/d/1Sw-Aus-qN7pMLaEFK_H3JOCHamvjVju2/view?usp=sharing
+
+            $config = Config::find(1);
+
+            /* Name of shop */
+            $printer -> setJustification(Printer::JUSTIFY_CENTER);
+            $printer -> setTextSize(1,2);
+            $printer -> text($config->title);
+            $printer -> setTextSize(1,1);
+            $printer -> feed();
+            $printer -> text($config->address);
+            $printer -> feed(2);
+
+            $printer -> setJustification(Printer::JUSTIFY_LEFT);
+
+            /* Title of receipt */
+            $printer -> setEmphasis(true);
+            $printer -> text("Pelanggan : ". $order->member->name. ' ('.$order->member->phone.')');
+            $printer -> feed();
+            $printer -> text("Kode Antrian : ". $order->code);
+            $printer -> setEmphasis(false);
+            $printer -> feed(2);
+
+            /* Information for the receipt */
+
+            $subTotal = 0;
+
+            /* Items */
+            foreach ($order->items as $item) {
+                $printer -> text(ucwords($item->product->name . (!empty($item->remark) ? ' ('.$item->remark.')' : '' ) ));
+                $printer -> feed();
+                $printer -> text('Rp '.number_format($item->price).' x '. number_format($item->qty).' = Rp. '.number_format($item->total_price));
+                $printer -> feed();
+                $subTotal += $item->price;
+            }
+
+            $designFee = $order->design_fee;
+            $total = $order->grand_total;
+            $payment = $order->down_payment;
+            if($payment - $total >= 0){
+                $result = 'Kembali : Rp. '.number_format($payment-$total);
+            }else{
+                $result = 'Sisa : Rp. '.number_format($total-$payment);
+            }
+
+            $printer -> feed();
+            $printer -> setEmphasis(true);
+            $printer -> text('Sub Total : Rp. '. number_format($subTotal));
+            $printer -> feed();
+            $printer -> text('Harga Desain : Rp. '. number_format($designFee));
+            $printer -> setEmphasis(false);
+            $printer -> feed();
+
+            /* Tax and total */
+            $printer -> setEmphasis(true);
+            $printer -> text('Total : Rp. '. number_format($total));
+            $printer -> feed();
+            $printer -> text('Pembayaran : Rp. '. number_format($payment));
+            $printer -> feed();
+            $printer -> text($result);
+            $printer -> setEmphasis(false);
+
+            /* Footer */
+            $printer -> feed(2);
+            $printer -> setJustification(Printer::JUSTIFY_CENTER);
+            $printer -> text("Terima kasih telah bertransaksi di ". $config->title.".");
+            $printer -> feed();
+            $printer -> text(" Informasi lebih lengkap bisa menghubungi ". $config->phone);
+            $printer -> feed(2);
+            $printer -> text(date('d F Y, H:i:s A') . "\n");
+            $printer -> feed(2);
+
+            $printer -> cut();
+            $printer -> pulse();
+
+            $printer -> close();
+
+        } catch(Exception $e) {
+            echo "Couldn't print to this printer: " . $e -> getMessage() . "\n";
+        }
     }
 }

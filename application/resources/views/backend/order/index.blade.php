@@ -88,6 +88,7 @@
     </div>
 </div>
 @include('backend.order.detail-part.machine')
+@include('backend.order.detail-part.cancel')
 @endsection 
 
 @push('customJs')
@@ -372,6 +373,89 @@
                 swal('Data tidak jadi diproses');
             }
         });
+    }
+
+    function cancelData(id){
+        $('#cancelModal form')[0].reset();
+        $.ajax({
+            url: "{{route('admin.order.machine',['id'=>''])}}"+"/"+id,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data) {
+                $('#cancelModal').modal('show');
+                $('.modal-title').text('Batal Pesanan');
+
+                $('[name=id]').val(data.id);
+                $('[name=code]').val(data.code);
+                $('[name=remark]').val(data.remark);
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                swal({
+                    title: 'System Error',
+                    text: errorThrown,
+                    icon: 'error',
+                    timer: '3000'
+                });
+            }
+        });
+    }
+
+    function setCancelData(){
+
+        $('#cancelModal').modal('hide');
+
+        swal({
+            title: "Yakin Batal Pesanan?",
+            text : "Data pesanan akan di batalkan!",
+            icon: "warning",
+            buttons: {
+                cancel:true,
+                confirm: {
+                    text:'Batal!',
+                    closeModal: false,
+                },
+            },
+        })
+            .then((process) => {
+                if(process){
+                    $.ajax({
+                        url:"{{route('admin.order.status')}}",
+                        type:'POST',
+                        // data: $('#myModal form').serialize(),
+                        data: $('#cancelModal form').serialize(),
+                        success: function(data){
+                            if(data.status){
+                                table.ajax.reload();
+                                swal({
+                                    title: 'Berhasil Batal pesanan',
+                                    text: data.message,
+                                    icon: 'success',
+                                    timer: '3000'
+                                });
+                            }else{
+                                swal({
+                                    title: 'Gagal Batal Pesanan!',
+                                    text: data.message,
+                                    icon: 'error',
+                                    timer: '3000'
+                                }).then(()=>{
+                                    processData($('#cancelModal [name=id]').val());
+                                });
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            swal({
+                                title: 'System Error',
+                                text: errorThrown,
+                                icon: 'error',
+                                timer: '3000'
+                            });
+                        }
+                    });
+                }else{
+                    swal('Data tidak jadi diproses');
+                }
+            });
     }
 
 </script>

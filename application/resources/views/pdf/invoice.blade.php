@@ -28,8 +28,16 @@
                         <td>Rp {{number_format(@$order->finishing_fee)}}</td>
                     </tr>
                     <tr style="background-color:#eee;">
-                        <th style="text-align: left">Total Bayar</th>
+                        <th style="text-align: left">Total Harga</th>
                         <td>Rp {{number_format(@$order->grand_total)}}</td>
+                    </tr>
+                    <tr style="background-color:#eee;">
+                        <th style="text-align: left">Jumlah Bayar</th>
+                        <td>Rp {{number_format(@$order->down_payment)}}</td>
+                    </tr>
+                    <tr style="background-color:#eee;">
+                        <th style="text-align: left">{{ @$order->down_payment - @$order->grand_total >= 0 ? 'Kembali': 'Sisa Bayar' }}</th>
+                        <td>Rp {{number_format((@$order->down_payment - @$order->grand_total >= 0 ? @$order->down_payment - @$order->grand_total : @$order->grand_total - @$order->down_payment))}}</td>
                     </tr>
                     <tr style="background-color:#eee;">
                         <th style="text-align: left">Status</th>

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="machineModal" role="dialog">
+<div class="modal fade" id="cancelModal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -26,22 +26,11 @@
                             <div id="remark_error" class="help-block help-block-error"> </div>
                         </div>
                     </div>
-                    <div class="form-group" id="machine_id">
-                        <label class="control-label col-sm-2" for="machine_id">Mesin</label>
-                        <div class="col-sm-10">
-                            <select class="form-control" name="machine_id">
-                                @foreach(\App\Helpers\SelectHelper::getSelectList('getMachineList') as $key => $val)
-                                    <option value="{{ $key }}">{{ $val }}</option>
-                                @endforeach
-                            </select>
-                            <div id="machine_id_error" class="help-block help-block-error"> </div>
-                        </div>
-                    </div>
-                    <input type="hidden" name="status" value="{{ \App\Util\Constant::ORDER_STATUS_PROGRESS }}">
+                    <input type="hidden" name="status" value="{{ \App\Util\Constant::ORDER_STATUS_CANCELLED }}">
                 </form>
             </div>
             <div class="modal-footer">
-                <button id="submit" type="button" onclick="setProgress()" class="btn btn-primary">Simpan</button>
+                <button id="submit" type="button" onclick="setCancelData()" class="btn btn-primary">Simpan</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
             </div>
         </div>

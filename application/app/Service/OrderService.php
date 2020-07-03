@@ -41,16 +41,40 @@ class OrderService {
             $orderMachine->save();
 
             $order->status = $status_after;
+            $order->remark = $request->remark;
             $order->save();
 
         } elseif($status_before == Constant::ORDER_STATUS_PROGRESS && $status_after == Constant::ORDER_STATUS_COMPLETED){
             $orderMachine = OrderMachine::where('order_id',$order->id)->first();
             $orderMachine->status = Constant::ORDER_MACHINE_STATUS_COMPLETE;
+            $orderMachine->completeDate = Carbon::now();
             $orderMachine->save();
 
             $order->status = $status_after;
             $order->save();
         } elseif(empty($status_before)){
+            $order->status = $status_after;
+            $order->save();
+        } elseif($status_after == Constant::ORDER_STATUS_CANCELLED) {
+
+            if($status_before == Constant::ORDER_MACHINE_STATUS_PROGRESS){
+
+                foreach ($order->items as $item){
+                    $current = $item->product->qty;
+                    $after = $current + $item->qty;
+                    ProductStockService::setProductStock($item->product_id, $order->id, Constant::STOCK_TYPE_ORDER_CANCEL,$current, $after);
+                    $product = Product::find($item->product_id);
+                    $product->qty = $after;
+                    $product->save();
+                }
+
+                $orderMachine = OrderMachine::where('order_id',$order->id)->first();
+                $orderMachine->status = Constant::ORDER_MACHINE_STATUS_CANCELLED;
+                $orderMachine->completeDate = Carbon::now();
+                $orderMachine->save();
+            }
+
+            $order->remark = $request->remark;
             $order->status = $status_after;
             $order->save();
         }
