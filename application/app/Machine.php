@@ -46,7 +46,10 @@ class Machine extends Model
     ];
 
     const exportData = [
-
+        'id'=>'Mesin Id',
+        'name'=>'Nama',
+        'description'=>'Deskripsi',
+        'status'=>'Status',
     ];
 
     public function newQuery($excludeDeleted = true) {

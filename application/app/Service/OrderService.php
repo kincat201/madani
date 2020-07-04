@@ -28,7 +28,7 @@ class OrderService {
             foreach ($order->items as $item){
                 $current = $item->product->qty;
                 $after = $current - $item->qty;
-                ProductStockService::setProductStock($item->product_id, $order->id, Constant::STOCK_TYPE_ORDER,$current, $after);
+                ProductStockService::setProductStock($item->product_id, $item->id, Constant::STOCK_TYPE_ORDER,$current, $after);
                 $product = Product::find($item->product_id);
                 $product->qty = $after;
                 $product->save();

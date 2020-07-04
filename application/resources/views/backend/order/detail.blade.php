@@ -101,8 +101,6 @@
             @if(\Auth::user()->role == \App\Util\Constant::USER_ROLE_CASHIER || \Auth::user()->role == \App\Util\Constant::USER_ROLE_ADMIN)
             var down_payment = parseInt($('[name=down_payment]').val().replace(/[^\d,-]/g,''),0);
             var total_payment = grand_total - down_payment;
-            console.log($('[name=down_payment]').val().replace(/[^\d,-]/g,''));
-            console.log(total_payment);
             AutoNumeric.set('[name=total_payment]',total_payment);
             @endif
         }
