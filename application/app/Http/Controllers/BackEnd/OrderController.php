@@ -223,9 +223,17 @@ class OrderController extends BackEndController
             // Call them separately
             $excel->setDescription('Data order');
 
-            $datas = Order::all();
+            $datas = Order::with(['orderMachine.machine','member','items.product'])->get();
 
             $excel->sheet('order', function($sheet) use ($datas) {
+
+                foreach ($datas as $key => $data){
+                    $datas[$key]->name = $data->member->name;
+                    $datas[$key]->phone = $data->member->phone;
+                    $datas[$key]->status = Constant::ORDER_STATUS_LIST[$data->status];
+                    $datas[$key]->payment_method = Constant::PAYMENT_METHOD_LIST[$data->payment_method];
+                    $datas[$key]->payment_method = Constant::STATUS_PAYMENT_LIST[$data->payment_status];
+                }
 
                 // Sheet manipulation
                 $sheet->loadView('backend.part.export',['datas'=>$datas,'model'=>Order::class]);
@@ -238,9 +246,55 @@ class OrderController extends BackEndController
                 ));
             });
 
+            $excel->sheet('order_item', function($sheet) use ($datas) {
+
+                $dataItem = [];
+                foreach ($datas as $key => $data){
+                    foreach ($data->items as $itemKey => $item){
+                        $item->code = $data->code;
+                        $item->product = $item->product->name;
+                        $item->product_type = Constant::PRODUCT_TYPE_PRICE_LIST[$item->product_type];
+                        $dataItem[] = $item;
+                    }
+                }
+
+                // Sheet manipulation
+                $sheet->loadView('backend.product.export.custom-export',['datas'=>$dataItem,'model'=>Order::exportDataItem]);
+
+                $sheet->setStyle(array(
+                    'font' => array(
+                        'name'      =>  'Times New Roman',
+                        'size'      =>  12,
+                    )
+                ));
+            });
+
+            $excel->sheet('order_machine', function($sheet) use ($datas) {
+
+                $dataMachine = [];
+                foreach ($datas as $key => $data){
+                    foreach ($data->orderMachine as $machineKey => $machine){
+                        $machine->code = $data->code;
+                        $machine->machine = $machine->machine->name;
+                        $machine->status = Constant::ORDER_MACHINE_STATUS_LIST[$machine->status];
+                        $dataMachine[] = $machine;
+                    }
+                }
+
+                // Sheet manipulation
+                $sheet->loadView('backend.product.export.custom-export',['datas'=>$dataMachine,'model'=>Order::exportDataMachine]);
+
+                $sheet->setStyle(array(
+                    'font' => array(
+                        'name'      =>  'Times New Roman',
+                        'size'      =>  12,
+                    )
+                ));
+            });
+
         })
-            // ;
-            ->download('xls');
+        // ;
+        ->download('xls');
     }
 
     public function setPayment(Request $request)

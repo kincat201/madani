@@ -44,4 +44,9 @@ class OrderMachine extends Model
         return parent::newQuery($excludeDeleted)
             ->where('order_machines.deleted', 0);
     }
+
+    public function machine()
+    {
+        return $this->belongsTo(Machine::class,'machine_id','id');
+    }
 }
