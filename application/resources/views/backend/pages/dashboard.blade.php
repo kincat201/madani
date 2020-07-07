@@ -14,7 +14,7 @@
 
         <!-- BEGIN PAGE BAR -->
         <div class="page-bar" style="padding:10px 0px;">
-            {{--<div class="col-md-1 label-control"><span style="margin-top: 7px;font-size: 16px;font-weight: bold;">Filter</span></div>
+            <div class="col-md-1 label-control"><span style="margin-top: 7px;font-size: 16px;font-weight: bold;">Filter</span></div>
             <form method="GET" action="{{route('admin.dashboard')}}">
                 <div class="col-md-4">
                     <div class="input-group input-date-range" data-date="13/07/2013" data-date-format="mm/dd/yyyy">
@@ -26,7 +26,7 @@
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-success">Filter</button>
                 </div>
-            </form>--}}
+            </form>
             <div class="col-md-6 label-control pull-right" style="text-align: right;">
                 <span style="margin-top: 7px;font-size: 16px;font-weight: bold;">{{date('D, d F Y')}}</span>
             </div>
@@ -37,7 +37,7 @@
             <div class="col-lg-12 text-center">
                 <br>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <a class="dashboard-stat dashboard-stat-v2 blue" href="{{route('admin.users')}}">
+                    <a class="dashboard-stat dashboard-stat-v2 blue" href="{{route('admin.products')}}">
                         <div class="visual">
                             <i class="fa fa-user"></i>
                         </div>
@@ -45,20 +45,46 @@
                             <div class="number">
                                 <span>{{number_format($user)}}</span>
                             </div>
-                            <div class="desc">User</div>
+                            <div class="desc">Produk</div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <a class="dashboard-stat dashboard-stat-v2 red" href="{{route('admin.units')}}">
+                    <a class="dashboard-stat dashboard-stat-v2 green" href="{{route('admin.orders')}}">
                         <div class="visual">
                             <i class="fa fa-list"></i>
                         </div>
                         <div class="details">
                             <div class="number">
-                                <span>{{number_format(@$reservation)}}</span>
+                                <span>{{number_format(@$order)}}</span>
                             </div>
-                            <div class="desc">Reservasi</div>
+                            <div class="desc">Pesanan</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <a class="dashboard-stat dashboard-stat-v2 yellow" href="{{route('admin.orders')}}">
+                        <div class="visual">
+                            <i class="fa fa-list"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                <span>{{number_format(@$income)}}</span>
+                            </div>
+                            <div class="desc">Total Pemasukan</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <a class="dashboard-stat dashboard-stat-v2 red" href="{{route('admin.orders')}}">
+                        <div class="visual">
+                            <i class="fa fa-list"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number">
+                                <span>{{number_format(@$outcome)}}</span>
+                            </div>
+                            <div class="desc">Total Modal</div>
                         </div>
                     </a>
                 </div>
@@ -95,7 +121,7 @@
                 type: 'line'
             },
             title: {
-                text: 'Grafik Reservasi Selama Setahun'
+                text: 'Grafik Pesanan Selama Setahun'
             },
             subtitle: {
                 text: 'Jumlah'
@@ -105,7 +131,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Total Reservasi'
+                    text: 'Total Pesanan'
                 }
             },
             plotOptions: {
@@ -120,7 +146,7 @@
                 //pointFormat: "Rp {point.y:.2f}"
             },
             series: [{
-                name: 'PIC',
+                name: 'Order',
                 data: value
             }]
         });

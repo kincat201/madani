@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackEnd;
 use App\Company;
 use App\Http\Controllers\Controller;
 use App\Kopnit;
+use App\Order;
 use App\Pic;
 use App\Reservation;
 use App\User;
@@ -39,7 +40,9 @@ class BackEndController extends Controller
     {
         $data['sidebar'] = 'dashboard';
         $data['user'] = User::count();
-        $data['reservation'] = 0;
+        $data['order'] = 0;
+        $data['income'] = 0;
+        $data['outcome'] = 0;
 
         //set Asset Chart
         $periode = [];
@@ -61,11 +64,30 @@ class BackEndController extends Controller
             ];
         }
 
-        foreach (User::get() as $pic){
-            $picDate = strtotime($pic->created_at);
+        $order = Order::with('items');
+
+        if($request->has('dateFrom')){
+            $data['dateFrom'] = $request->dateFrom;
+            $order->where('created_at', '>=', Carbon::parse($request->dateFrom));
+        }
+
+        if($request->has('dateTo')){
+            $data['dateTo'] = $request->dateTo;
+            $order->where('created_at', '<=', Carbon::parse($request->dateTo));
+        }
+
+        foreach ($order->get() as $order){
+            $data['order']++;
+
+            foreach ($order->items as $item){
+                $data['income'] += $item->total_price;
+                $data['outcome'] += $item->total_hpp;
+            }
+
+            $orderDate = strtotime($order->created_at);
 
             foreach($periode as $key => $prd){
-                if(($picDate >= $prd['firstDay'])&&($picDate <= $prd['lastDay'])){
+                if(($orderDate >= $prd['firstDay'])&&($orderDate <= $prd['lastDay'])){
                     $periode[$key]['value']++;
                 }
             }
