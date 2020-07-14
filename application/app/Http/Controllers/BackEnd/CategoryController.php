@@ -44,10 +44,6 @@ class CategoryController extends BackEndController
             $validate_rule[$key] = $value;
         }
 
-        if($request->id == 0){
-            $validate_rule['image'] = 'required|image';
-        }
-
         $validation = Validator::make($request->all(),$validate_rule);
 
         if($validation->fails()){
@@ -76,7 +72,7 @@ class CategoryController extends BackEndController
             $categoryImage = $image->store('categories','public');
         }
 
-        $data->image = $categoryImage;
+        $data->image = empty($categoryImage) ? 'categories/default.png' : $categoryImage;
 
         if($data->save()){
             return Response::json(array('status'=>true,'message'=>'Data berhasil disimpan'));
