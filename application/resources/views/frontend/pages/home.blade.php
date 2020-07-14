@@ -107,7 +107,7 @@
 								<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 									<!-- Block2 -->
 									<div class="block2">
-										<div class="block2-pic hov-img0 label-new label-{{$best->label}}" data-label="Terlaris">
+										<div class="block2-pic hov-img0" data-label="Terlaris">
 											<img src="{{url('storage/'.$best->product->image)}}" alt="{{$best->product->name}}">
 
 											<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" product-id="{{$best->product->id}}">
@@ -148,7 +148,7 @@
 									<div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
 										<!-- Block2 -->
 										<div class="block2">
-											<div class="block2-pic hov-img0 label-new" data-label="Terbaru">
+											<div class="block2-pic hov-img0" data-label="Terbaru">
 												<img src="{{url('storage/'.$new->image)}}" alt="{{$new->name}}">
 
 												<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" product-id="{{$new->id}}">

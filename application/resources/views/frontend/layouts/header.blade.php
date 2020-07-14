@@ -17,12 +17,9 @@
 							<a href="{{route('home')}}">Beranda</a>
 						</li>
 
-						@php
-							$productLink = ['product','product/*','cart','checkout','confirm']
-						@endphp
-						<li class="{{in_array(request()->segment(1),$productLink)?'active-menu':''}}">
-							<a href="{{route('product')}}">Belanja</a>
-						</li>
+                        <li class="{{request()->is('product')?'active-menu':''}}">
+                            <a href="{{route('product')}}">Produk</a>
+                        </li>
 
 						<li class="{{request()->is('help')?'active-menu':''}}">
 							<a href="{{route('help')}}">Bantuan & FAQ</a>
@@ -119,11 +116,8 @@
 				<a href="{{route('home')}}">Beranda</a>
 			</li>
 
-			@php
-				$productLink = ['product','product/*','cart','checkout','confirm']
-			@endphp
-			<li class="{{in_array(request()->segment(1),$productLink)?'active-menu':''}}">
-				<a href="{{route('product')}}">Belanja</a>
+			<li class="{{request()->is('product')?'active-menu':''}}">
+				<a href="{{route('product')}}">Produk</a>
 			</li>
 
 			<li class="{{request()->is('help')?'active-menu':''}}">

@@ -3,8 +3,4 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/application/resources/views/frontend/pages/home.blade.php" />
-    <file url="file://$PROJECT_DIR$/application/resources/views/frontend/pages/reservation.blade.php" />
-  </component>
 </project>

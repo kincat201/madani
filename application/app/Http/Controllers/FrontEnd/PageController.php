@@ -43,6 +43,7 @@ class PageController extends FrontEndController
         $bests = OrderDetail::withCount('product')
             ->orderBy('product_count', 'desc')
             ->limit(7)
+            ->groupBy('product_id')
             ->get();
 
         return view('frontend.pages.home',[

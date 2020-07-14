@@ -281,20 +281,21 @@
             dataType: 'JSON',
             success: function (product) {
                 $.each(product, function(productKey,productItem) {
+                    var productImage = productPath +'/'+ productItem.image;
                     var $divProduct = $('<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item '+productItem.category+'">\n' +
                         '                    <!-- Block2 -->\n' +
                         '                    <div class="block2">\n' +
-                        '                        <div class="block2-pic hov-img0 label-new label-'+productItem.label+'" data-label="'+productItem.labelText+'">\n' +
-                        '                            <img src="' + productPath +'/'+ productItem.images + '" alt="' + productItem.name + '">\n' +
+                        '                        <div class="block2-pic hov-img0">\n' +
+                        '                            <img src="'+productImage+'" alt="' + productItem.name + '">\n' +
                         '\n' +
                         '                            <a href="javascript:;" id="loadProduct-'+productItem.id+'" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" onclick="preview('+productItem.id+')" product-id="' + productItem.id + '">\n' +
-                        '                                Lihat\n' +
+                        '                                Lihat\n'+
                         '                            </a>\n' +
                         '                        </div>\n' +
                         '\n' +
                         '                        <div class="block2-txt flex-w flex-t p-t-14">\n' +
                         '                            <div class="block2-txt-child1 flex-col-l ">\n' +
-                        '                                <a href="' + productUrl + '/' + productItem.id + '" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">\n' +
+                        '                                <a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">\n' +
                         '                                    ' + productItem.name + '\n' +
                         '                                </a>\n' +
                         '\n' +
@@ -304,8 +305,8 @@
                         '                            </div>\n' +
                         '\n' +
                         '                            <div class="block2-txt-child2 flex-r p-t-3">\n' +
-                        '                                <a href="' + productUrl + '/' + productItem.id + '" class="btn-addwish-b2 dis-block pos-relative" style="color:#999">\n' +
-                        '                                    <i class="fa fa-archive" style="margin-left: 2px"></i>' + productItem.stock + '\n' +
+                        '                                <a href="#" class="btn-addwish-b2 dis-block pos-relative" style="color:#999">\n' +
+                        '                                    <i class="fa fa-archive" style="margin-left: 2px"></i>' + productItem.qty + '\n' +
                         '                                </a>\n' +
                         '                            </div>\n' +
                         '                        </div>\n' +
@@ -336,56 +337,42 @@
             dataType: 'JSON',
             success: function (product) {
                 $('[name=previewId]').val(product.id);
-                $('[name=previewMember]').val(product.member);
                 $('#previewName').html(product.name);
                 $('#previewPrice').html('Rp. ' + product.price);
+                $('#previewUnit').html(product.unit.name);
                 $('#previewDescription').html(product.description);
                 $('#previewQty').attr('max',product.stock);
-                $('[name=previewSize]').empty();
+
                 $('[name=previewSize]').empty();
 
                 $('[name=previewSize]').append(
                     $("<option></option>")
                         .attr("value","")
-                        .text('Pilih Ukuran')
+                        .text('Pilih Jenis')
                 );
 
-                $.each(product.size, function(productKeySize,productSize) {
+                $.each(product.variants, function(productKeySize,productSize) {
                     var currentSize = $("<option></option>")
-                            .attr("value",productSize)
-                            .text(productSize);
+                            .attr("value",JSON.stringify(productSize))
+                            .text((productSize.remark ? productSize.remark : '') + ' ('+priceTypes[productSize.types]+')');
 
                     $('[name=previewSize]').append(currentSize);
                 });
 
-                $('[name=previewColor]').append(
-                    $("<option></option>")
-                        .attr("value","")
-                        .text('Pilih Warna')
-                );
-
-                $.each(product.color, function(productKeyColor,productColor) {
-                    var currentColor = $("<option></option>")
-                        .attr("value",productColor)
-                        .text(productColor);
-
-                    $('[name=previewColor]').append(currentColor);
-                });
-
                 $('.wrap-slick3').html('<div class="wrap-slick3-dots"></div><div class="wrap-slick3-arrows flex-sb-m flex-w"></div><div class="slick3 gallery-lb" id="previewImages"></div>');
 
-                $.each(product.images, function(productKeyImage,productImage) {
-                    var currentImage= '<div class="item-slick3" data-thumb="'+productPath+'/'+productImage+'">\
+                // $.each(product.images, function(productKeyImage,productImage) {
+                    var currentImage= '<div class="item-slick3" data-thumb="'+productPath+'/'+product.image+'">\
                         <div class="wrap-pic-w pos-relative">\
-                            <img src="'+productPath+'/'+productImage+'" alt="'+product.name+'">\
-                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="'+productPath+'/'+productImage+'">\
+                            <img src="'+productPath+'/'+product.image+'" alt="'+product.name+'">\
+                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="'+productPath+'/'+product.image+'">\
                                 <i class="fa fa-expand"></i>\
                             </a>\
                         </div>\
                         </div>';
 
                     $('#previewImages').append(currentImage);
-                });
+                // });
 
                 $('.wrap-slick3').each(function(){
                     $(this).find('.slick3').slick({
