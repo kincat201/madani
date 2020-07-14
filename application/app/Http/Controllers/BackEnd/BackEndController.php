@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Kopnit;
 use App\Order;
 use App\Pic;
+use App\Product;
 use App\Reservation;
 use App\User;
 use Carbon\Carbon;
@@ -39,7 +40,7 @@ class BackEndController extends Controller
     public function dashboard(Request $request)
     {
         $data['sidebar'] = 'dashboard';
-        $data['user'] = User::count();
+        $data['product'] = Product::active()->count();
         $data['order'] = 0;
         $data['income'] = 0;
         $data['outcome'] = 0;
