@@ -148,4 +148,9 @@ class Product extends Model
     {
         return $query->where('products.status',Constant::COMMON_STATUS_ACTIVE);
     }
+
+    public function scopeOnline($query)
+    {
+        return $query->where('products.online',Constant::COMMON_STATUS_ACTIVE);
+    }
 }

@@ -128,6 +128,85 @@
         });
 		@endif
 
+        function checkOut(){
+            $('.js-modal3').addClass('show-modal1');
+        }
+
+        function setCheckOut() {
+            swal({
+                title: "Yakin Pesan?",
+                text : "Data keranjang belanja akan dihilangkan setelah dipesan",
+                icon: "warning",
+                buttons: {
+                    cancel:true,
+                    confirm: {
+                        text:'Pesan!',
+                        closeModal: false,
+                    },
+                },
+            })
+            .then((process) => {
+                if(process){
+                    var totalCart = '{{ number_format(\Session::get('totalCart')) }}';
+                    var carts = [];
+
+                    @foreach(\Session::get('carts') as $cart)
+                        carts.push({
+                            name:'{{ $cart['name'] }}',
+                            price:'{{ number_format($cart['price']) }}',
+                            qty:'{{ $cart['qty'] }}',
+                        });
+                    @endforeach
+                    var validateOrder = [];
+                    var name = $('.js-modal3 [name=name]').val();
+                    var email = $('.js-modal3 [name=email]').val();
+                    var phone = $('.js-modal3 [name=phone]').val();
+                    var address = $('.js-modal3 [name=address]').val();
+
+                    if( name == ''){
+                        validateOrder.push('nama lengkap');
+                    }
+                    if(email == ''){
+                        validateOrder.push('alamat email');
+                    }
+                    if(phone == ''){
+                        validateOrder.push('nomor telepon');
+                    }
+
+                    if(validateOrder.length>0){
+                        return swal({
+                            title: 'Periksa data pemesan',
+                            icon: "error",
+                            text: validateOrder.join(', ') + ' harus diisi'
+                        });
+                    }
+
+                    var textOrder = '';
+                    textOrder += 'Assalamualaikum%2C%20saya%20ingin%20melakukan%20pemesanan%3A%0A%0A';
+                    textOrder += 'Nama%20%3A%20'+name+'%0A';
+                    textOrder += 'Email%20%3A%20'+email+'%0A';
+                    textOrder += 'Telepon%20%3A%20'+phone+'%0A';
+                    textOrder += address ? 'Alamat%20%3A%20'+address+'%0A%0A' : '';
+                    textOrder += '%0AItem%20sebagai%20berikut%20%3A%0A';
+                    carts.map(cart=>{
+                        textOrder += cart.name.replace(' ','%20') + '%20%28'+cart.qty+'%20x%20'+cart.price+'%29%0A';
+                    });
+                    textOrder += '%0ATotal%20%3A%20'+totalCart;
+
+                    swal({
+                        title:'Berhasil Melakukan Pemesanan',
+                        text: 'Silahkan lanjutkan pemesanan via Whatsapp, terima kasih!',
+                        icon: "success",
+                    }).then((next)=>{
+                        window.open('https://api.whatsapp.com/send?phone={{ $CONF->whatsapp }}&text='+textOrder, '_blank');
+                        window.location = '{{ route('emptyCart') }}';
+                    })
+                }else{
+                    swal('Tidak jadi dipesan!');
+                }
+            });
+        }
+
 		function addCart(type){
 	        $('.modal-loading').addClass('modal-loading-show');
 	        var product='';var qty='';var size='';var color = '';

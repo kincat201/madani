@@ -32,22 +32,11 @@
 						<li class="{{request()->is('contact')?'active-menu':''}}">
 							<a href="{{route('contact')}}">Kontak</a>
 						</li>
-						@php
-							$memberLink = ['login','myprofile','password','myorder']
-						@endphp
-						<li class="{{in_array(request()->segment(1),$memberLink)?'active-menu':''}}">
-							@if(@\Auth::user()->role == \App\Util\Constant::USER_ROLE_ADMIN)
-							<a href="{{route('admin.dashboard')}}">Dashboard</a>
-							@elseif(\Auth::user())
-							<a href="javascript:;">Member <i class="fa fa-angle-down"></i></a>
-							<ul class="sub-menu">
-								<li><a href="{{route('member')}}">Profil</a></li>
-								<li><a href="{{route('member.order')}}">Daftar Pesanan</a></li>
-								<li><a href="{{route('logout')}}">Keluar</a></li>
-							</ul>
-							@else
-							<a href="{{route('login')}}">Member</a>
-							@endif
+
+						<li>
+                            <a href="https://api.whatsapp.com/send?phone={{$CONF->whatsapp}}&amp;text=Halo%20Admin%20Saya%20Ingin%20Bertanya%20{{ str_replace(' ', '%20', $CONF->title) }}" target="_blank" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                                Whatsapp
+                            </a>
 						</li>
 					</ul>
 				</div>	

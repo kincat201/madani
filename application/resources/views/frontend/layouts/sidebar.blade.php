@@ -19,7 +19,7 @@
 					@foreach($randProducts as $randProduct)
 					<!-- item gallery sidebar -->
 					<div class="wrap-item-gallery m-b-10">
-						<a class="item-gallery bg-img1" href="{{route('productDetail',['id'=>$randProduct->id])}}" 
+						<a class="item-gallery bg-img1 js-show-modal1" href="#" product-id="{{$randProduct->id}}"
 						style="background-image: url('{{url('storage/'.$randProduct->image)}}');"></a>
 					</div>
 					@endforeach

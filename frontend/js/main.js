@@ -417,4 +417,8 @@
         $('.js-modal2').removeClass('show-modal1');
     });
 
+    $('.js-hide-modal3').on('click',function(){
+        $('.js-modal3').removeClass('show-modal1');
+    });
+
 })(jQuery);

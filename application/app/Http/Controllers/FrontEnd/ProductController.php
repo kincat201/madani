@@ -22,7 +22,7 @@ class ProductController extends FrontEndController
     public function index(Request $filter)
     {
         $filter = (object)Input::all();
-        $products = Product::with(['category','unit','variants'])->limit(8,0);
+        $products = Product::with(['category','unit','variants'])->active()->limit(8,0);
 
         if(!empty($filter->keyword)){
             $products->where('name','like','%'.$filter->keyword.'%');
@@ -38,10 +38,10 @@ class ProductController extends FrontEndController
     public function loadMore(){
         $filter = (object)Input::all();
         $offset = (@$filter->page*8)+1;
-        $products = Product::with(['category','unit','variants'])
+        $products = Product::with(['unit','variants'])
+            ->active()
             ->limit(8)
             ->offset($offset)
-            ->orderBy('created_at','desc')
             ->get();
         foreach ($products as $product){
             $product->price = number_format($product->prices());

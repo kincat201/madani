@@ -68,7 +68,7 @@
 						<i class="fa fa-instagram"></i>
 					</a>
 
-					<a href="https://api.whatsapp.com/send?phone={{$CONF->whatsapp}}&amp;text=Halo%20Admin%20Saya%20Ingin%20Bertanya%20terkait%20JSIT%20Commerce" target="_blank" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+					<a href="https://api.whatsapp.com/send?phone={{$CONF->whatsapp}}&amp;text=Halo%20Admin%20Saya%20Ingin%20Bertanya%20{{ str_replace(' ', '%20', $CONF->title) }}" target="_blank" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
 						<i class="fa fa-whatsapp"></i>
 					</a>
 				</div>
