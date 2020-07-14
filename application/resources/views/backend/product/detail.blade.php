@@ -93,6 +93,7 @@
             'ajax'        : {
                 url: "{{ route('admin.product.stock') }}",
                 data: function (d) {
+                    d.id = '{{ @$model->id }}';
                     d.types = $('[name=s_types]').val();
                 }
             },

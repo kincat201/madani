@@ -246,7 +246,7 @@ class ProductController extends BackEndController
     }
 
     public function stockData(Request $request){
-        $datas = ProductStock::with(['product','orderDetail.order'])->orderBy('created_at','asc');
+        $datas = ProductStock::where('product_id',$request->id)->with(['product','orderDetail.order'])->orderBy('created_at','desc');
 
         $filter = [
             'types'=> '='
