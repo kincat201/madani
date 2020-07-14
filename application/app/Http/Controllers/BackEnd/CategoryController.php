@@ -58,6 +58,7 @@ class CategoryController extends BackEndController
 
         if(empty($data->id)){
             $data = new Category();
+            $data->image = 'products/default.png';
         }
 
         $data->fill((array)$request->all());
@@ -72,7 +73,7 @@ class CategoryController extends BackEndController
             $categoryImage = $image->store('categories','public');
         }
 
-        $data->image = empty($categoryImage) ? 'categories/default.png' : $categoryImage;
+        $data->image = $categoryImage;
 
         if($data->save()){
             return Response::json(array('status'=>true,'message'=>'Data berhasil disimpan'));
