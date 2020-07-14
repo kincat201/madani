@@ -169,7 +169,7 @@
 
 												<div class="block2-txt-child2 flex-r p-t-3">
 													<a href="{{route('productDetail',['id'=>$new->id])}}" class="btn-addwish-b2 dis-block pos-relative" style="color:#999">
-														<i class="fa fa-archive" style="margin-left: 2px"></i>&nbsp;{{number_format($new->stock)}}
+														<i class="fa fa-archive" style="margin-left: 2px"></i>&nbsp;{{number_format($new->qty)}}
 													</a>
 												</div>
 											</div>

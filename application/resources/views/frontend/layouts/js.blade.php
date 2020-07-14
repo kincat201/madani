@@ -100,6 +100,7 @@
 	<script>
         var productUrl = "{{url('product')}}";
         var productPath = "{{url('storage')}}";
+        var priceTypes = {!! json_encode(\App\Util\Constant::PRODUCT_TYPE_PRICE_LIST) !!};
         var productList = [];
         var countCart = 0;
         @foreach(Session::get('carts') as $cart)
@@ -129,26 +130,16 @@
 
 		function addCart(type){
 	        $('.modal-loading').addClass('modal-loading-show');
-	        if($('[name=previewMember]').val() == 1 && '{{\Auth::user()}}' == ''){
-                $('.modal-loading').removeClass('modal-loading-show');
-                return swal({
-                    title:'Produk Member',
-                    text: 'Produk hanya bisa dibeli oleh member, silahkan login dahulu!',
-                    icon: "warning",
-                });
-			}
 	        var product='';var qty='';var size='';var color = '';
 	        if(type == 1){
 	            $('.js-modal1').removeClass('show-modal1');
 	            product = $('[name=previewId]').val();
 	            qty = $('[name=previewQty]').val();
 	            size = $('[name=previewSize]').val();
-	            color = $('[name=previewColor]').val();
 	        }else if(type == 2){
 	            product = $('[name=productId]').val();
 	            qty = $('[name=productQty]').val();
 	            size = $('[name=productSize]').val();
-	            color = $('[name=productColor]').val();
 	        }
 	        $.ajax({
 	            url : '{{route("addCart")}}',
@@ -158,7 +149,6 @@
 	                    product:product,
 	                    qty:qty,
 	                    size:size,
-	                    color:color,
 	                    _token: '{{ csrf_token() }}'
 	                },
 	            success: function(response)
@@ -192,6 +182,13 @@
 	            }
 	        });
 	    }
+
+	    function setPrice(type){
+            if(type == 1){
+                var price = JSON.parse($('[name=previewSize]').val()).price;
+                $('#previewPrice').html('Rp. ' + parseInt(price,0).toLocaleString('us-US'));
+            }
+        }
 
 	    function updateCart(data){
 

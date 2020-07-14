@@ -8,7 +8,7 @@ use App\Util\Constant;
 use Carbon\Carbon;
 
 class OrderService {
-    public static function GenerateNumber() {
+    public static function GenerateNumber($type) {
         return Carbon::today()->format('Y-m-d') . '-' . str_pad((Order::whereDate('payment_date', '=', Carbon::today())->count()) + 1, 4, '0', STR_PAD_LEFT);
     }
 
