@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group" id="phone">
-                            <label class="control-label required-form">Telepon</label>
+                            <label class="control-label">Telepon</label>
                             <input type="text" id="search_phone" name="search_phone" placeholder="Ketik Nomor telepon atau nama" class="form-control" value="{{ !empty(@$model->member) ? @$model->member->phone.' ('.@$model->member->name.')' : '' }}"/>
                             <input type="hidden" name="phone" value="{{ @$model->member->phone }}" class="form-control" />
                             <div class="help-block"></div>
@@ -21,7 +21,7 @@
                     <div class="col-md-6">
                         <div class="form-group" id="name">
                             <label class="control-label required-form">Nama</label>
-                            <input type="text" name="name" class="form-control" value="{{ @$model->member->name }}" placeholder="Nama">
+                            <input type="text" name="name" class="form-control" value="{{ !empty(@$model->member->name) ? @$model->member->name : @$model->tmp_name }}" placeholder="Nama">
                             <div class="help-block"></div>
                             <div id="name_error" class="help-block help-block-error"> </div>
                         </div>

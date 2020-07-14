@@ -201,7 +201,7 @@
             var row = '<tr id="ds_'+no+'">\n' +
                 '                    <td style="text-align: center">'+data.product.name + ' - ' + (data.remark ? data.remark : '') + ' ('+priceTypes[data.product_type]+')' + '</td>\n' +
                 '                    <td style="text-align: center">\n' +
-                '                      '+parseInt(data.qty,0).toLocaleString('de-DE')+'\n' +
+                '                      '+parseFloat(data.qty,0).toLocaleString('de-DE')+'\n' +
                 '                    </td>\n' +
                 '                    <td style="text-align: center">\n' +
                 '                      '+parseInt(data.price,0).toLocaleString('de-DE')+'\n' +
@@ -214,7 +214,7 @@
                 '                    </td>\n' +
                 '                  </tr>';
 
-            calculateTotalItem(parseInt(data.price,0) * parseInt(data.qty,0));
+            calculateTotalItem(parseInt(data.price,0) * parseFloat(data.qty,0));
 
             $('#listItem').append(row);
         });
@@ -236,16 +236,16 @@
             }
             var product = JSON.parse($('[name=product0]').val());
             var price = JSON.parse($('[name=price0]').val());
-            var qty = $('[name=qty0]').val().replace('.','');
-            var total = parseInt(price.price,0) * parseInt(qty,0);
-            var total_hpp = parseInt(price.hpp,0) * parseInt(qty,0);
+            var qty = $('[name=qty0]').val();
+            var total = parseInt(price.price,0) * parseFloat(qty,0);
+            var total_hpp = parseInt(price.hpp,0) * parseFloat(qty,0);
 
             calculateTotalItem(total);
 
             var row = '<tr id="ds_'+currentIndex+'">\n' +
                 '                    <td style="text-align: center">'+product.name+ ' - ' + ( price.remark ? price.remark : '') + ' ('+priceTypes[price.types]+')' +'</td>\n' +
                 '                    <td style="text-align: center">\n' +
-                '                      '+parseInt(qty).toLocaleString('de-De')+'\n' +
+                '                      '+parseFloat(qty).toLocaleString('de-De')+'\n' +
                 '                    </td>\n' +
                 '                    <td style="text-align: center">\n' +
                 '                      '+parseInt(price.price).toLocaleString('de-De')+'\n' +
@@ -284,7 +284,6 @@
             $('[name=product'+id+']').val('');
             $('[name=qty'+id+']').val(0);
             $('[name=price'+id+']').val('');
-            AutoNumeric.set('[name=qty'+id+']',0);
             $('[name=product0]').empty();
             $('[name=price0]').empty();
         }
@@ -317,6 +316,16 @@
             total_item = parseInt(total_item,0) + parseInt(amount,0);
             calculate();
         }
+
+        function calculateQty(){
+            var width = parseFloat($('[name=width0]').val());
+            var height = parseFloat($('[name=height0]').val());
+            $('[name=qty0]').val(width*height);
+        }
+
+        $('#search_phone').on('change', function () {
+           $('[name=phone]').val($('#search_phone').val());
+        });
 
         $("#search_phone").autocomplete({
             source: function(request, response) {

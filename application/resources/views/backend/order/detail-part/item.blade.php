@@ -85,8 +85,24 @@
                         <div class="form-group col-md-6">
                             <label class="control-label col-sm-12" for="qty">Jumlah</label>
                             <div class="col-sm-12" id="qty0">
-                                <input type="text" class="form-control autonumeric" name="qty0" placeholder="Jumlah">
+                                <input type="text" class="form-control" name="qty0" placeholder="Jumlah">
                                 <div id="qty0_error" class="help-block help-block-error"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label col-sm-12" for="width">Panjang</label>
+                            <div class="col-sm-12" id="width0">
+                                <input type="text" class="form-control" name="width0" onchange="calculateQty()" placeholder="Panjang">
+                                <div id="width0_error" class="help-block help-block-error"> (Optional) untuk menghitung jumlah</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label col-sm-12" for="height">Lebar</label>
+                            <div class="col-sm-12" id="height0">
+                                <input type="text" class="form-control" onchange="calculateQty()" name="height0" placeholder="Lebar">
+                                <div id="height0_error" class="help-block help-block-error"> (Optional) untuk menghitung jumlah</div>
                             </div>
                         </div>
                     </div>

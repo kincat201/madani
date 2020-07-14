@@ -8,7 +8,7 @@ use App\Util\Constant;
 use Carbon\Carbon;
 
 class OrderService {
-    public static function GenerateNumber($type) {
+    public static function GenerateNumber() {
         return Carbon::today()->format('Y-m-d') . '-' . str_pad((Order::whereDate('payment_date', '=', Carbon::today())->count()) + 1, 4, '0', STR_PAD_LEFT);
     }
 
@@ -20,6 +20,7 @@ class OrderService {
             $order->payment_status = $request->payment_status;
             $order->payment_method = $request->payment_method;
             $order->payment_date = Carbon::now();
+            $order->cashier_id = \Auth::user()->id;
 
             $order->status = $status_after;
             $order->save();
@@ -42,6 +43,7 @@ class OrderService {
 
             $order->status = $status_after;
             $order->remark = $request->remark;
+            $order->operator_id = \Auth::user()->id;
             $order->save();
 
         } elseif($status_before == Constant::ORDER_STATUS_PROGRESS && $status_after == Constant::ORDER_STATUS_COMPLETED){

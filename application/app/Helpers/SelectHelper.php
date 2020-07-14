@@ -93,6 +93,17 @@ class SelectHelper {
         return $result;
     }
 
+    public static function getDesignerList() {
+        $users = User::where('role', Constant::USER_ROLE_DESIGNER)->get();
+        $data = [];
+
+        foreach ($users as $user){
+            $data[$user->id] = $user->name;
+        }
+
+        return $data;
+    }
+
     public static function getSelectList($type){
         if($type == 'getUserList'){
             return self::getUserList();
@@ -108,6 +119,8 @@ class SelectHelper {
             return self::getMachineList();
         }else if($type == 'getNotification'){
             return self::getNotification();
+        }else if($type == 'getDesignerList'){
+            return self::getDesignerList();
         }
     }
 }

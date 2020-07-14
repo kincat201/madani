@@ -22,6 +22,8 @@
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/league/flysystem" />
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/maatwebsite/excel" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/mike42/escpos-php" />
+      <excludeFolder url="file://$MODULE_DIR$/application/vendor/mike42/gfx-php" />
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/mockery/mockery" />
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/application/vendor/mtdowling/cron-expression" />

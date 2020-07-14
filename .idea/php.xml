@@ -78,6 +78,8 @@
       <path value="$PROJECT_DIR$/application/vendor/jakub-onderka/php-console-highlighter" />
       <path value="$PROJECT_DIR$/application/vendor/psr/log" />
       <path value="$PROJECT_DIR$/application/vendor/erusev/parsedown" />
+      <path value="$PROJECT_DIR$/application/vendor/mike42/escpos-php" />
+      <path value="$PROJECT_DIR$/application/vendor/mike42/gfx-php" />
     </include_path>
   </component>
   <component name="PhpUnit">

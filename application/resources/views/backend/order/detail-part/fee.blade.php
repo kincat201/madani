@@ -22,6 +22,33 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="form-group" id="is_design">
+                            <label class="control-label">Designer</label>
+                            <select class="form-control" name="designer_id">
+                                <option value="">Pilih Designer</option>
+                                @foreach(\App\Helpers\SelectHelper::getDesignerList() as $key => $val)
+                                    <option value="{{ $key }}" {{ @$model->designer_id == $key ? 'selected' : '' }}>{{ $val }}</option>
+                                @endforeach
+                            </select>
+                            <div class="help-block"></div>
+                            <div id="is_design_error" class="help-block help-block-error"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" id="is_design">
+                            <label class="control-label">File Design</label>
+                            <input type="file" name="file_design" class="form-control" value="{{ @$model->file_design }}" placeholder="File Design">
+                            <br>
+                            @if(!empty(@$model->id) && !empty(@$model->file_design))
+                                <a href="{{url('storage/'.@$model->file_design)}}" style="color: #3a3a3a" target="_blank" title="preview">Lihat File</a>
+                            @endif
+                            <div class="help-block"></div>
+                            <div id="file_design_error" class="help-block help-block-error"> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group" id="deadline">
                             <label class="control-label">Deadline</label>
                             <input type="text" name="deadline" class="form-control datepickerinput" maxlength="" value="{{ @$model->deadline }}" placeholder="Deadline">

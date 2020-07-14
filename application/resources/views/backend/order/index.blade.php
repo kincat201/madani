@@ -113,6 +113,7 @@
             url: "{{ route('admin.order.data') }}",
             data: function (d) {
                 d.name = $('[name=s_name]').val();
+                d.tmp_name = $('[name=s_name]').val();
                 d.code = $('[name=s_code]').val();
                 d.deadline = $('[name=s_deadline]').val();
                 d.phone = $('[name=s_phone]').val();

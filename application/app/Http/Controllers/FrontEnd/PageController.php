@@ -81,7 +81,7 @@ class PageController extends FrontEndController
     }
 
     public function invoice($id){
-        $order = Order::with(['member','items.product','orderMachine'])->find($id);
+        $order = Order::with(['member','cashier','creator','items.product','orderMachine'])->find($id);
         //return view('pdf.invoice',['order'=>$order,'title'=>'Kwitansi Pesanan']);
 
         $pdf = PDF::loadView('pdf.invoice',['order'=>$order,'title'=>'Kwitansi Pesanan']);

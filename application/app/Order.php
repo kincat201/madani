@@ -16,6 +16,7 @@ class Order extends Model
         'is_design',
         'deadline',
         'design_fee',
+        'designer_id',
         'marketing_fee',
         'finishing_fee',
         'remark',
@@ -38,7 +39,6 @@ class Order extends Model
     ];
 
     const FORM_VALIDATION = [
-        'phone' => 'required',
         'name' => 'required',
     ];
 
@@ -97,5 +97,25 @@ class Order extends Model
     public function member()
     {
         return $this->belongsTo(Member::class,'member_id','id');
+    }
+
+    public function designer()
+    {
+        return $this->belongsTo(User::class,'designer_id','id');
+    }
+
+    public function operator()
+    {
+        return $this->belongsTo(User::class,'operator_id','id');
+    }
+
+    public function cashier()
+    {
+        return $this->belongsTo(User::class,'cashier_id','id');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'created_by','id');
     }
 }

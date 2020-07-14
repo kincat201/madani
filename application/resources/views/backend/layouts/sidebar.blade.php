@@ -131,7 +131,7 @@
                         <span class="arrow {{ in_array(@$sidebar,$order) ? '' : 'hidden'}}"></span>
                     </a>
                     <ul class="sub-menu">
-                        @if(@\Auth::user()->role == \App\Util\Constant::USER_ROLE_DESIGNER)
+                        @if(@\Auth::user()->role == \App\Util\Constant::USER_ROLE_DESIGNER || @\Auth::user()->role == \App\Util\Constant::USER_ROLE_CASHIER)
                         <li class="nav-item {{@$sidebar === 'order_new'? 'active' : ''}}">
                             <a
                                 href="{{route('admin.order.get',0)}}" class="nav-link nav-toggle"> <i

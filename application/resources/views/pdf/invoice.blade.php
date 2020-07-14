@@ -78,5 +78,9 @@
                 </table>
             </td>
         </tr>
+        <tr><td class="break"></td></tr>
+        <tr>
+            <td> Di input oleh : <b>{{ @$order->creator->name }}</b>, cashier : <b>{{ @$order->cashier->name }}</b></td>
+        </tr>
     </table>
 @endsection

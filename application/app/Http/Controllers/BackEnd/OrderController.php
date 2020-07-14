@@ -66,16 +66,18 @@ class OrderController extends BackEndController
             return response()->json($data);
         }
 
-        $member = Member::where('phone',$request->phone)->first();
-        if(empty($member->id)){
-            $member = new Member();
-            $member->phone = $request->phone;
-        }
+        if($request->has('phone')){
+            $member = Member::where('phone',$request->phone)->first();
+            if(empty($member->id)){
+                $member = new Member();
+                $member->phone = $request->phone;
+            }
 
-        $member->name = $request->name;
-        $member->email = $request->email;
-        $member->address = $request->address;
-        $member->save();
+            $member->name = $request->name;
+            $member->email = $request->email;
+            $member->address = $request->address;
+            $member->save();
+        }
 
         $data = Order::find($request->id);
 
@@ -83,9 +85,14 @@ class OrderController extends BackEndController
             $data = new Order();
             $data->code = OrderService::GenerateNumber();
             $data->payment_date = Carbon::now();
+            $data->created_by = \Auth::user()->id;
         }
 
-        $data->member_id = $member->id;
+        if($request->has('phone')){
+            $data->member_id = $member->id;
+        }
+
+        $data->tmp_name = $request->name;
 
         $data->fill((array)$request->all());
 
@@ -97,6 +104,18 @@ class OrderController extends BackEndController
         }
 
         $status_before = $data->status;
+
+        $fileDesign = $data->file_design;
+
+        if ($request->hasFile('file_design')) {
+            $file = $request->file('file_design');
+            if(!empty($fileDesign) && file_exists('storage/'.$fileDesign)){
+                unlink('storage/'.$fileDesign);
+            }
+            $fileDesign = $file->store('designs','public');
+        }
+
+        $data->file_design = $fileDesign;
 
         if($data->save()){
             $data->items()->delete();
@@ -142,12 +161,13 @@ class OrderController extends BackEndController
 
     public function indexData(Request $request){
         $datas = Order::select('orders.id','code','deadline','status','payment_status',
-            'orders.created_at','members.name','members.phone')
+            'orders.created_at','members.name','tmp_name','members.phone')
             ->join('members','members.id', '=','orders.member_id','left')
             ->orderBy('code','desc');
 
         $filter = [
             'code' => 'like',
+            'tmp_name' => 'like',
             'members.name' => 'like',
             'members.phone' => 'like',
             'status' => '=',
@@ -173,6 +193,9 @@ class OrderController extends BackEndController
         }
 
         return DataTables::of($datas)
+            ->editColumn('name', function($data){
+                return !empty($data->name) ? $data->name : $data->tmp_name;
+            })
             ->editColumn('status', function($data){
                 return '<label class="label label-'.Constant::ORDER_STATUS_LABEL_LIST[$data->status].'">'.Constant::ORDER_STATUS_LIST[$data->status].'</label>';
             })
@@ -232,7 +255,7 @@ class OrderController extends BackEndController
                     $datas[$key]->phone = $data->member->phone;
                     $datas[$key]->status = Constant::ORDER_STATUS_LIST[$data->status];
                     $datas[$key]->payment_method = Constant::PAYMENT_METHOD_LIST[$data->payment_method];
-                    $datas[$key]->payment_method = Constant::STATUS_PAYMENT_LIST[$data->payment_status];
+                    $datas[$key]->payment_status = Constant::STATUS_PAYMENT_LIST[$data->payment_status];
                 }
 
                 // Sheet manipulation
@@ -326,7 +349,7 @@ class OrderController extends BackEndController
 
     public function getReceipt($id){
         try {
-            $order = Order::where('id',$id)->with(['member','items.product','orderMachine'])->first();
+            $order = Order::where('id',$id)->with(['member','creator','cashier','items.product','orderMachine'])->first();
             if(empty($order->id)){
                 return Response::json(array('status'=>false,'message'=>'Order tidak ditemukan!'));
             }
@@ -405,6 +428,8 @@ class OrderController extends BackEndController
             $printer -> text(" Informasi lebih lengkap bisa menghubungi ". $config->phone);
             $printer -> feed(2);
             $printer -> text(date('d F Y, H:i:s A') . "\n");
+            $printer -> feed(2);
+            $printer -> text('Creator : '.@$order->creator->name.' | Cashier : '.@$order->cashier->name);
             $printer -> feed(2);
 
             $printer -> cut();
